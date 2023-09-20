@@ -9,15 +9,6 @@ extension DateTimeExtensions on DateTime {
     return DateFormat(pattern, locale).format(this);
   }
 
-  String toLetterDateString() {
-    return year.toString() +
-        Label.year.tr +
-        month.toString() +
-        Label.month.tr +
-        day.toString() +
-        Label.day.tr;
-  }
-
   String get formatYMDE => format('y年M月d日（E）');
 
   String get formatYMD => format('y年M月d日');

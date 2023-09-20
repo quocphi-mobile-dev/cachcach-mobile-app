@@ -69,8 +69,7 @@ class InputTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _InputTextFieldState createState() =>
-      _InputTextFieldState();
+  _InputTextFieldState createState() => _InputTextFieldState();
 
   factory InputTextField.password({
     int? maxLength,
@@ -100,7 +99,6 @@ class InputTextField extends StatefulWidget {
       label: label,
       topNote: topNote,
       bottomNote: bottomNote,
-      maxLength: maxLengthPasswordTextField,
     );
   }
 
@@ -154,7 +152,6 @@ class _InputTextFieldState extends State<InputTextField> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.label != null ? buildLabel() : const SizedBox(),
         widget.topNote != null ? buildTopNote() : const SizedBox(),
         FocusScope(
           onFocusChange: widget.onFocusChange,
@@ -182,7 +179,7 @@ class _InputTextFieldState extends State<InputTextField> {
         cursorColor: Colors.black,
         focusNode: widget.focusNode,
         maxLengthEnforcement: MaxLengthEnforcement.enforced,
-        maxLength: widget.maxLength ?? maxLengthTextField,
+        maxLength: widget.maxLength,
         onTap: widget.onTap,
         textAlign: widget.textAlign ?? TextAlign.start,
         decoration: _buildInputDecoration(),
@@ -226,30 +223,6 @@ class _InputTextFieldState extends State<InputTextField> {
       ),
       contentPadding:
           widget.contentPadding ?? const EdgeInsets.fromLTRB(10, 10, 10, 12),
-    );
-  }
-
-  Widget buildLabel() {
-    return Column(
-      children: [
-        RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: widget.label ?? "",
-                style: AppTextStyle.t12w700(),
-              ),
-              widget.isRequired
-                  ? TextSpan(
-                      text: Label.requiredCharacter.tr,
-                      style: AppTextStyle.t12w400(AppColors.indianRed),
-                    )
-                  : const TextSpan(text: ""),
-            ],
-          ),
-        ),
-        SizedBox(height: 6.dp),
-      ],
     );
   }
 
