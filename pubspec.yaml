@@ -14,14 +14,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.3.8
   dio: ^4.0.0
-  connectivity_plus: ^2.0.2
   pretty_dio_logger: ^1.1.1
   intl: ^0.17.0
   floor: ^1.2.0
   shared_preferences: 2.0.8
   flutter_svg: 1.0.0
-  equatable: 2.0.3
   flutter_native_splash: ^2.1.6
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
