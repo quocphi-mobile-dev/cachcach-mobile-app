@@ -33,7 +33,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/raw/
   fonts:
     - family: NotoSansJP
       fonts:
