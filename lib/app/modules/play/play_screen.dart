@@ -1,10 +1,10 @@
-import 'package:cachcach/app/modules/bottom_bar/main_bottom_bar.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
-import 'package:cachcach/core/theme/dimens.dart';
+import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
-import 'package:cachcach/core/theme/theme.dart';
+import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class PlayScreen extends StatefulWidget {
@@ -23,17 +23,17 @@ class _PlayScreenState extends State<PlayScreen> {
       backgroundColor: AppColors.bgColor,
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.only(bottom: 20.dp),
+          padding: EdgeInsets.only(bottom: 20.h),
           children: [
-            space(h: 20.dp),
+            space(h: 20.h),
             Image.asset(
               AppImages.imgLogoMini,
-              width: 172.dp,
-              height: 126.dp,
+              width: 172.w,
+              height: 126.h,
             ),
-            space(h: 20.dp),
+            space(h: 20.h),
             _widgetGroupCouple(),
-            space(h: 20.dp),
+            space(h: 20.h),
             _widgetGroupFriends(),
           ],
         ),
@@ -43,16 +43,20 @@ class _PlayScreenState extends State<PlayScreen> {
 
   Widget _widgetGroupCouple() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.dp),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "Couple",
-            style: AppTextStyle.common(34, FontWeight.w600, AppColors.black),
+            style: AppTextStyle.textStyleCommon.copyWith(
+              fontSize: 34.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
           ),
-          space(h: 20.dp),
+          space(h: 20.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -75,16 +79,20 @@ class _PlayScreenState extends State<PlayScreen> {
 
   Widget _widgetGroupFriends() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.dp),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "Friends",
-            style: AppTextStyle.common(34, FontWeight.w600, AppColors.black),
+            style: AppTextStyle.textStyleCommon.copyWith(
+              fontSize: 34.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
           ),
-          space(h: 20.dp),
+          space(h: 20.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -115,20 +123,23 @@ class _PlayScreenState extends State<PlayScreen> {
         borderRadius: BorderRadius.circular(24),
         onTap: onTap,
         child: Container(
-          width: 162.dp,
-          height: 162.dp,
-          padding: EdgeInsets.symmetric(horizontal: 20.dp, vertical: 12.dp),
+          width: 162.w,
+          height: 162.h,
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
           alignment: Alignment.center,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(image),
-              space(h: 20.dp),
+              space(h: 20.h),
               Text(
                 label,
-                style:
-                    AppTextStyle.common(16, FontWeight.w400, AppColors.black),
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.black,
+                ),
               )
             ],
           ),

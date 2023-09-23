@@ -1,7 +1,10 @@
 import 'package:cachcach/app/widgets/widget_common.dart';
-import 'package:cachcach/core/theme/theme.dart';
+import 'package:cachcach/core/theme/colors.dart';
+import 'package:cachcach/core/theme/images.dart';
+import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -17,19 +20,22 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: AppColors.bgColor,
         body: SafeArea(
           child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 34.dp, vertical: 40.dp),
+            padding: EdgeInsets.symmetric(horizontal: 34.w, vertical: 40.h),
             children: [
-              space(h: .45.dp),
               _buildAppIcon(),
-              space(h: 12.dp),
+              space(h: 12.h),
               _formLogin(),
-              space(h: 12.dp),
+              space(h: 12.h),
               const FormLoginSocial(),
-              space(h: 12.dp),
+              space(h: 12.h),
               Text(
                 "Bạn chưa có tài khoản? Đăng ký ngay",
                 textAlign: TextAlign.center,
-                style: AppTextStyle.t12w400(AppColors.grey),
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 12.sp,
+                  color: AppColors.grey,
+                  fontWeight: FontWeight.w400,
+                ),
               )
             ],
           ),
@@ -40,8 +46,8 @@ class LoginScreen extends StatelessWidget {
 
   Widget _buildAppIcon() {
     return SizedBox(
-        height: 120.dp,
-        width: 120.dp,
+        height: 120.h,
+        width: 120.w,
         child: Image.asset(
           AppImages.imgLogo,
         ));
@@ -51,15 +57,15 @@ class LoginScreen extends StatelessWidget {
     return Column(
       children: [
         _buildEmailTextField(),
-        space(h: 20.dp),
+        space(h: 20.h),
         _buildPasswordTextField(),
-        space(h: 20.dp),
+        space(h: 20.h),
         _buildRowForgotPasswordAndEmail(),
-        space(h: 20.dp),
+        space(h: 20.h),
         _buildLoginButton(),
-        space(h: 20.dp),
+        space(h: 20.h),
         _buildTrialButton(),
-        space(h: 20.dp),
+        space(h: 20.h),
       ],
     );
   }
@@ -75,19 +81,19 @@ class LoginScreen extends StatelessWidget {
           color: AppColors.grey,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.dp),
+          borderRadius: BorderRadius.circular(8.r),
           borderSide: const BorderSide(
             color: AppColors.grey,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.dp),
+          borderRadius: BorderRadius.circular(8.r),
           borderSide: const BorderSide(
             color: AppColors.grey,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.dp),
+          borderRadius: BorderRadius.circular(8.r),
           borderSide: const BorderSide(
             color: AppColors.grey,
           ),
@@ -107,19 +113,19 @@ class LoginScreen extends StatelessWidget {
           color: AppColors.grey,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.dp),
+          borderRadius: BorderRadius.circular(8.r),
           borderSide: const BorderSide(
             color: AppColors.grey,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.dp),
+          borderRadius: BorderRadius.circular(8.r),
           borderSide: const BorderSide(
             color: AppColors.grey,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.dp),
+          borderRadius: BorderRadius.circular(8.r),
           borderSide: const BorderSide(
             color: AppColors.grey,
           ),
@@ -131,7 +137,7 @@ class LoginScreen extends StatelessWidget {
   Widget _buildLoginButton() {
     return SizedBox(
       width: double.infinity,
-      height: 50.dp,
+      height: 50.h,
       child: ElevatedButton(
         onPressed: () {
           Get.toNamed(RouteName.home);
@@ -139,7 +145,7 @@ class LoginScreen extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           // primary: AppColors.primaryColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.dp),
+            borderRadius: BorderRadius.circular(8.r),
           ),
         ),
         child: const Text(
@@ -177,18 +183,22 @@ class LoginScreen extends StatelessWidget {
   Widget _buildTrialButton() {
     return SizedBox(
       width: double.infinity,
-      height: 50.dp,
+      height: 50.h,
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
           primary: AppColors.background,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.dp),
+            borderRadius: BorderRadius.circular(8.r),
           ),
         ),
         child: Text(
           "Trial",
-          style: AppTextStyle.t12w400(AppColors.grey),
+          style: AppTextStyle.textStyleCommon.copyWith(
+            fontSize: 12.sp,
+            color: AppColors.grey,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ),
     );
@@ -213,20 +223,20 @@ class FormLoginSocial extends StatelessWidget {
 
   Widget _buildLoginWithGoogleButton() {
     return SizedBox(
-      width: 50.dp,
-      height: 50.dp,
+      width: 50.w,
+      height: 50.h,
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
           // primary: AppColors.primaryColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.dp),
+            borderRadius: BorderRadius.circular(8.r),
           ),
         ),
         child: Image.asset(
           AppImages.imgLogo,
-          height: 24.dp,
-          width: 24.dp,
+          height: 24.h,
+          width: 24.w,
         ),
       ),
     );
@@ -234,20 +244,20 @@ class FormLoginSocial extends StatelessWidget {
 
   Widget _buildLoginWithFacebookButton() {
     return SizedBox(
-      width: 50.dp,
-      height: 50.dp,
+      width: 50.w,
+      height: 50.h,
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
           // primary: AppColors.primaryColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.dp),
+            borderRadius: BorderRadius.circular(8.r),
           ),
         ),
         child: Image.asset(
           AppImages.imgLogo,
-          height: 24.dp,
-          width: 24.dp,
+          height: 24.h,
+          width: 24.w,
         ),
       ),
     );
@@ -255,20 +265,20 @@ class FormLoginSocial extends StatelessWidget {
 
   Widget _buildLoginWithAppleButton() {
     return SizedBox(
-      width: 50.dp,
-      height: 50.dp,
+      width: 50.w,
+      height: 50.h,
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
           // primary: AppColors.primaryColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.dp),
+            borderRadius: BorderRadius.circular(8.r),
           ),
         ),
         child: Image.asset(
           AppImages.imgLogo,
-          height: 24.dp,
-          width: 24.dp,
+          height: 24.h,
+          width: 24.w,
         ),
       ),
     );

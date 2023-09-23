@@ -1,4 +1,4 @@
-import 'package:cachcach/core/theme/theme.dart';
+import 'package:cachcach/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 Widget space({double? w, double? h}) {
