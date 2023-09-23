@@ -136,4 +136,7 @@ class AppColors {
 
   /// #FB724C
   static const coral = Color(0xffFB724C);
+
+  /// #FE8D4B
+  static const crusta = Color(0xffFE8D4B);
 }
