@@ -40,14 +40,12 @@ flutter:
     - assets/icons/
     - assets/images/
   fonts:
-    - family: NotoSansJP
+    - family: Poppins
       fonts:
-        - asset: fonts/NotoSansJP-Black.otf
-        - asset: fonts/NotoSansJP-Bold.otf
-        - asset: fonts/NotoSansJP-Light.otf
-        - asset: fonts/NotoSansJP-Medium.otf
-        - asset: fonts/NotoSansJP-Regular.otf
-        - asset: fonts/NotoSansJP-Thin.otf
+        - asset: fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: fonts/Poppins-Bold.ttf
+          weight: 600
 
 flutter_native_splash:
   # This package generates native code to customize Flutter's default white native splash screen
