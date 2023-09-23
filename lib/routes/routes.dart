@@ -28,7 +28,7 @@ class AppRoutes {
     RouteName.signUp: () => const SignUpScreen(),
     RouteName.home: () => const HomeScreen(),
     RouteName.play: () => const PlayScreen(),
-    RouteName.selectMode: () => const SelectModeScreen(),
+    RouteName.selectMode: () => SelectModeScreen(),
   };
 
   static final bindings = <String, List<Bindings> Function()>{};
