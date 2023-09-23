@@ -9,4 +9,7 @@ class AppImages {
   static const imgFemale = "assets/images/img_female.png";
   static const imgMale = "assets/images/img_male.png";
   static const imgPlus = "assets/images/img_plus.png";
+  static const imgCustomCards = "assets/images/img_custom_cards.png";
+  static const imgPolicy = "assets/images/img_policy.png";
+  static const imgTermsOfUse = "assets/images/img_terms_of_use.png";
 }
