@@ -1,6 +1,7 @@
 import 'package:cachcach/app/modules/auth/login/login_screen.dart';
 import 'package:cachcach/app/modules/auth/signup/sign_up_screen.dart';
 import 'package:cachcach/app/modules/bottom_bar/home_screen.dart';
+import 'package:cachcach/app/modules/play/guide_play/guide_play_screen.dart';
 import 'package:cachcach/app/modules/play/play_screen.dart';
 import 'package:cachcach/app/modules/play/player/player_screen.dart';
 import 'package:cachcach/app/modules/play/select_mode/select_mode_screen.dart';
@@ -17,6 +18,7 @@ class RouteName {
   static const String play = "/play";
   static const String selectMode = "/select-mode";
   static const String player = "/player";
+  static const String guidePlay = "/guide-play";
 
   static const String privacyPolicy = "/privacy-policy";
   static const String welcome = '/welcome';
@@ -32,6 +34,7 @@ class AppRoutes {
     RouteName.play: () => const PlayScreen(),
     RouteName.selectMode: () => const SelectModeScreen(),
     RouteName.player: () => const PlayerScreen(),
+    RouteName.guidePlay: () => const GuidePlayScreen(),
   };
 
   static final bindings = <String, List<Bindings> Function()>{};
