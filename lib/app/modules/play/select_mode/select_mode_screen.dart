@@ -1,11 +1,10 @@
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
-import 'package:cachcach/core/theme/dimens.dart';
 import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'card/classic_card.dart';
@@ -21,10 +20,14 @@ class SelectModeScreen extends StatelessWidget {
         child: Column(
           children: [
             _buildTopBar(),
-            space(h: 12.dp),
+            space(h: 12.h),
             Text(
               "Select a Mode",
-              style: AppTextStyle.common(34, FontWeight.w600, AppColors.black),
+              style: AppTextStyle.textStyleCommon.copyWith(
+                fontSize: 34.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.black,
+              ),
             ),
             Expanded(child: ClassicCard())
           ],
@@ -43,16 +46,16 @@ class SelectModeScreen extends StatelessWidget {
           IconButton(
             icon: SvgPicture.asset(
               AppIcons.icArrowLeft,
-              width: 32.dp,
-              height: 32.dp,
+              width: 32.w,
+              height: 32.h,
             ),
             onPressed: () {},
           ),
           IconButton(
             icon: Image.asset(
               AppImages.imgSettings,
-              width: 44.dp,
-              height: 44.dp,
+              width: 44.w,
+              height: 44.h,
             ),
             onPressed: () {},
           ),

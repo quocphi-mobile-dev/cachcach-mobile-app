@@ -130,4 +130,10 @@ class AppColors {
 
   /// #398EA8
   static const normalBlue = Color(0xff398EA8);
+
+  /// #FE904B
+  static const sunshade = Color(0xffFE904B);
+
+  /// #FB724C
+  static const coral = Color(0xffFB724C);
 }

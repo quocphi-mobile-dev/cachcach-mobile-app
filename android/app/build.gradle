@@ -1,6 +1,8 @@
 plugins {
     id "com.android.application"
+    id "com.google.gms.google-services"
     id "kotlin-android"
+    id "com.google.firebase.crashlytics"
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -24,7 +26,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.cachcach.cachcach"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -45,17 +47,46 @@ android {
         applicationId "com.cachcach.cachcach"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 21
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release {
+            keyAlias "cachcach"
+            keyPassword "cachcach2023"
+            storeFile file("key_release.keystore")
+            storePassword "cachcach2023"
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions "app"
+
+    productFlavors {
+        dev {
+            dimension "app"
+            resValue "string", "app_name", ":Dev Cach Cach"
+            applicationId "com.cachcach.cachcach.dev"
+            flutter.target "lib/main_dev.dart"
+            versionCode 1
+            versionName "1.0.0"
+        }
+
+        prod {
+            dimension "app"
+            resValue "string", "app_name", "Cach Cach"
+            applicationId "com.cachcach.cachcach"
+            flutter.target "lib/main_product.dart"
+            versionCode 1
+            versionName "1.0.0"
         }
     }
 }
