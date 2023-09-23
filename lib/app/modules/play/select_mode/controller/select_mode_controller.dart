@@ -1,6 +1,7 @@
 import 'package:cachcach/app/modules/play/select_mode/card/select_mode_card.dart';
 import 'package:cachcach/app/modules/play/select_mode/model/mode.dart';
 import 'package:cachcach/app/modules/play/select_mode/model/select_mode_model.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:get/get.dart';
 
 class SelectModeController extends GetxController {
@@ -22,7 +23,7 @@ class SelectModeController extends GetxController {
           guideText: mode.getGuideText(),
           showIconMovie: mode.isLock(),
           onPlay: () {
-
+            Get.toNamed(RouteName.player);
           },
         ),
       );

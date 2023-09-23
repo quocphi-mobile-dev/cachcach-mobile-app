@@ -29,9 +29,6 @@ class AppColors {
   /// white
   static const background = white;
 
-  /// whiteSmoke
-  static const background2 = whiteSmoke;
-
   /// matterhorn
   static const text = matterhorn;
 
@@ -58,9 +55,6 @@ class AppColors {
 
   /// #D8D8D8
   static const gainsboro = Color(0xffD8D8D8);
-
-  /// #F2F2F2
-  static const whiteSmoke = Color(0xffF2F2F2);
 
   ///#F7F7F7
   static const whiteSmokeF7 = Color(0xffF7F7F7);
@@ -136,4 +130,10 @@ class AppColors {
 
   /// #FB724C
   static const coral = Color(0xffFB724C);
+
+  /// #FE8D4B
+  static const crusta = Color(0xffFE8D4B);
+
+  /// #F0F0F0
+  static const whiteSmoke = Color(0xffF0F0F0);
 }
