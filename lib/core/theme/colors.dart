@@ -140,4 +140,7 @@ class AppColors {
 
   /// #E1ACAC
   static const cavernPink = Color(0xffE1ACAC);
+
+  /// #3D7878
+  static const ming = Color(0xff3D7878);
 }
