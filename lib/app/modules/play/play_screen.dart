@@ -61,13 +61,13 @@ class _PlayScreenState extends State<PlayScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildItem(
-                  image: AppImages.imgTrustOrDare,
+                  image: AppImages.imgTruthOrDare,
                   label: "Truth or Dare",
                   onTap: () {
                     Get.toNamed(RouteName.selectMode);
                   }),
               _buildItem(
-                  image: AppImages.imgTrustOrDare,
+                  image: AppImages.imgTruthOrDare,
                   label: "Chewing",
                   onTap: () {}),
             ],
@@ -97,11 +97,11 @@ class _PlayScreenState extends State<PlayScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildItem(
-                  image: AppImages.imgTrustOrDare,
+                  image: AppImages.imgTruthOrDare,
                   label: "Truth or Dare",
                   onTap: () {}),
               _buildItem(
-                  image: AppImages.imgTrustOrDare,
+                  image: AppImages.imgTruthOrDare,
                   label: "Chewing",
                   onTap: () {}),
             ],

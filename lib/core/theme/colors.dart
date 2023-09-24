@@ -137,4 +137,7 @@ class AppColors {
 
   /// #F0F0F0
   static const whiteSmoke = Color(0xffF0F0F0);
+
+  /// #E1ACAC
+  static const cavernPink = Color(0xffE1ACAC);
 }

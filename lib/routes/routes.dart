@@ -4,6 +4,7 @@ import 'package:cachcach/app/modules/bottom_bar/home_screen.dart';
 import 'package:cachcach/app/modules/play/guide_play/guide_play_screen.dart';
 import 'package:cachcach/app/modules/play/play_screen.dart';
 import 'package:cachcach/app/modules/play/player/player_screen.dart';
+import 'package:cachcach/app/modules/play/question/question_screen.dart';
 import 'package:cachcach/app/modules/play/select_mode/select_mode_screen.dart';
 import 'package:cachcach/app/modules/play/setting/setting_screen.dart';
 import 'package:cachcach/app/modules/play/spin/spin_screen.dart';
@@ -23,6 +24,7 @@ class RouteName {
   static const String guidePlay = "/guide-play";
   static const String setting = "/setting";
   static const String spin = "/spin";
+  static const String question = "/question";
 
   static const String privacyPolicy = "/privacy-policy";
   static const String welcome = '/welcome';
@@ -41,6 +43,7 @@ class AppRoutes {
     RouteName.guidePlay: () => const GuidePlayScreen(),
     RouteName.setting: () => const SettingScreen(),
     RouteName.spin: () => const SpinScreen(),
+    RouteName.question: () => const QuestionScreen(),
   };
 
   static final bindings = <String, List<Bindings> Function()>{};

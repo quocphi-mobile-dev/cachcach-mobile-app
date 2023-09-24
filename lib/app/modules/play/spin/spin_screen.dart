@@ -4,13 +4,11 @@ import 'package:cachcach/app/modules/play/spin/controller/spin_controller.dart';
 import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
-import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:circle_list/circle_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SpinScreen extends StatefulWidget {
@@ -38,7 +36,7 @@ class _SpinScreenState extends State<SpinScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTopBar(),
+            buildTopBar(),
             _buildTitle(),
             Expanded(child: _buildSpin()),
           ],
@@ -185,22 +183,6 @@ class _SpinScreenState extends State<SpinScreen>
           fontWeight: FontWeight.w600,
           color: AppColors.black,
         ),
-      ),
-    );
-  }
-
-  Widget _buildTopBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: IconButton(
-        icon: SvgPicture.asset(
-          AppIcons.icArrowLeft,
-          width: 32.w,
-          height: 32.h,
-        ),
-        onPressed: () {
-          Get.back();
-        },
       ),
     );
   }

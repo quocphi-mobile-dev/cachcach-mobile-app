@@ -20,7 +20,7 @@ class PlayerScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTopBar(),
+            buildTopBar(),
             _buildTitle(),
             space(h: 10.h),
             Expanded(
@@ -200,22 +200,6 @@ class PlayerScreen extends StatelessWidget {
           fontWeight: FontWeight.w600,
           color: AppColors.black,
         ),
-      ),
-    );
-  }
-
-  Widget _buildTopBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: IconButton(
-        icon: SvgPicture.asset(
-          AppIcons.icArrowLeft,
-          width: 32.w,
-          height: 32.h,
-        ),
-        onPressed: () {
-          Get.back();
-        },
       ),
     );
   }
