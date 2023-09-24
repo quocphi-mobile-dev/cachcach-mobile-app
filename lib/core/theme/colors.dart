@@ -12,6 +12,7 @@ class AppColors {
   static Color? grey400 = Colors.grey[400];
   static const grey = Colors.grey;
   static const red = Colors.red;
+  static const blue = Colors.blue;
   static const bgColor = Color(0xffFBDCDC);
 
   /// matterhorn
@@ -136,4 +137,16 @@ class AppColors {
 
   /// #F0F0F0
   static const whiteSmoke = Color(0xffF0F0F0);
+
+  /// #E1ACAC
+  static const cavernPink = Color(0xffE1ACAC);
+
+  /// #3D7878
+  static const ming = Color(0xff3D7878);
+
+  /// #BFE5E4
+  static const mabel = Color(0xffBFE5E4);
+
+  /// #FDE0A2
+  static const capeHoney = Color(0xffFDE0A2);
 }

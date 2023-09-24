@@ -28,7 +28,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            _buildTopBar(),
+            buildTopBar(useSetting: true),
             space(h: 12.h),
             Text(
               "Select a Mode",
@@ -103,38 +103,6 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
             );
           }),
         ),
-      ),
-    );
-  }
-
-  Widget _buildTopBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: SvgPicture.asset(
-              AppIcons.icArrowLeft,
-              width: 32.w,
-              height: 32.h,
-            ),
-            onPressed: () {
-              Get.back();
-            },
-          ),
-          IconButton(
-            icon: Image.asset(
-              AppImages.imgSettings,
-              width: 44.w,
-              height: 44.h,
-            ),
-            onPressed: () {
-              Get.toNamed(RouteName.setting);
-            },
-          ),
-        ],
       ),
     );
   }

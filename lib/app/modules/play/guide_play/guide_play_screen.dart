@@ -1,11 +1,10 @@
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
-import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class GuidePlayScreen extends StatelessWidget {
@@ -19,7 +18,7 @@ class GuidePlayScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTopBar(),
+            buildTopBar(),
             _buildLogo(),
             space(h: 24.h),
             Expanded(
@@ -112,7 +111,9 @@ class GuidePlayScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(14.r),
         child: InkWell(
           borderRadius: BorderRadius.circular(14.r),
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(RouteName.spin);
+          },
           child: Container(
             width: double.infinity,
             height: double.infinity,
@@ -127,22 +128,6 @@ class GuidePlayScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildTopBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: IconButton(
-        icon: SvgPicture.asset(
-          AppIcons.icArrowLeft,
-          width: 32.w,
-          height: 32.h,
-        ),
-        onPressed: () {
-          Get.back();
-        },
       ),
     );
   }

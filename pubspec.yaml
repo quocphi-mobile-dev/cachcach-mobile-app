@@ -27,6 +27,7 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   firebase_crashlytics: ^3.3.1
   firebase_core: ^2.13.0
+  circle_list: ^1.0.5
 
 dev_dependencies:
   flutter_test:
