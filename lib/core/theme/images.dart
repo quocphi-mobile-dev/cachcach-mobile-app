@@ -12,4 +12,8 @@ class AppImages {
   static const imgCustomCards = "assets/images/img_custom_cards.png";
   static const imgPolicy = "assets/images/img_policy.png";
   static const imgTermsOfUse = "assets/images/img_terms_of_use.png";
+  static const imgPlayerMale1 = "assets/images/img_player_male_1.png";
+  static const imgSpinArrow = "assets/images/img_spin_arrow.png";
+  static const imgSpin = "assets/images/img_spin.png";
+  static const imgCursor = "assets/images/img_cursor.png";
 }

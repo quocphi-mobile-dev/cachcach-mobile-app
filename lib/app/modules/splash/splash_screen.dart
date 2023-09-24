@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _handleNavigation() async {
     // Get.offAllNamed(RouteName.authMain);
-    Get.offAllNamed(RouteName.login);
+    Get.offAllNamed(RouteName.spin);
     FlutterNativeSplash.remove();
   }
 }

@@ -3,6 +3,7 @@ import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -112,7 +113,9 @@ class GuidePlayScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(14.r),
         child: InkWell(
           borderRadius: BorderRadius.circular(14.r),
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(RouteName.spin);
+          },
           child: Container(
             width: double.infinity,
             height: double.infinity,
