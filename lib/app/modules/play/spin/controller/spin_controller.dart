@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cachcach/app/modules/play/player/controller/player_controller.dart';
 import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
 import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -10,24 +11,11 @@ class SpinController extends GetxController {
   late Animation<double> animation;
   RxBool isSpinning = false.obs;
   Duration timeSpin = const Duration(seconds: 3);
-
-  RxList<PlayerInfo> listPlayer = RxList([]);
+  PlayerInfo playerSelected = PlayerInfo();
 
   @override
   void onReady() {
     super.onReady();
-    listPlayer.assignAll([
-      PlayerInfo(gender: Gender.male, name: "Player 1"),
-      PlayerInfo(gender: Gender.male, name: "Player 2"),
-      PlayerInfo(gender: Gender.male, name: "Player 3"),
-      PlayerInfo(gender: Gender.male, name: "Player 4"),
-      PlayerInfo(gender: Gender.male, name: "Player 5"),
-      PlayerInfo(gender: Gender.male, name: "Player 6"),
-      PlayerInfo(gender: Gender.male, name: "Player 7"),
-      // PlayerInfo(gender: Gender.male, name: "Player 8"),
-      // PlayerInfo(gender: Gender.male, name: "Player 9"),
-      // PlayerInfo(gender: Gender.male, name: "Player 10"),
-    ]);
   }
 
   void initAnimation({required TickerProvider vsync}) {
@@ -62,12 +50,25 @@ class SpinController extends GetxController {
     setRotation(360 * 30 + getRandomRotation());
 
     animationController.animateTo(1,
-        duration: timeSpin,
-        curve: const Cubic(0.42, 0.0, 0.001, 1));
+        duration: timeSpin, curve: const Cubic(0.42, 0.0, 0.001, 1));
   }
 
   int getRandomRotation() {
-    return ((360 / listPlayer.length) * Random().nextInt(listPlayer.length))
-        .toInt();
+    PlayerController playerController = Get.find();
+    int index = Random().nextInt(playerController.listPlayer.length);
+    playerSelected = playerController.listPlayer[index];
+    return ((360 / playerController.listPlayer.length) * index).toInt();
+  }
+
+  void checkResult() {
+    PlayerController playerController = Get.find();
+    for (PlayerInfo playerInfo in playerController.listPlayer) {
+      if (playerInfo.truthPoint > 0 || playerInfo.darePoint > 0) {
+        Get.toNamed(RouteName.scoreBoard);
+        return;
+      }
+    }
+
+    Get.back();
   }
 }

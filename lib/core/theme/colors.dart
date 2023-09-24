@@ -143,4 +143,10 @@ class AppColors {
 
   /// #3D7878
   static const ming = Color(0xff3D7878);
+
+  /// #BFE5E4
+  static const mabel = Color(0xffBFE5E4);
+
+  /// #FDE0A2
+  static const capeHoney = Color(0xffFDE0A2);
 }

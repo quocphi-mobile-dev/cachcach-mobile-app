@@ -1,16 +1,25 @@
+import 'package:cachcach/app/modules/play/controller/play_controller.dart';
+import 'package:cachcach/app/modules/play/player/controller/player_controller.dart';
+import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
-import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class PlayerScreen extends StatelessWidget {
+class PlayerScreen extends StatefulWidget {
   const PlayerScreen({super.key});
+
+  @override
+  State<PlayerScreen> createState() => _PlayerScreenState();
+}
+
+class _PlayerScreenState extends State<PlayerScreen> {
+  final controller = Get.put(PlayerController());
+  final PlayController playController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +33,30 @@ class PlayerScreen extends StatelessWidget {
             _buildTitle(),
             space(h: 10.h),
             Expanded(
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 50.h),
-                itemBuilder: (context, index) {
-                  if (index == 2) {
-                    return _buildAddPlayer();
-                  }
+              child: Obx(
+                () => ListView(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 50.h),
+                  children: [
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        PlayerInfo playerInfo = controller.listPlayer[index];
 
-                  return _buildItemPlayer();
-                },
-                separatorBuilder: (context, index) {
-                  return space(h: 38.h);
-                },
-                itemCount: 3,
+                        return _buildItemPlayer(playerInfo);
+                      },
+                      separatorBuilder: (context, index) {
+                        return space(h: 38.h);
+                      },
+                      itemCount: controller.listPlayer.length,
+                    ),
+                    space(h: 38.h),
+                    playController.playMode == PlayMode.couple
+                        ? Container()
+                        : _buildAddPlayer()
+                  ],
+                ),
               ),
             ),
             _buildButtonStartGame(),
@@ -62,6 +82,7 @@ class PlayerScreen extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(14.r),
           onTap: () {
+            FocusScope.of(context).unfocus();
             Get.toNamed(RouteName.guidePlay);
           },
           child: Container(
@@ -82,7 +103,7 @@ class PlayerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildItemPlayer() {
+  Widget _buildItemPlayer(PlayerInfo playerInfo) {
     return Container(
       width: double.infinity,
       height: 72.h,
@@ -93,39 +114,57 @@ class PlayerScreen extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 36.w,
-            height: 36.w,
-            padding: EdgeInsets.all(8.w),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              shape: BoxShape.circle,
-            ),
-            child: Image.asset(
-              AppImages.imgFemale,
-              width: 24.w,
-              height: 24.w,
+          Obx(
+            () => GestureDetector(
+              onTap: () {
+                playerInfo.gender.value = Gender.female;
+              },
+              child: Container(
+                width: 36.w,
+                height: 36.w,
+                padding: EdgeInsets.all(8.w),
+                decoration: BoxDecoration(
+                  color: playerInfo.gender.value == Gender.female
+                      ? AppColors.mabel
+                      : AppColors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset(
+                  AppImages.imgFemale,
+                  width: 24.w,
+                  height: 24.w,
+                ),
+              ),
             ),
           ),
           space(w: 8.w),
-          Container(
-            width: 36.w,
-            height: 36.w,
-            padding: EdgeInsets.all(8.w),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              shape: BoxShape.circle,
-            ),
-            child: Image.asset(
-              AppImages.imgMale,
-              width: 24.w,
-              height: 24.w,
+          Obx(
+            () => GestureDetector(
+              onTap: () {
+                playerInfo.gender.value = Gender.male;
+              },
+              child: Container(
+                width: 36.w,
+                height: 36.w,
+                padding: EdgeInsets.all(8.w),
+                decoration: BoxDecoration(
+                  color: playerInfo.gender.value == Gender.male
+                      ? AppColors.capeHoney
+                      : AppColors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset(
+                  AppImages.imgMale,
+                  width: 24.w,
+                  height: 24.w,
+                ),
+              ),
             ),
           ),
           space(w: 16.w),
           Expanded(
             child: TextField(
-              controller: TextEditingController(),
+              controller: playerInfo.textEditingController,
               style: AppTextStyle.textStyleCommon.copyWith(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,

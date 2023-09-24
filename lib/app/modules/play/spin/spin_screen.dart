@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cachcach/app/modules/play/player/controller/player_controller.dart';
 import 'package:cachcach/app/modules/play/spin/controller/spin_controller.dart';
 import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
@@ -21,6 +22,7 @@ class SpinScreen extends StatefulWidget {
 class _SpinScreenState extends State<SpinScreen>
     with SingleTickerProviderStateMixin {
   final controller = Get.put(SpinController());
+  final PlayerController playerController = Get.find();
 
   @override
   void initState() {
@@ -36,7 +38,9 @@ class _SpinScreenState extends State<SpinScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildTopBar(),
+            buildTopBar(onBack: () {
+              controller.checkResult();
+            }),
             _buildTitle(),
             Expanded(child: _buildSpin()),
           ],
@@ -57,9 +61,9 @@ class _SpinScreenState extends State<SpinScreen>
           rotateMode: RotateMode.stopRotate,
           centerWidget: _buildButtonSpin(),
           children: List.generate(
-            controller.listPlayer.length,
+            playerController.listPlayer.length,
             (index) {
-              PlayerInfo playerInfo = controller.listPlayer[index];
+              PlayerInfo playerInfo = playerController.listPlayer[index];
               return _buildItemSpin(playerInfo);
             },
           ),

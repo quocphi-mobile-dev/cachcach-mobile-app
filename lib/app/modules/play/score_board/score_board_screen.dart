@@ -1,12 +1,23 @@
+import 'package:cachcach/app/modules/play/player/controller/player_controller.dart';
+import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class ScoreBoardScreen extends StatelessWidget {
+class ScoreBoardScreen extends StatefulWidget {
   const ScoreBoardScreen({super.key});
+
+  @override
+  State<ScoreBoardScreen> createState() => _ScoreBoardScreenState();
+}
+
+class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
+  final PlayerController playerController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +26,9 @@ class ScoreBoardScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            buildTopBar(),
+            buildTopBar(onBack: () {
+              Get.until((route) => route.settings.name == RouteName.selectMode);
+            }),
             _buildPlayerWin(),
             space(h: 12.h),
             _buildScoreBoard(),
@@ -75,56 +88,62 @@ class ScoreBoardScreen extends StatelessWidget {
           shrinkWrap: true,
           padding: EdgeInsets.only(bottom: 50.h),
           itemBuilder: (BuildContext context, int index) {
-            return Row(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: Text(
-                    "Player $index:",
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 19.sp,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.black,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "5",
-                      style: AppTextStyle.textStyleCommon.copyWith(
-                        fontSize: 19.sp,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "15",
-                      style: AppTextStyle.textStyleCommon.copyWith(
-                        fontSize: 19.sp,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            );
+            PlayerInfo playerInfo =
+                playerController.getListPlayerSortByPoint()[index];
+            return _buildPlayerScore(playerInfo);
           },
           separatorBuilder: (BuildContext context, int index) {
             return space(h: 20.h);
           },
-          itemCount: 10,
+          itemCount: playerController.getListPlayerSortByPoint().length,
         ),
       ),
+    );
+  }
+
+  Widget _buildPlayerScore(PlayerInfo playerInfo) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 3,
+          child: Text(
+            "${playerInfo.name}:",
+            style: AppTextStyle.textStyleCommon.copyWith(
+              fontSize: 19.sp,
+              fontWeight: FontWeight.w400,
+              color: AppColors.black,
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 4,
+          child: Container(
+            alignment: Alignment.center,
+            child: Text(
+              "${playerInfo.truthPoint}",
+              style: AppTextStyle.textStyleCommon.copyWith(
+                fontSize: 19.sp,
+                fontWeight: FontWeight.w400,
+                color: AppColors.black,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 4,
+          child: Container(
+            alignment: Alignment.center,
+            child: Text(
+              "${playerInfo.darePoint}",
+              style: AppTextStyle.textStyleCommon.copyWith(
+                fontSize: 19.sp,
+                fontWeight: FontWeight.w400,
+                color: AppColors.black,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -175,7 +194,7 @@ class ScoreBoardScreen extends StatelessWidget {
         children: [
           Flexible(
             child: Text(
-              "Players 1:",
+              "${playerController.getListPlayerSortByPoint().first.name}:",
               style: AppTextStyle.textStyleCommon.copyWith(
                 fontSize: 34.sp,
                 fontWeight: FontWeight.w600,

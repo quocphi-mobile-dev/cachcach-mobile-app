@@ -7,26 +7,60 @@ import 'package:get/get.dart';
 class SelectModeController extends GetxController {
   RxInt pageSelected = 0.obs;
   RxList<SelectModeModel> listCard = RxList([]);
+  Mode mode = Mode.classic;
+
+  List<String> listTruth = [];
+  List<String> listDare = [];
 
   @override
   void onReady() {
     super.onReady();
-    listCard.assignAll(List.generate(Mode.values.length, (index) {
-      final mode = Mode.values[index];
-      return SelectModeModel(
-        isLock: mode.isLock(),
-        card: SelectModeCard(
-          title: mode.getTitle(),
-          totalCards: mode.getTotalCard(),
-          image: mode.getImage(),
-          label: mode.getLabel(),
-          guideText: mode.getGuideText(),
-          showIconMovie: mode.isLock(),
-          onPlay: () {
-            Get.toNamed(RouteName.player);
-          },
-        ),
-      );
-    }));
+    listCard.assignAll(
+      List.generate(
+        Mode.values.length,
+        (index) {
+          final mode = Mode.values[index];
+          return SelectModeModel(
+            isLock: mode.isLock(),
+            card: SelectModeCard(
+              title: mode.getTitle(),
+              totalCards: mode.getTotalCard(),
+              image: mode.getImage(),
+              label: mode.getLabel(),
+              guideText: mode.getGuideText(),
+              showIconMovie: mode.isLock(),
+              onPlay: () {
+                this.mode = mode;
+                listTruth.assignAll(mode.getListTruth());
+                listDare.assignAll(mode.getListDare());
+                Get.toNamed(RouteName.player);
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  String getRandomTruth() {
+    if (listTruth.isEmpty) {
+      return "";
+    }
+
+    listTruth.shuffle();
+    String item = listTruth.first;
+    listTruth.remove(item);
+    return item;
+  }
+
+  String getRandomDare() {
+    if (listDare.isEmpty) {
+      return "";
+    }
+
+    listDare.shuffle();
+    String item = listDare.first;
+    listDare.remove(item);
+    return item;
   }
 }

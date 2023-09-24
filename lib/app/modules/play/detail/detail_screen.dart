@@ -1,16 +1,21 @@
-import 'dart:math';
-
+import 'package:cachcach/app/modules/play/spin/controller/spin_controller.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
-import 'package:cachcach/core/utils/constant.dart';
 import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key});
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  final SpinController spinController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,7 @@ class DetailScreen extends StatelessWidget {
         shrinkWrap: true,
         children: [
           Text(
-            content[Random().nextInt(content.length)],
+            Get.arguments['content'],
             style: AppTextStyle.textStyleCommon.copyWith(
               fontSize: 16.sp,
               fontWeight: FontWeight.w400,
@@ -81,7 +86,7 @@ class DetailScreen extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       child: Text(
-        "Player 1:",
+        spinController.playerSelected.name,
         style: AppTextStyle.textStyleCommon.copyWith(
           fontSize: 34.sp,
           fontWeight: FontWeight.w600,

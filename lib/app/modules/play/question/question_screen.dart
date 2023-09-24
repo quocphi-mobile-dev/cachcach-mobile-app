@@ -1,3 +1,6 @@
+import 'package:cachcach/app/modules/play/select_mode/controller/select_mode_controller.dart';
+import 'package:cachcach/app/modules/play/select_mode/model/mode.dart';
+import 'package:cachcach/app/modules/play/spin/controller/spin_controller.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
@@ -7,8 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class QuestionScreen extends StatelessWidget {
+class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
+
+  @override
+  State<QuestionScreen> createState() => _QuestionScreenState();
+}
+
+class _QuestionScreenState extends State<QuestionScreen> {
+  final SpinController spinController = Get.find();
+  final SelectModeController selectModeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +83,9 @@ class QuestionScreen extends StatelessWidget {
       width: 150.w,
       height: 180.h,
       decoration: BoxDecoration(
-        color: AppColors.crusta,
+        color: selectModeController.listTruth.isEmpty
+            ? AppColors.grey
+            : AppColors.crusta,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Material(
@@ -80,9 +93,17 @@ class QuestionScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.r),
         child: InkWell(
           borderRadius: BorderRadius.circular(20.r),
-          onTap: () {
-            Get.toNamed(RouteName.detail);
-          },
+          onTap: selectModeController.listTruth.isEmpty
+              ? null
+              : () {
+                  spinController.playerSelected.truthPoint += 1;
+                  Get.toNamed(
+                    RouteName.detail,
+                    arguments: {
+                      "content": selectModeController.getRandomTruth(),
+                    },
+                  );
+                },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
             child: Column(
@@ -106,7 +127,7 @@ class QuestionScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "30/30",
+                  "${selectModeController.listTruth.length}/${selectModeController.mode.getListTruth().length}",
                   style: AppTextStyle.textStyleCommon.copyWith(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w400,
@@ -126,7 +147,9 @@ class QuestionScreen extends StatelessWidget {
       width: 150.w,
       height: 180.h,
       decoration: BoxDecoration(
-        color: AppColors.crusta,
+        color: selectModeController.listDare.isEmpty
+            ? AppColors.grey
+            : AppColors.crusta,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Material(
@@ -134,9 +157,17 @@ class QuestionScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.r),
         child: InkWell(
           borderRadius: BorderRadius.circular(20.r),
-          onTap: () {
-            Get.toNamed(RouteName.detail);
-          },
+          onTap: selectModeController.listDare.isEmpty
+              ? null
+              : () {
+                  spinController.playerSelected.darePoint += 1;
+                  Get.toNamed(
+                    RouteName.detail,
+                    arguments: {
+                      "content": selectModeController.getRandomDare(),
+                    },
+                  );
+                },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
             child: Column(
@@ -161,7 +192,7 @@ class QuestionScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "30/30",
+                  "${selectModeController.listDare.length}/${selectModeController.mode.getListDare().length}",
                   style: AppTextStyle.textStyleCommon.copyWith(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w400,
@@ -194,7 +225,7 @@ class QuestionScreen extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       child: Text(
-        "Player 1:",
+        spinController.playerSelected.name,
         style: AppTextStyle.textStyleCommon.copyWith(
           fontSize: 34.sp,
           fontWeight: FontWeight.w600,

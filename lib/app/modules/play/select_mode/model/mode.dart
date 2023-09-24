@@ -1,4 +1,5 @@
 import 'package:cachcach/core/theme/images.dart';
+import 'package:cachcach/core/utils/constant.dart';
 
 enum Mode { classic, spicy, crazy, nightmare, xxx, bozzy }
 
@@ -89,19 +90,40 @@ extension ModeExtension on Mode {
   }
 
   int getTotalCard() {
+    return getListTruth().length + getListDare().length;
+  }
+
+  List<String> getListTruth() {
     switch (this) {
       case Mode.classic:
-        return 315;
+        return content;
       case Mode.spicy:
-        return 276;
+        return content;
       case Mode.crazy:
-        return 315;
+        return content;
       case Mode.nightmare:
-        return 315;
+        return content;
       case Mode.xxx:
-        return 315;
+        return content;
       case Mode.bozzy:
-        return 315;
+        return content;
+    }
+  }
+
+  List<String> getListDare() {
+    switch (this) {
+      case Mode.classic:
+        return content;
+      case Mode.spicy:
+        return content;
+      case Mode.crazy:
+        return content;
+      case Mode.nightmare:
+        return content;
+      case Mode.xxx:
+        return content;
+      case Mode.bozzy:
+        return content;
     }
   }
 }

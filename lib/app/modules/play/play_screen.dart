@@ -1,3 +1,4 @@
+import 'package:cachcach/app/modules/play/controller/play_controller.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
@@ -16,6 +17,7 @@ class PlayScreen extends StatefulWidget {
 
 class _PlayScreenState extends State<PlayScreen> {
   int currentPageIndex = 0;
+  final controller = Get.put(PlayController());
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,7 @@ class _PlayScreenState extends State<PlayScreen> {
                   image: AppImages.imgTruthOrDare,
                   label: "Truth or Dare",
                   onTap: () {
+                    controller.playMode = PlayMode.couple;
                     Get.toNamed(RouteName.selectMode);
                   }),
               _buildItem(
