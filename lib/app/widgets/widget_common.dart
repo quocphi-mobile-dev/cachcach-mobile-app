@@ -37,7 +37,7 @@ Widget divider({
   return Padding(padding: margin, child: divider);
 }
 
-Widget buildTopBar({bool useSetting = false}) {
+Widget buildTopBar({VoidCallback? onBack, bool useSetting = false}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16),
     child: Row(
@@ -50,9 +50,10 @@ Widget buildTopBar({bool useSetting = false}) {
             width: 32.w,
             height: 32.h,
           ),
-          onPressed: () {
-            Get.back();
-          },
+          onPressed: onBack ??
+              () {
+                Get.back();
+              },
         ),
         useSetting
             ? IconButton(

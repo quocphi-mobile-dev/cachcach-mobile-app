@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,6 +36,7 @@ class SpinController extends GetxController {
     animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         isSpinning.value = false;
+        Get.toNamed(RouteName.question);
       }
     });
     setRotation(0);

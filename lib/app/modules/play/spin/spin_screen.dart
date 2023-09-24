@@ -46,19 +46,24 @@ class _SpinScreenState extends State<SpinScreen>
   }
 
   Widget _buildSpin() {
-    return Center(
-      child: CircleList(
-        children: List.generate(controller.listPlayer.length, (index) {
-          PlayerInfo playerInfo = controller.listPlayer[index];
-          return _buildItemSpin(playerInfo);
-        }),
-        childrenPadding: 0,
-        initialAngle: -90 * pi / 180,
-        outerRadius: 250.w,
-        origin: Offset(-125.w / 2, 0),
-        // outerCircleColor: AppColors.blue,
-        rotateMode: RotateMode.stopRotate,
-        centerWidget: _buildButtonSpin(),
+    return Obx(
+      () => Center(
+        child: CircleList(
+          childrenPadding: 0,
+          initialAngle: -90 * pi / 180,
+          outerRadius: 250.w,
+          origin: Offset(-125.w / 2, 0),
+          // outerCircleColor: AppColors.blue,
+          rotateMode: RotateMode.stopRotate,
+          centerWidget: _buildButtonSpin(),
+          children: List.generate(
+            controller.listPlayer.length,
+            (index) {
+              PlayerInfo playerInfo = controller.listPlayer[index];
+              return _buildItemSpin(playerInfo);
+            },
+          ),
+        ),
       ),
     );
   }

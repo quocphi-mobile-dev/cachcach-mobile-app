@@ -2,8 +2,10 @@ import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class QuestionScreen extends StatelessWidget {
   const QuestionScreen({super.key});
@@ -24,14 +26,14 @@ class QuestionScreen extends StatelessWidget {
               endIndent: 64.w,
             ),
             _buildPlayerName(),
-            Expanded(child: _buildTrustOrDare())
+            Expanded(child: _buildTruthOrDare())
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTrustOrDare() {
+  Widget _buildTruthOrDare() {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -78,7 +80,9 @@ class QuestionScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.r),
         child: InkWell(
           borderRadius: BorderRadius.circular(20.r),
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(RouteName.detail);
+          },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
             child: Column(
@@ -130,7 +134,9 @@ class QuestionScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.r),
         child: InkWell(
           borderRadius: BorderRadius.circular(20.r),
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(RouteName.detail);
+          },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
             child: Column(
