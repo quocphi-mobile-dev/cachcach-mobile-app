@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
@@ -223,15 +222,13 @@ class _SelectModeCardState extends State<SelectModeCard> {
       ),
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
       alignment: Alignment.center,
-      child: AutoSizeText(
-        widget.title ?? "",
+      child: Text(
+        widget.title,
         style: AppTextStyle.textStyleCommon.copyWith(
           fontSize: 12.sp,
           fontWeight: FontWeight.w600,
           color: AppColors.black,
         ),
-        minFontSize: 8.sp,
-        maxFontSize: 12.sp,
       ),
     );
   }
@@ -251,15 +248,13 @@ class _SelectModeCardState extends State<SelectModeCard> {
             bottomRight: Radius.circular(24.r),
           ),
         ),
-        child: AutoSizeText(
+        child: Text(
           "${widget.totalCards ?? ""} CARDS",
           style: AppTextStyle.textStyleCommon.copyWith(
             fontSize: 12.sp,
             fontWeight: FontWeight.w600,
             color: AppColors.black,
           ),
-          minFontSize: 8.sp,
-          maxFontSize: 12.sp,
         ),
       ),
     );
