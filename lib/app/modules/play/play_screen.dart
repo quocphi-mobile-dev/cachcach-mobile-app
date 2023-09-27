@@ -72,7 +72,10 @@ class _PlayScreenState extends State<PlayScreen> {
               _buildItem(
                   image: AppImages.imgTruthOrDare,
                   label: "Chewing",
-                  onTap: () {}),
+                  onTap: () {
+                    controller.playMode = PlayMode.couple;
+                    Get.toNamed(RouteName.flipTheCard);
+                  }),
             ],
           )
         ],
