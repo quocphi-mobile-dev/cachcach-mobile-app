@@ -5,8 +5,11 @@ import 'package:cachcach/app/modules/play/spin/controller/spin_controller.dart';
 import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
+import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
+import 'package:cachcach/core/utils/custom_arc.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:circle_list/circle_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,6 +38,7 @@ class _SpinScreenState extends State<SpinScreen>
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       body: SafeArea(
+        bottom: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,143 +46,111 @@ class _SpinScreenState extends State<SpinScreen>
               controller.checkResult();
             }),
             _buildTitle(),
-            Expanded(child: _buildSpin()),
+            Expanded(child: _buildWheel()),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSpin() {
-    return Obx(
-      () => Center(
-        child: CircleList(
-          childrenPadding: 0,
-          initialAngle: -90 * pi / 180,
-          outerRadius: 250.w,
-          origin: Offset(-125.w / 2, 0),
-          // outerCircleColor: AppColors.blue,
-          rotateMode: RotateMode.stopRotate,
-          centerWidget: _buildButtonSpin(),
-          children: List.generate(
-            playerController.listPlayer.length,
-            (index) {
-              PlayerInfo playerInfo = playerController.listPlayer[index];
-              return _buildItemSpin(playerInfo);
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildButtonSpin() {
-    return GestureDetector(
-      onTap: () {
-        controller.startSpinning();
-      },
-      child: Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.all(30.w),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.white,
-            ),
-          ),
-          AnimatedBuilder(
-            animation: controller.animationController,
-            builder: (_, child) {
-              return Transform.rotate(
-                angle: controller.animation.value,
-                child: Container(
-                  alignment: Alignment.topCenter,
-                  child: Image.asset(
-                    AppImages.imgSpinArrow,
-                    width: 75.w,
-                    height: 75.w,
+  Widget _buildWheel() {
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: SizedBox(
+            height: 500.h,
+            child: Stack(
+              children: [
+                CustomPaint(
+                  painter: CustomArc(
+                      context: context,
+                      color: AppColors.crusta.withOpacity(0.5)),
+                  size: Size(double.infinity, 500.h),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 100.h),
+                  child: CarouselSlider(
+                    carouselController: controller.carouselController,
+                    items: List.generate(
+                      playerController.listPlayer.length,
+                      (index) {
+                        PlayerInfo playerInfo =
+                            playerController.listPlayer[index];
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 120.w,
+                              height: 120.w,
+                              decoration: const BoxDecoration(
+                                color: AppColors.crusta,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.asset(AppImages.imgPlayerMale1),
+                            ),
+                            space(h: 10.h),
+                            Text(
+                              playerInfo.name,
+                              style: AppTextStyle.textStyleCommon.copyWith(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.black,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    options: CarouselOptions(
+                      height: 400.h,
+                      enlargeCenterPage: true,
+                      enlargeStrategy: CenterPageEnlargeStrategy.height,
+                      viewportFraction: 0.4,
+                      aspectRatio: 1.0,
+                      scrollPhysics: const NeverScrollableScrollPhysics(),
+                    ),
                   ),
                 ),
-              );
-            },
-          ),
-          Obx(
-            () => controller.isSpinning.value
-                ? Container()
-                : Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AppImages.imgSpin,
-                          width: 90.w,
-                          height: 90.w,
-                        ),
-                        Text(
-                          "CLICK HERE",
-                          style: AppTextStyle.textStyleCommon.copyWith(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.black,
-                          ),
-                        )
-                      ],
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Transform.rotate(
+                    angle: 3.14,
+                    child: Image.asset(
+                      AppImages.imgSpinArrow,
+                      width: 75.w,
+                      height: 75.w,
                     ),
                   ),
-          ),
-          Obx(
-            () => controller.isSpinning.value
-                ? Container()
-                : Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 120.w, top: 60.h),
-                      child: Image.asset(
-                        AppImages.imgCursor,
-                        width: 75.w,
-                        height: 75.w,
-                      ),
-                    ),
-                  ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildItemSpin(PlayerInfo playerInfo) {
-    return Transform.scale(
-      scaleX: 0.8,
-      scaleY: 0.8,
-      child: Container(
-        width: 100.w,
-        height: 135.h,
-        decoration: BoxDecoration(
-            color: AppColors.crusta, borderRadius: BorderRadius.circular(20.r)),
-        alignment: Alignment.center,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              AppImages.imgPlayerMale1,
-              width: 80.w,
-              height: 80.h,
+                ),
+              ],
             ),
-            space(h: 12.h),
-            Text(
-              playerInfo.name,
-              style: AppTextStyle.textStyleCommon.copyWith(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: AppColors.black,
-              ),
-            )
-          ],
+          ),
         ),
-      ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: GestureDetector(
+            onTap: () {
+              controller.startRandom();
+            },
+            child: Container(
+              width: 120.w,
+              height: 120.h,
+              margin: EdgeInsets.only(bottom: 70.h),
+              decoration: const BoxDecoration(
+                  color: AppColors.white, shape: BoxShape.circle),
+              child: RotationTransition(
+                turns: Tween(begin: 0.0, end: 1.0)
+                    .animate(controller.animationController),
+                child: Icon(
+                  Icons.sync,
+                  size: 40.w,
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 
