@@ -109,6 +109,9 @@ class _SpinScreenState extends State<SpinScreen>
                       viewportFraction: 0.4,
                       aspectRatio: 1.0,
                       scrollPhysics: const NeverScrollableScrollPhysics(),
+                      onPageChanged: (index, _) {
+                        controller.selectedIndex = index;
+                      }
                     ),
                   ),
                 ),
