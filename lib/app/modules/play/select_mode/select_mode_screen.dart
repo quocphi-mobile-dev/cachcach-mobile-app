@@ -2,13 +2,9 @@ import 'package:cachcach/app/modules/play/select_mode/controller/select_mode_con
 import 'package:cachcach/app/modules/play/select_mode/model/select_mode_model.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
-import 'package:cachcach/core/theme/icons.dart';
-import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
-import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SelectModeScreen extends StatefulWidget {

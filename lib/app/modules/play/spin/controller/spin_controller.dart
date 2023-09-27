@@ -13,6 +13,7 @@ class SpinController extends GetxController {
   Duration timeSpin = const Duration(seconds: 3);
   PlayerInfo playerSelected = PlayerInfo();
   CarouselController carouselController = CarouselController();
+  int selectedIndex = 0;
 
   @override
   void onReady() {
@@ -74,5 +75,8 @@ class SpinController extends GetxController {
     await Future.delayed(timeRandom);
     stopAnimation();
     isSpinning = false;
+    PlayerController playerController = Get.find();
+    playerSelected = playerController.listPlayer[selectedIndex];
+    Get.toNamed(RouteName.question);
   }
 }
