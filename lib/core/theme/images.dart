@@ -19,4 +19,5 @@ class AppImages {
   static const imgTruth = "assets/images/img_truth.png";
   static const imgDare = "assets/images/img_dare.png";
   static const imgCup = "assets/images/img_cup.png";
+  static const imgGoogle = "assets/images/img_google.png";
 }

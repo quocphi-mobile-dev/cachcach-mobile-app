@@ -164,4 +164,13 @@ class AppColors {
 
   /// #2FD87D
   static const shamrock = Color(0xff2FD87D);
+
+  /// #AEAEB2
+  static const spunPearl = Color(0xffAEAEB2);
+
+  /// #8594E7
+  static const portage = Color(0xff8594E7);
+
+  /// #3B5998
+  static const mariner = Color(0xff3B5998);
 }

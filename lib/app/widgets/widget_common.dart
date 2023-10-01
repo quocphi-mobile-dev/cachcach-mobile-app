@@ -71,3 +71,93 @@ Widget buildTopBar({VoidCallback? onBack, bool useSetting = false}) {
     ),
   );
 }
+
+Widget gradientButton({
+  double? width,
+  double? height,
+  double? borderRadius,
+  Gradient? gradient,
+  VoidCallback? onTap,
+  required Widget child,
+}) {
+  return Container(
+    width: width ?? double.infinity,
+    height: height ?? 50.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(borderRadius ?? 14.r),
+      gradient: gradient ??
+          const LinearGradient(
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
+            colors: [
+              AppColors.sunshade,
+              AppColors.coral,
+            ],
+          ),
+    ),
+    child: Material(
+      color: AppColors.transparent,
+      borderRadius: BorderRadius.circular(14.r),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14.r),
+        onTap: onTap,
+        child: child,
+      ),
+    ),
+  );
+}
+
+Widget normalButton({
+  double? width,
+  double? height,
+  double? borderRadius,
+  VoidCallback? onTap,
+  Color? backgroundColor,
+  required Widget child,
+}) {
+  return Container(
+    width: width ?? double.infinity,
+    height: height ?? 50.h,
+    decoration: BoxDecoration(
+      color: backgroundColor ?? AppColors.portage,
+      borderRadius: BorderRadius.circular(borderRadius ?? 14.r),
+    ),
+    child: Material(
+      color: AppColors.transparent,
+      borderRadius: BorderRadius.circular(14.r),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14.r),
+        onTap: onTap,
+        child: child,
+      ),
+    ),
+  );
+}
+
+Widget outlineButton({
+  double? width,
+  double? height,
+  double? borderRadius,
+  VoidCallback? onTap,
+  BoxBorder? border,
+  required Widget child,
+}) {
+  return Container(
+    width: width ?? double.infinity,
+    height: height ?? 50.h,
+    decoration: BoxDecoration(
+      color: AppColors.transparent,
+      borderRadius: BorderRadius.circular(borderRadius ?? 14.r),
+      border: border ?? Border.all(color: AppColors.grey),
+    ),
+    child: Material(
+      color: AppColors.transparent,
+      borderRadius: BorderRadius.circular(14.r),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14.r),
+        onTap: onTap,
+        child: child,
+      ),
+    ),
+  );
+}
