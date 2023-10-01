@@ -186,4 +186,10 @@ class AppColors {
 
   /// #F05BF3
   static const pinkFlamingo = Color(0xffF05BF3);
+
+  /// #422ba8
+  static const blueGem = Color(0xff422ba8);
+
+  /// #FB7A7A
+  static const salmon = Color(0xffFB7A7A);
 }

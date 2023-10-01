@@ -5,4 +5,5 @@ class AppIcons {
   static const icProfile = 'assets/icons/ic_profile.svg';
   static const icTwitter = 'assets/icons/ic_twitter.svg';
   static const icLock = 'assets/icons/ic_lock.svg';
+  static const icPlus = 'assets/icons/ic_plus.svg';
 }

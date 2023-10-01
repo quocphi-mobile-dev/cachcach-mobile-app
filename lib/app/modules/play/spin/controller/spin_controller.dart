@@ -73,8 +73,8 @@ class SpinController extends GetxController {
     );
 
     await Future.delayed(timeRandom);
-    await Future.delayed(const Duration(milliseconds: 2000));
     stopAnimation();
+    await Future.delayed(const Duration(milliseconds: 2000));
     isSpinning = false;
     PlayerController playerController = Get.find();
     playerSelected = playerController.listPlayer[selectedIndex];

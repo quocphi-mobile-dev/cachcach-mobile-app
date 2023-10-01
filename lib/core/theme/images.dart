@@ -26,4 +26,6 @@ class AppImages {
   static const imgBeerFlipCard = "assets/images/img_beer_flip_card.png";
   static const imgFriends = "assets/images/img_friends.png";
   static const imgChewing = "assets/images/img_chewing.png";
+  static const imgCharacterMale = "assets/images/img_character_male.png";
+  static const imgCharacterFemale = "assets/images/img_character_female.png";
 }
