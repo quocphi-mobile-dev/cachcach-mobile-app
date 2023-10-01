@@ -22,19 +22,22 @@ class SelectModeController extends GetxController {
           final mode = Mode.values[index];
           return SelectModeModel(
             isLock: mode.isLock(),
+            backgroundColor: mode.getBackgroundColor(),
             card: SelectModeCard(
               title: mode.getTitle(),
               totalCards: mode.getTotalCard(),
               image: mode.getImage(),
               label: mode.getLabel(),
               guideText: mode.getGuideText(),
-              showIconMovie: mode.isLock(),
+              isLock: mode.isLock(),
+              price: mode.getPrice(),
               onPlay: () {
                 this.mode = mode;
                 listTruth.assignAll(mode.getListTruth());
                 listDare.assignAll(mode.getListDare());
                 Get.toNamed(RouteName.player);
               },
+              onUnlock: () {},
             ),
           );
         },

@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 Future handleException(
   Object e, {
@@ -128,3 +129,5 @@ void showLoading() {
 void hideLoading() {
   Get.back();
 }
+
+var currencyFormat = NumberFormat.currency(locale: "vi");

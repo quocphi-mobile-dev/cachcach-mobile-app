@@ -4,4 +4,5 @@ class AppIcons {
   static const icArrowLeft = 'assets/icons/ic_arrow_left.svg';
   static const icProfile = 'assets/icons/ic_profile.svg';
   static const icTwitter = 'assets/icons/ic_twitter.svg';
+  static const icLock = 'assets/icons/ic_lock.svg';
 }

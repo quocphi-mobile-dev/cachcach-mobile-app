@@ -1,5 +1,7 @@
+import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/utils/constant.dart';
+import 'package:flutter/material.dart';
 
 enum Mode { classic, spicy, crazy, nightmare, xxx, bozzy }
 
@@ -55,6 +57,23 @@ extension ModeExtension on Mode {
     }
   }
 
+  int getPrice() {
+    switch (this) {
+      case Mode.classic:
+        return 0;
+      case Mode.spicy:
+        return 0;
+      case Mode.crazy:
+        return 129000;
+      case Mode.nightmare:
+        return 149000;
+      case Mode.xxx:
+        return 169000;
+      case Mode.bozzy:
+        return 189000;
+    }
+  }
+
   String getLabel() {
     switch (this) {
       case Mode.classic:
@@ -72,20 +91,31 @@ extension ModeExtension on Mode {
     }
   }
 
+  Color? getBackgroundColor() {
+    switch (this) {
+      case Mode.nightmare:
+        return AppColors.darkCoral;
+      case Mode.xxx:
+        return AppColors.pinkFlamingo;
+      default:
+        return null;
+    }
+  }
+
   String getGuideText() {
     switch (this) {
       case Mode.classic:
-        return "Hi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.Hi.";
+        return "Bao gồm các thẻ bài nội dung vui nhộn nhưng cũng không kém phần hấp dẫn phù hợp với những cặp đôi mới quen nhau mong muốn tìm hiểu nhau sâu hơn.";
       case Mode.spicy:
-        return "Hi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.Hi.";
+        return "Bao gồm các thẻ bài nội dung vui nhộn nhưng cũng không kém phần hấp dẫn phù hợp với những cặp đôi mới quen nhau mong muốn tìm hiểu nhau sâu hơn.";
       case Mode.crazy:
-        return "Hi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.Hi.";
+        return "Bao gồm các thẻ bài nội dung vui nhộn nhưng cũng không kém phần hấp dẫn phù hợp với những cặp đôi mới quen nhau mong muốn tìm hiểu nhau sâu hơn.";
       case Mode.nightmare:
-        return "Hi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.Hi.";
+        return "Bao gồm các thẻ bài nội dung vui nhộn nhưng cũng không kém phần hấp dẫn phù hợp với những cặp đôi mới quen nhau mong muốn tìm hiểu nhau sâu hơn.";
       case Mode.xxx:
-        return "Hi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.Hi.";
+        return "Bao gồm các thẻ bài nội dung vui nhộn nhưng cũng không kém phần hấp dẫn phù hợp với những cặp đôi mới quen nhau mong muốn tìm hiểu nhau sâu hơn.";
       case Mode.bozzy:
-        return "Hi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.HiHi>HI.Hi.";
+        return "Bao gồm các thẻ bài nội dung vui nhộn nhưng cũng không kém phần hấp dẫn phù hợp với những cặp đôi mới quen nhau mong muốn tìm hiểu nhau sâu hơn.";
     }
   }
 

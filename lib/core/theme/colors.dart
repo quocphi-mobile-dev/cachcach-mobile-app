@@ -13,8 +13,8 @@ class AppColors {
   static const grey = Colors.grey;
   static const red = Colors.red;
   static const blue = Colors.blue;
-  /// #6064D1
-  static const bgColor = Color(0xff6064D1);
+  /// #5A3ECD
+  static const bgColor = Color(0xff5A3ECD);
 
   /// matterhorn
   static const primary = matterhorn;
@@ -174,4 +174,16 @@ class AppColors {
 
   /// #3B5998
   static const mariner = Color(0xff3B5998);
+
+  /// #886DFE
+  static const lightSlateBlue = Color(0xff886DFE);
+
+  /// #D0CDD3
+  static const fog = Color(0xffD0CDD3);
+
+  /// #CD4F3E
+  static const darkCoral = Color(0xffCD4F3E);
+
+  /// #F05BF3
+  static const pinkFlamingo = Color(0xffF05BF3);
 }
