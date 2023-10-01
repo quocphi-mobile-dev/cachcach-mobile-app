@@ -90,7 +90,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
           borderRadius: BorderRadius.circular(14.r),
           onTap: () {
             FocusScope.of(context).unfocus();
-            Get.toNamed(RouteName.guidePlay);
+            Get.toNamed(RouteName.spin);
           },
           child: Container(
             width: double.infinity,
