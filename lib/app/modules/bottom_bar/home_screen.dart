@@ -13,16 +13,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar:  MainBottomBar(callback: (index){
-        setState(() {
-          currentPageIndex = index;
-        });
-        print("callback _HomeScreenState: index $index");
-      },),
-
+      bottomNavigationBar: MainBottomBar(
+        callback: (index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+          print("callback _HomeScreenState: index $index");
+        },
+      ),
       body: <Widget>[
         PlayScreen(),
         MyDareScreen(),
