@@ -1,4 +1,5 @@
 import 'package:cachcach/app/modules/play/controller/play_controller.dart';
+import 'package:cachcach/app/modules/play/widgets/slogan.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
@@ -28,14 +29,12 @@ class _PlayScreenState extends State<PlayScreen> {
           padding: EdgeInsets.only(bottom: 20.h),
           children: [
             space(h: 20.h),
-            Image.asset(
-              AppImages.imgLogoMini,
-              width: 172.w,
-              height: 126.h,
-            ),
+            const Slogan(),
             space(h: 20.h),
             _widgetGroupCouple(),
             space(h: 20.h),
+            divider(color: AppColors.cavernPink, indent: 16.w, endIndent: 16.w),
+            space(h: 10.h),
             _widgetGroupFriends(),
           ],
         ),
@@ -51,11 +50,11 @@ class _PlayScreenState extends State<PlayScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Couple",
+            "Cặp đôi",
             style: AppTextStyle.textStyleCommon.copyWith(
               fontSize: 34.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.black,
+              color: AppColors.white,
             ),
           ),
           space(h: 20.h),
@@ -70,8 +69,8 @@ class _PlayScreenState extends State<PlayScreen> {
                     Get.toNamed(RouteName.selectMode);
                   }),
               _buildItem(
-                  image: AppImages.imgTruthOrDare,
-                  label: "Chewing",
+                  image: AppImages.imgBeerFlipCard,
+                  label: "Lật thẻ bài",
                   onTap: () {
                     controller.playMode = PlayMode.couple;
                     Get.toNamed(RouteName.flipTheCard);
@@ -91,11 +90,11 @@ class _PlayScreenState extends State<PlayScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Friends",
+            "Nhóm bạn",
             style: AppTextStyle.textStyleCommon.copyWith(
               fontSize: 34.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.black,
+              color: AppColors.white,
             ),
           ),
           space(h: 20.h),
@@ -103,11 +102,11 @@ class _PlayScreenState extends State<PlayScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildItem(
-                  image: AppImages.imgTruthOrDare,
+                  image: AppImages.imgFriends,
                   label: "Truth or Dare",
                   onTap: () {}),
               _buildItem(
-                  image: AppImages.imgTruthOrDare,
+                  image: AppImages.imgChewing,
                   label: "Chewing",
                   onTap: () {}),
             ],
@@ -122,35 +121,51 @@ class _PlayScreenState extends State<PlayScreen> {
     required String label,
     VoidCallback? onTap,
   }) {
-    return Material(
-      color: AppColors.white,
-      borderRadius: BorderRadius.circular(24),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(24),
-        onTap: onTap,
-        child: Container(
-          width: 162.w,
-          height: 162.h,
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 157.w,
+          height: 117.h,
           alignment: Alignment.center,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Stack(
             children: [
-              Image.asset(image),
-              space(h: 20.h),
-              Text(
-                label,
-                style: AppTextStyle.textStyleCommon.copyWith(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.black,
+              Align(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  image,
+                  width: 120.w,
+                ),
+              ),
+              Material(
+                color: AppColors.transparent,
+                borderRadius: BorderRadius.circular(24),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(24),
+                  onTap: onTap,
+                  child: const SizedBox(
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
                 ),
               )
             ],
           ),
         ),
-      ),
+        space(h: 6.h),
+        Text(
+          label,
+          style: AppTextStyle.textStyleCommon.copyWith(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w400,
+            color: AppColors.white,
+          ),
+        )
+      ],
     );
   }
 }

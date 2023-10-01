@@ -1,4 +1,8 @@
+import 'package:cachcach/core/theme/colors.dart';
+import 'package:cachcach/core/theme/images.dart';
+import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainBottomBar extends StatefulWidget {
   final Color? color;
@@ -19,31 +23,47 @@ class _MainBottomBarState extends State<MainBottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationBar(
-      onDestinationSelected: (int index) {
-        setState(() {
-          currentPageIndex = index;
-          widget.callback(index);
-        });
-      },
-      indicatorColor: Colors.amber[800],
-      selectedIndex: currentPageIndex,
-      destinations: const <Widget>[
-        NavigationDestination(
-          selectedIcon: Icon(Icons.home),
-          icon: Icon(Icons.home_outlined),
-          label: 'Home',
+    return Theme(
+      data: ThemeData(
+        navigationBarTheme: NavigationBarThemeData(
+          labelTextStyle: MaterialStateProperty.resolveWith(
+            (states) {
+              return AppTextStyle.textStyleCommon.copyWith(
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.black,
+              );
+            },
+          ),
         ),
-        NavigationDestination(
-          icon: Icon(Icons.business),
-          label: 'Business',
-        ),
-        NavigationDestination(
-          selectedIcon: Icon(Icons.account_circle_rounded),
-          icon: Icon(Icons.account_circle_outlined),
-          label: 'School',
-        ),
-      ],
+      ),
+      child: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+            widget.callback(index);
+          });
+        },
+        backgroundColor: AppColors.white,
+        indicatorColor: AppColors.bgColor,
+        selectedIndex: currentPageIndex,
+        destinations: <Widget>[
+          NavigationDestination(
+            icon: Image.asset(AppImages.imgPlayBottomBar),
+            label: 'Play',
+          ),
+          NavigationDestination(
+            icon: Image.asset(
+              AppImages.imgMyDaresBottomBar,
+            ),
+            label: 'My dares',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 }

@@ -20,4 +20,10 @@ class AppImages {
   static const imgDare = "assets/images/img_dare.png";
   static const imgCup = "assets/images/img_cup.png";
   static const imgGoogle = "assets/images/img_google.png";
+  static const imgPlayBottomBar = "assets/images/img_play_bottom_bar.png";
+  static const imgMyDaresBottomBar = "assets/images/img_my_dares_bottom_bar.png";
+  static const imgSlogan = "assets/images/img_slogan.png";
+  static const imgBeerFlipCard = "assets/images/img_beer_flip_card.png";
+  static const imgFriends = "assets/images/img_friends.png";
+  static const imgChewing = "assets/images/img_chewing.png";
 }
