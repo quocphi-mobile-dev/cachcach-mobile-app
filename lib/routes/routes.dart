@@ -4,7 +4,6 @@ import 'package:cachcach/app/modules/auth/signup/sign_up_screen.dart';
 import 'package:cachcach/app/modules/bottom_bar/home_screen.dart';
 import 'package:cachcach/app/modules/play/detail/detail_screen.dart';
 import 'package:cachcach/app/modules/play/flip_the_card/flip_the_card_screen.dart';
-import 'package:cachcach/app/modules/play/guide_play/guide_play_screen.dart';
 import 'package:cachcach/app/modules/play/play_screen.dart';
 import 'package:cachcach/app/modules/play/player/player_screen.dart';
 import 'package:cachcach/app/modules/play/question/question_screen.dart';
@@ -26,7 +25,6 @@ class RouteName {
   static const String play = "/play";
   static const String selectMode = "/select-mode";
   static const String player = "/player";
-  static const String guidePlay = "/guide-play";
   static const String setting = "/setting";
   static const String spin = "/spin";
   static const String question = "/question";
@@ -49,7 +47,6 @@ class AppRoutes {
     RouteName.play: () => const PlayScreen(),
     RouteName.selectMode: () => const SelectModeScreen(),
     RouteName.player: () => const PlayerScreen(),
-    RouteName.guidePlay: () => const GuidePlayScreen(),
     RouteName.setting: () => const SettingScreen(),
     RouteName.spin: () => const SpinScreen(),
     RouteName.question: () => const QuestionScreen(),
