@@ -1,6 +1,7 @@
 import 'package:cachcach/app/modules/bottom_bar/main_bottom_bar.dart';
 import 'package:cachcach/app/modules/my_dare/my_dare.dart';
 import 'package:cachcach/app/modules/play/play_screen.dart';
+import 'package:cachcach/app/modules/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,11 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: <Widget>[
         PlayScreen(),
         MyDareScreen(),
-        Container(
-          color: Colors.blue,
-          alignment: Alignment.center,
-          child: const Text('Page 3'),
-        ),
+        const ProfileScreen(),
       ][currentPageIndex],
     );
   }

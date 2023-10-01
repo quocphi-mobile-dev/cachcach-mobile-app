@@ -39,8 +39,8 @@ class _MainBottomBarState extends State<MainBottomBar> {
           label: 'Business',
         ),
         NavigationDestination(
-          selectedIcon: Icon(Icons.school),
-          icon: Icon(Icons.school_outlined),
+          selectedIcon: Icon(Icons.account_circle_rounded),
+          icon: Icon(Icons.account_circle_outlined),
           label: 'School',
         ),
       ],
