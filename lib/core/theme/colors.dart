@@ -149,4 +149,19 @@ class AppColors {
 
   /// #FDE0A2
   static const capeHoney = Color(0xffFDE0A2);
+
+  /// #2656D1
+  static const ceruleanBlue = Color(0xff2656D1);
+
+  /// #949E16
+  static const citron = Color(0xff949E16);
+
+  /// #D635F0
+  static const freeSpeechMagenta = Color(0xffD635F0);
+
+  /// #F36464
+  static const bittersweet = Color(0xffF36464);
+
+  /// #2FD87D
+  static const shamrock = Color(0xff2FD87D);
 }
