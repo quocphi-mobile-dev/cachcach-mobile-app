@@ -9,6 +9,7 @@ import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/core/utils/custom_arc.dart';
+import 'package:cachcach/core/utils/my_size_extensions.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:circle_list/circle_list.dart';
 import 'package:flutter/material.dart';
@@ -64,8 +65,9 @@ class _SpinScreenState extends State<SpinScreen>
               children: [
                 CustomPaint(
                   painter: CustomArc(
-                      context: context,
-                      color: AppColors.crusta.withOpacity(0.5)),
+                    context: context,
+                    color: AppColors.blueGem,
+                  ),
                   size: Size(double.infinity, 500.h),
                 ),
                 Container(
@@ -81,8 +83,8 @@ class _SpinScreenState extends State<SpinScreen>
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
-                              width: 120.w,
-                              height: 120.w,
+                              width: 140.ic,
+                              height: 140.ic,
                               decoration: const BoxDecoration(
                                 color: AppColors.crusta,
                                 shape: BoxShape.circle,
@@ -103,16 +105,15 @@ class _SpinScreenState extends State<SpinScreen>
                       },
                     ),
                     options: CarouselOptions(
-                      height: 400.h,
-                      enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.height,
-                      viewportFraction: 0.4,
-                      aspectRatio: 1.0,
-                      scrollPhysics: const NeverScrollableScrollPhysics(),
-                      onPageChanged: (index, _) {
-                        controller.selectedIndex = index;
-                      }
-                    ),
+                        height: 400.h,
+                        enlargeCenterPage: true,
+                        enlargeStrategy: CenterPageEnlargeStrategy.height,
+                        viewportFraction: 0.4,
+                        aspectRatio: 1.0,
+                        scrollPhysics: const NeverScrollableScrollPhysics(),
+                        onPageChanged: (index, _) {
+                          controller.selectedIndex = index;
+                        }),
                   ),
                 ),
                 Align(
@@ -165,7 +166,7 @@ class _SpinScreenState extends State<SpinScreen>
         style: AppTextStyle.textStyleCommon.copyWith(
           fontSize: 34.sp,
           fontWeight: FontWeight.w600,
-          color: AppColors.black,
+          color: AppColors.white,
         ),
       ),
     );

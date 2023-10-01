@@ -1,7 +1,9 @@
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
-import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
+import 'package:cachcach/core/utils/my_size_extensions.dart';
+import 'package:cachcach/core/utils/top_level_function.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,18 +15,22 @@ class SelectModeCard extends StatefulWidget {
     required this.totalCards,
     required this.image,
     required this.label,
-    this.showIconMovie = true,
+    this.isLock = true,
     required this.guideText,
     this.onPlay,
+    this.onUnlock,
+    required this.price,
   });
 
   final String title;
   final int totalCards;
   final String image;
   final String label;
-  final bool showIconMovie;
+  final bool isLock;
   final String guideText;
   final VoidCallback? onPlay;
+  final VoidCallback? onUnlock;
+  final int price;
 
   @override
   State<SelectModeCard> createState() => _SelectModeCardState();
@@ -36,39 +42,40 @@ class _SelectModeCardState extends State<SelectModeCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 300.w,
+      width: 342.w,
       height: 512.h,
       child: Stack(
         children: [
-          _background(),
           _buildContent(),
-          _buildMovie(),
-          _buildTitle(),
-          _buildTotalCard(),
+          _buildImage(),
         ],
       ),
     );
   }
 
-  Widget _buildMovie() {
-    if (widget.showIconMovie) {
-      return Container(
-        alignment: Alignment.topRight,
-        margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
-        child: Image.asset(
-          AppImages.imgMoviePlay,
-          width: 50.w,
-          height: 50.h,
-        ),
-      );
-    }
-
-    return const SizedBox();
+  Widget _buildImage() {
+    return Image.asset(
+      widget.image,
+      width: 140.ic,
+      height: 140.ic,
+    );
   }
 
   Widget _buildContent() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 22.w).copyWith(bottom: 50.h),
+    return Container(
+      margin: EdgeInsets.only(top: 90.h, bottom: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+      decoration: BoxDecoration(
+        color: AppColors.lightSlateBlue,
+        borderRadius: BorderRadius.circular(24.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 4,
+            offset: const Offset(4, 8), // Shadow position
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -77,32 +84,37 @@ class _SelectModeCardState extends State<SelectModeCard> {
               shrinkWrap: true,
               padding: EdgeInsets.only(bottom: 20.h),
               children: [
-                Image.asset(
-                  widget.image,
-                  width: 160.w,
-                  height: 160.h,
-                ),
+                space(h: 40.h),
                 Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    widget.label,
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 30.sp,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.black,
-                    ),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.label,
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 28.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                      space(w: 10.w),
+                      _buildTotalCard(),
+                    ],
                   ),
                 ),
                 space(h: 12.h),
                 Container(
                   alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: Text(
                     widget.guideText,
                     textAlign: TextAlign.justify,
                     style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.black,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white,
                     ),
                   ),
                 ),
@@ -120,10 +132,10 @@ class _SelectModeCardState extends State<SelectModeCard> {
   Widget _buildButtonAddWithMyDare() {
     return Container(
       width: double.infinity,
-      height: 50.h,
+      height: 60.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14.r),
-        color: AppColors.bgColor,
+        color: AppColors.white,
       ),
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
       child: Row(
@@ -133,29 +145,31 @@ class _SelectModeCardState extends State<SelectModeCard> {
             () => SizedBox(
               width: 40.w,
               height: 20.h,
-              child: Switch(
+              child: CupertinoSwitch(
                 value: isEnable.value,
+                thumbColor: AppColors.crusta,
                 onChanged: (bool value) {
                   isEnable.value = value;
                 },
               ),
             ),
           ),
-          space(w: 10.w),
+          space(w: 24.w),
           Expanded(
             child: Text(
               "Add with my dares",
               style: AppTextStyle.textStyleCommon.copyWith(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.black,
+                color: AppColors.bgColor,
               ),
             ),
           ),
           space(w: 10.w),
           Icon(
             Icons.chevron_right,
-            size: 20.w,
+            size: 32.ic,
+            color: AppColors.crusta,
           ),
         ],
       ),
@@ -163,20 +177,62 @@ class _SelectModeCardState extends State<SelectModeCard> {
   }
 
   Widget _buildButtonPlay() {
-    return Container(
-      width: double.infinity,
-      height: 50.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14.r),
-        gradient: const LinearGradient(
-          begin: Alignment.centerRight,
-          end: Alignment.centerLeft,
-          colors: [
-            AppColors.sunshade,
-            AppColors.coral,
-          ],
+    if (widget.isLock) {
+      return gradientButton(
+        width: double.infinity,
+        height: 60.h,
+        child: Material(
+          color: AppColors.transparent,
+          borderRadius: BorderRadius.circular(14.r),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(14.r),
+            onTap: widget.onUnlock,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(children: [
+                        TextSpan(
+                          text: "Mở khoá chỉ ",
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: currencyFormat.format(widget.price),
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.white,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ),
+                  space(w: 10.w),
+                  Icon(
+                    Icons.play_circle_outlined,
+                    size: 40.ic,
+                    color: AppColors.white,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
-      ),
+      );
+    }
+
+    return gradientButton(
+      width: double.infinity,
+      height: 60.h,
       child: Material(
         color: AppColors.transparent,
         borderRadius: BorderRadius.circular(14.r),
@@ -190,16 +246,17 @@ class _SelectModeCardState extends State<SelectModeCard> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Play",
+                  "Bắt đầu chơi",
                   style: AppTextStyle.textStyleCommon.copyWith(
-                    fontSize: 24.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                     color: AppColors.white,
                   ),
                 ),
                 Icon(
                   Icons.play_circle_outlined,
-                  size: 40.w,
+                  size: 40.ic,
+                  color: AppColors.white,
                 ),
               ],
             ),
@@ -209,53 +266,13 @@ class _SelectModeCardState extends State<SelectModeCard> {
     );
   }
 
-  Widget _buildTitle() {
-    return Container(
-      width: 90.w,
-      height: 30.h,
-      decoration: BoxDecoration(
-        color: AppColors.sunshade,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.r),
-          bottomRight: Radius.circular(48.r),
-        ),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-      alignment: Alignment.center,
-      child: Text(
-        widget.title,
-        style: AppTextStyle.textStyleCommon.copyWith(
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w600,
-          color: AppColors.black,
-        ),
-      ),
-    );
-  }
-
   Widget _buildTotalCard() {
-    return Align(
-      alignment: Alignment.bottomRight,
-      child: Container(
-        width: 90.w,
-        height: 30.h,
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: AppColors.sunshade,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(48.r),
-            bottomRight: Radius.circular(24.r),
-          ),
-        ),
-        child: Text(
-          "${widget.totalCards ?? ""} CARDS",
-          style: AppTextStyle.textStyleCommon.copyWith(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w600,
-            color: AppColors.black,
-          ),
-        ),
+    return Text(
+      "${widget.totalCards ?? ""} Cards",
+      style: AppTextStyle.textStyleCommon.copyWith(
+        fontSize: 12.sp,
+        fontWeight: FontWeight.w600,
+        color: AppColors.white,
       ),
     );
   }

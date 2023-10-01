@@ -1,7 +1,6 @@
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/icons.dart';
-import 'package:cachcach/core/theme/images.dart';
-import 'package:cachcach/routes/routes.dart';
+import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -37,36 +36,41 @@ Widget divider({
   return Padding(padding: margin, child: divider);
 }
 
-Widget buildTopBar({VoidCallback? onBack, bool useSetting = false}) {
+Widget buildTopBar({VoidCallback? onBack, String? title}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         IconButton(
           icon: SvgPicture.asset(
             AppIcons.icArrowLeft,
             width: 32.w,
             height: 32.h,
+            color: AppColors.white,
           ),
           onPressed: onBack ??
               () {
                 Get.back();
               },
         ),
-        useSetting
-            ? IconButton(
-                icon: Image.asset(
-                  AppImages.imgSettings,
-                  width: 44.w,
-                  height: 44.h,
+        space(w: 10.w),
+        title != null
+            ? Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white,
+                    ),
+                  ),
                 ),
-                onPressed: () {
-                  Get.toNamed(RouteName.setting);
-                },
               )
             : Container(),
+        space(w: 42.w),
       ],
     ),
   );
@@ -78,6 +82,7 @@ Widget gradientButton({
   double? borderRadius,
   Gradient? gradient,
   VoidCallback? onTap,
+  BoxBorder? border,
   required Widget child,
 }) {
   return Container(
@@ -94,6 +99,7 @@ Widget gradientButton({
               AppColors.coral,
             ],
           ),
+      border: border
     ),
     child: Material(
       color: AppColors.transparent,
