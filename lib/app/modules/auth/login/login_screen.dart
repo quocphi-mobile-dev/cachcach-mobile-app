@@ -62,7 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(RouteName.signUp);
+                    },
                     child: Text(
                       "Đăng ký ngay",
                       style: AppTextStyle.textStyleCommon.copyWith(
