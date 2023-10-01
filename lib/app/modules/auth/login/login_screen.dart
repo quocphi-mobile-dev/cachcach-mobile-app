@@ -7,8 +7,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final textFieldFocusNode = FocusNode();
+  bool _obscured = false;
+
+  void _toggleObscuredPass() {
+    setState(() {
+      _obscured = !_obscured;
+      if (textFieldFocusNode.hasPrimaryFocus) return;
+      textFieldFocusNode.canRequestFocus = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,22 +62,22 @@ class LoginScreen extends StatelessWidget {
 
   Widget _buildAppIcon() {
     return SizedBox(
-        height: 120.h,
-        width: 120.w,
-        child: Image.asset(
-          AppImages.imgLogo,
-        ));
+      height: 140.h,
+      width: 140.w,
+      child: Image.asset(
+        AppImages.imgLogo,
+      ),
+    );
   }
 
   Widget _formLogin() {
     return Column(
       children: [
         _buildEmailTextField(),
-        space(h: 20.h),
+        space(h: 12.h),
         _buildPasswordTextField(),
-        space(h: 20.h),
         _buildRowForgotPasswordAndEmail(),
-        space(h: 20.h),
+        space(h: 12.h),
         _buildLoginButton(),
         space(h: 20.h),
         _buildTrialButton(),
@@ -74,8 +90,13 @@ class LoginScreen extends StatelessWidget {
     return TextField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
         hintText: "Email",
-        // hintStyle: AppTextStyles.hintStyle,
+        hintStyle: AppTextStyle.textStyleCommon.copyWith(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w400,
+        ),
         prefixIcon: const Icon(
           Icons.email_outlined,
           color: AppColors.grey,
@@ -83,19 +104,7 @@ class LoginScreen extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
           borderSide: const BorderSide(
-            color: AppColors.grey,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: const BorderSide(
-            color: AppColors.grey,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: const BorderSide(
-            color: AppColors.grey,
+            color: AppColors.white,
           ),
         ),
       ),
@@ -104,10 +113,16 @@ class LoginScreen extends StatelessWidget {
 
   Widget _buildPasswordTextField() {
     return TextField(
-      obscureText: true,
+      obscureText: _obscured,
+      focusNode: textFieldFocusNode,
       decoration: InputDecoration(
-        hintText: "Password",
-        // hintStyle: AppTextStyles.hintStyle,
+        fillColor: Colors.white,
+        filled: true,
+        hintText: "Mật khẩu",
+        hintStyle: AppTextStyle.textStyleCommon.copyWith(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w400,
+        ),
         prefixIcon: const Icon(
           Icons.lock_outline,
           color: AppColors.grey,
@@ -118,16 +133,16 @@ class LoginScreen extends StatelessWidget {
             color: AppColors.grey,
           ),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: const BorderSide(
-            color: AppColors.grey,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: const BorderSide(
-            color: AppColors.grey,
+        suffixIcon: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+          child: GestureDetector(
+            onTap: _toggleObscuredPass,
+            child: Icon(
+              _obscured
+                  ? Icons.visibility_rounded
+                  : Icons.visibility_off_rounded,
+              size: 24,
+            ),
           ),
         ),
       ),
@@ -161,19 +176,14 @@ class LoginScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextButton(
-          onPressed: () {},
-          child: const Text(
-            "Forgot password?",
-            // style: AppTextStyles.buttonTextStyle,
-          ),
-        ),
-        TextButton(
           onPressed: () {
-            Get.toNamed(RouteName.signUp);
+            Get.toNamed(RouteName.forgotPassword);
           },
           child: const Text(
-            "Sign up",
-            // style: AppTextStyles.buttonTextStyle,
+            "Quên mật khẩu?",
+            style: TextStyle(
+              decoration: TextDecoration.underline,
+            ),
           ),
         ),
       ],

@@ -63,7 +63,7 @@ class SpinController extends GetxController {
     }
     isSpinning = true;
 
-    Duration timeRandom = const Duration(seconds: 5);
+    Duration timeRandom = const Duration(seconds: 15);
     startAnimation();
     carouselController.jumpToPage(0);
     carouselController.animateToPage(
@@ -73,6 +73,7 @@ class SpinController extends GetxController {
     );
 
     await Future.delayed(timeRandom);
+    await Future.delayed(const Duration(milliseconds: 2000));
     stopAnimation();
     isSpinning = false;
     PlayerController playerController = Get.find();
