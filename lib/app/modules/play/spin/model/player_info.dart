@@ -12,7 +12,12 @@ class PlayerInfo {
   int truthPoint = 0;
   int darePoint = 0;
 
+  int truthGiveUpPoint = 0;
+  int dareGiveUpPoint = 0;
+
   int get totalPoint => truthPoint + darePoint;
+
+  int heroWidgetId = 0;
 
   PlayerInfo({Gender? gender, String? name}) {
     if (gender != null) {

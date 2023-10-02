@@ -39,12 +39,6 @@ class SpinController extends GetxController {
     animationController.dispose();
   }
 
-  @override
-  void onClose() {
-    releaseAnimation();
-    super.onClose();
-  }
-
   void checkResult() {
     PlayerController playerController = Get.find();
     for (PlayerInfo playerInfo in playerController.listPlayer) {
@@ -66,15 +60,16 @@ class SpinController extends GetxController {
     Duration timeRandom = const Duration(seconds: 15);
     startAnimation();
     carouselController.jumpToPage(0);
+    int pageSelected = 1000 + Random().nextInt(100);
     carouselController.animateToPage(
-      1000 + Random().nextInt(100),
+      pageSelected,
       duration: timeRandom,
       curve: const Cubic(0.42, 0.0, 0.0001, 1),
     );
 
     await Future.delayed(timeRandom);
     stopAnimation();
-    await Future.delayed(const Duration(milliseconds: 2000));
+    await Future.delayed(const Duration(milliseconds: 1000));
     isSpinning = false;
     PlayerController playerController = Get.find();
     playerSelected = playerController.listPlayer[selectedIndex];
