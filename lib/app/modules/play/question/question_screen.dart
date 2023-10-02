@@ -1,11 +1,12 @@
+import 'package:cachcach/app/modules/play/question/model/question_type.dart';
 import 'package:cachcach/app/modules/play/select_mode/controller/select_mode_controller.dart';
-import 'package:cachcach/app/modules/play/select_mode/model/mode.dart';
 import 'package:cachcach/app/modules/play/spin/controller/spin_controller.dart';
+import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
-import 'package:cachcach/routes/routes.dart';
+import 'package:cachcach/core/utils/my_size_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   final SpinController spinController = Get.find();
   final SelectModeController selectModeController = Get.find();
+  QuestionType? questionType;
 
   @override
   Widget build(BuildContext context) {
@@ -27,182 +29,324 @@ class _QuestionScreenState extends State<QuestionScreen> {
       backgroundColor: AppColors.bgColor,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             buildTopBar(),
             _buildLabel(),
-            divider(
-              color: AppColors.cavernPink,
-              indent: 64.w,
-              endIndent: 64.w,
-            ),
-            _buildPlayerName(),
-            Expanded(child: _buildTruthOrDare())
+            space(h: 30.h),
+            _buildPlayer(),
+            space(h: 30.h),
+            Expanded(child: _buildTruthOrDare()),
+            space(h: 16.h),
+            _buildActions(),
+            space(h: 16.h),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTruthOrDare() {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildButtonTruth(),
-          space(h: 12.h),
-          divider(color: AppColors.cavernPink, indent: 100.w, endIndent: 100.w),
-          space(h: 12.h),
-          Container(
-            width: 110.w,
-            height: 50.h,
-            decoration: BoxDecoration(
-                color: AppColors.crusta,
-                borderRadius: BorderRadius.circular(50.r)),
-            alignment: Alignment.center,
+  Widget _buildActions() {
+    if (questionType == null) {
+      return Container(
+        height: 58.h,
+      );
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        normalButton(
+          width: 172.w,
+          height: 58.h,
+          borderRadius: 14.r,
+          onTap: () {
+            if (questionType == QuestionType.truth) {
+              spinController.playerSelected.truthGiveUpPoint += 1;
+            } else {
+              spinController.playerSelected.dareGiveUpPoint += 1;
+            }
+            Get.back();
+          },
+          child: Center(
             child: Text(
-              "OF",
+              "Bỏ cuộc",
               style: AppTextStyle.textStyleCommon.copyWith(
-                fontSize: 30.sp,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.black,
+                color: AppColors.white,
               ),
             ),
           ),
+        ),
+        space(w: 12.w),
+        gradientButton(
+          width: 172.w,
+          height: 58.h,
+          borderRadius: 14.r,
+          onTap: () {
+            if (questionType == QuestionType.truth) {
+              spinController.playerSelected.truthPoint += 1;
+            } else {
+              spinController.playerSelected.darePoint += 1;
+            }
+            Get.back();
+          },
+          child: Center(
+            child: Text(
+              "Hoàn thành",
+              style: AppTextStyle.textStyleCommon.copyWith(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCardTruth() {
+    if (selectModeController.listTruth.isEmpty) {
+      return Container();
+    }
+
+    return Container(
+      width: 172.w,
+      height: 300.h,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Material(
+        borderRadius: BorderRadius.circular(16.r),
+        color: AppColors.transparent,
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              questionType = QuestionType.truth;
+            });
+          },
+          borderRadius: BorderRadius.circular(16.r),
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  AppImages.imgQuestionTruth,
+                  width: 120.ic,
+                  height: 120.ic,
+                  fit: BoxFit.fitWidth,
+                ),
+                space(h: 36.h),
+                Text(
+                  "Truth",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 44.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCardDare() {
+    if (selectModeController.listDare.isEmpty) {
+      return Container();
+    }
+
+    return Container(
+      width: 172.w,
+      height: 300.h,
+      decoration: BoxDecoration(
+        color: AppColors.black,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Material(
+        color: AppColors.transparent,
+        borderRadius: BorderRadius.circular(16.r),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16.r),
+          onTap: () {
+            setState(() {
+              questionType = QuestionType.dare;
+            });
+          },
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  AppImages.imgQuestionDare,
+                  width: 120.ic,
+                  height: 120.ic,
+                  fit: BoxFit.fitWidth,
+                ),
+                space(h: 36.h),
+                Text(
+                  "Dare",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 44.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTruthOrDare() {
+    Widget widget = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildCardTruth(),
+        space(w: 12.w),
+        _buildCardDare(),
+      ],
+    );
+
+    if (questionType == QuestionType.truth) {
+      widget = _buildDetailQuestionTruth();
+    } else if (questionType == QuestionType.dare) {
+      widget = _buildDetailQuestionDare();
+    }
+
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 500),
+      transitionBuilder: (child, animation) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+      child: widget,
+    );
+  }
+
+  Widget _buildDetailQuestionTruth() {
+    return Container(
+      width: 355.w,
+      height: 300.h,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Image.asset(
+                AppImages.imgQuestionTruth,
+                width: 42.ic,
+                height: 42.ic,
+              ),
+              space(w: 20.w),
+              Expanded(
+                child: Text(
+                  "Truth",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 28.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  ),
+                ),
+              )
+            ],
+          ),
           space(h: 12.h),
-          divider(color: AppColors.cavernPink, indent: 100.w, endIndent: 100.w),
-          space(h: 12.h),
-          _buildButtonDare(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.zero,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    selectModeController.getRandomTruth(),
+                    textAlign: TextAlign.justify,
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildButtonTruth() {
+  Widget _buildDetailQuestionDare() {
     return Container(
-      width: 150.w,
-      height: 180.h,
+      width: 355.w,
+      height: 300.h,
       decoration: BoxDecoration(
-        color: selectModeController.listTruth.isEmpty
-            ? AppColors.grey
-            : AppColors.crusta,
-        borderRadius: BorderRadius.circular(20.r),
+        color: AppColors.black,
+        borderRadius: BorderRadius.circular(16.r),
       ),
-      child: Material(
-        color: AppColors.transparent,
-        borderRadius: BorderRadius.circular(20.r),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20.r),
-          onTap: selectModeController.listTruth.isEmpty
-              ? null
-              : () {
-                  spinController.playerSelected.truthPoint += 1;
-                  Get.toNamed(
-                    RouteName.detail,
-                    arguments: {
-                      "content": selectModeController.getRandomTruth(),
-                    },
-                  );
-                },
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Image.asset(
-                      AppImages.imgTruth,
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                ),
-                Text(
-                  "Trurth",
-                  style: AppTextStyle.textStyleCommon.copyWith(
-                    fontSize: 30.sp,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.black,
-                  ),
-                ),
-                Text(
-                  "${selectModeController.listTruth.length}/${selectModeController.mode.getListTruth().length}",
-                  style: AppTextStyle.textStyleCommon.copyWith(
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.black,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildButtonDare() {
-    return Container(
-      width: 150.w,
-      height: 180.h,
-      decoration: BoxDecoration(
-        color: selectModeController.listDare.isEmpty
-            ? AppColors.grey
-            : AppColors.crusta,
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      child: Material(
-        color: AppColors.transparent,
-        borderRadius: BorderRadius.circular(20.r),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20.r),
-          onTap: selectModeController.listDare.isEmpty
-              ? null
-              : () {
-                  spinController.playerSelected.darePoint += 1;
-                  Get.toNamed(
-                    RouteName.detail,
-                    arguments: {
-                      "content": selectModeController.getRandomDare(),
-                    },
-                  );
-                },
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Image.asset(
-                      AppImages.imgDare,
-                      width: 100.w,
-                      height: 100.w,
-                    ),
-                  ),
-                ),
-                Text(
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Image.asset(
+                AppImages.imgQuestionDare,
+                width: 42.ic,
+                height: 42.ic,
+              ),
+              space(w: 20.w),
+              Expanded(
+                child: Text(
                   "Dare",
                   style: AppTextStyle.textStyleCommon.copyWith(
-                    fontSize: 30.sp,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.black,
+                    fontSize: 28.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
                   ),
                 ),
-                Text(
-                  "${selectModeController.listDare.length}/${selectModeController.mode.getListDare().length}",
-                  style: AppTextStyle.textStyleCommon.copyWith(
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.black,
+              )
+            ],
+          ),
+          space(h: 12.h),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.zero,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    selectModeController.getRandomDare(),
+                    textAlign: TextAlign.justify,
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -211,25 +355,51 @@ class _QuestionScreenState extends State<QuestionScreen> {
     return Container(
       alignment: Alignment.center,
       child: Text(
-        "Fun",
+        "Người được chọn",
         style: AppTextStyle.textStyleCommon.copyWith(
-          fontSize: 34.sp,
+          fontSize: 18.sp,
           fontWeight: FontWeight.w600,
-          color: AppColors.black,
+          color: AppColors.white,
         ),
       ),
     );
   }
 
-  Widget _buildPlayerName() {
-    return Container(
-      alignment: Alignment.center,
-      child: Text(
-        spinController.playerSelected.name,
-        style: AppTextStyle.textStyleCommon.copyWith(
-          fontSize: 34.sp,
-          fontWeight: FontWeight.w600,
-          color: AppColors.black,
+  Widget _buildPlayer() {
+    return Hero(
+      tag: "${spinController.playerSelected.heroWidgetId}",
+      child: Container(
+        width: 160.w,
+        height: 180.h,
+        decoration: BoxDecoration(
+            color: AppColors.crusta, borderRadius: BorderRadius.circular(20.r)),
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Image.asset(
+                spinController.playerSelected.gender.value == Gender.male
+                    ? AppImages.imgPlayerMale1
+                    : AppImages.imgPlayerFemale1,
+                width: 120.ic,
+                height: 120.ic,
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            space(h: 12.h),
+            Text(
+              spinController.playerSelected.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyle.textStyleCommon.copyWith(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );

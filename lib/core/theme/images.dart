@@ -13,6 +13,7 @@ class AppImages {
   static const imgPolicy = "assets/images/img_policy.png";
   static const imgTermsOfUse = "assets/images/img_terms_of_use.png";
   static const imgPlayerMale1 = "assets/images/img_player_male_1.png";
+  static const imgPlayerFemale1 = "assets/images/img_player_female_1.png";
   static const imgSpinArrow = "assets/images/img_spin_arrow.png";
   static const imgSpin = "assets/images/img_spin.png";
   static const imgCursor = "assets/images/img_cursor.png";
@@ -28,4 +29,6 @@ class AppImages {
   static const imgChewing = "assets/images/img_chewing.png";
   static const imgCharacterMale = "assets/images/img_character_male.png";
   static const imgCharacterFemale = "assets/images/img_character_female.png";
+  static const imgQuestionTruth = "assets/images/img_question_truth.png";
+  static const imgQuestionDare = "assets/images/img_question_dare.png";
 }

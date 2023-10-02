@@ -2,7 +2,6 @@ import 'package:cachcach/app/modules/auth/forgot_pass/forgot_password_screen.dar
 import 'package:cachcach/app/modules/auth/login/login_screen.dart';
 import 'package:cachcach/app/modules/auth/signup/sign_up_screen.dart';
 import 'package:cachcach/app/modules/bottom_bar/home_screen.dart';
-import 'package:cachcach/app/modules/play/detail/detail_screen.dart';
 import 'package:cachcach/app/modules/play/flip_the_card/flip_the_card_screen.dart';
 import 'package:cachcach/app/modules/play/play_screen.dart';
 import 'package:cachcach/app/modules/play/player/player_screen.dart';
@@ -28,7 +27,6 @@ class RouteName {
   static const String setting = "/setting";
   static const String spin = "/spin";
   static const String question = "/question";
-  static const String detail = "/detail";
   static const String scoreBoard = "/score-board";
   static const String flipTheCard = "/flip-the-card";
 
@@ -50,7 +48,6 @@ class AppRoutes {
     RouteName.setting: () => const SettingScreen(),
     RouteName.spin: () => const SpinScreen(),
     RouteName.question: () => const QuestionScreen(),
-    RouteName.detail: () => const DetailScreen(),
     RouteName.scoreBoard: () => const ScoreBoardScreen(),
     RouteName.flipTheCard: () => const FlipTheCardScreen(),
   };
