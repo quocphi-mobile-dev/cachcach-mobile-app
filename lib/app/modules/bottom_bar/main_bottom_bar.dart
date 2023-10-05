@@ -31,21 +31,22 @@ class _MainBottomBarState extends State<MainBottomBar> {
               return AppTextStyle.textStyleCommon.copyWith(
                 fontSize: 10.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.black,
+                color: AppColors.dividerColor,
               );
             },
           ),
         ),
       ),
       child: NavigationBar(
+        height: 56.h,
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
             widget.callback(index);
           });
         },
-        backgroundColor: AppColors.white,
-        indicatorColor: AppColors.bgColor,
+        // backgroundColor: AppColors.blue,
+        indicatorColor: AppColors.coral.withOpacity(0.2),
         selectedIndex: currentPageIndex,
         destinations: <Widget>[
           NavigationDestination(
@@ -58,7 +59,7 @@ class _MainBottomBarState extends State<MainBottomBar> {
             ),
             label: 'My dares',
           ),
-          NavigationDestination(
+          const NavigationDestination(
             icon: Icon(Icons.account_circle_outlined),
             label: 'Profile',
           ),

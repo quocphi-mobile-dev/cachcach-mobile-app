@@ -15,6 +15,7 @@ class AppColors {
   static const blue = Colors.blue;
   /// #5A3ECD
   static const bgColor = Color(0xff5A3ECD);
+  static const bgColorAuth = Color(0xffFFFFFF);
 
   /// matterhorn
   static const primary = matterhorn;

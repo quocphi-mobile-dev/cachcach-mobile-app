@@ -29,7 +29,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
             buildTopBar(onBack: () {
               Get.until((route) => route.settings.name == RouteName.selectMode);
             }),
-            _buildPlayerWin(),
+            // _buildPlayerWin(),
             space(h: 12.h),
             _buildScoreBoard(),
           ],

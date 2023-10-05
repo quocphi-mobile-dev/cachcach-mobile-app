@@ -5,6 +5,9 @@ class AppImages {
   static const imgTruthOrDare = "assets/images/img_truth_or_dare.png";
   static const imgSettings = "assets/images/img_settings.png";
   static const imgClassic = "assets/images/img_classic.png";
+  static const imgExtreme = "assets/images/img_extremme.png";
+  static const imgFun = "assets/images/img_fun.png";
+  static const imgHot = "assets/images/img_hot.png";
   static const imgMoviePlay = "assets/images/img_movie_play.png";
   static const imgFemale = "assets/images/img_female.png";
   static const imgMale = "assets/images/img_male.png";

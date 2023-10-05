@@ -11,13 +11,13 @@ extension ModeExtension on Mode {
       case Mode.classic:
         return AppImages.imgClassic;
       case Mode.spicy:
-        return AppImages.imgClassic;
+        return AppImages.imgHot;
       case Mode.crazy:
-        return AppImages.imgClassic;
+        return AppImages.imgFun;
       case Mode.nightmare:
-        return AppImages.imgClassic;
+        return AppImages.imgExtreme;
       case Mode.xxx:
-        return AppImages.imgClassic;
+        return AppImages.imgHot;
       case Mode.bozzy:
         return AppImages.imgClassic;
     }

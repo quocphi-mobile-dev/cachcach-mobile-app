@@ -57,7 +57,7 @@ class SpinController extends GetxController {
     }
     isSpinning = true;
 
-    Duration timeRandom = const Duration(seconds: 15);
+    Duration timeRandom = const Duration(seconds: 3);
     startAnimation();
     carouselController.jumpToPage(0);
     int pageSelected = 1000 + Random().nextInt(100);

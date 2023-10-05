@@ -22,7 +22,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        backgroundColor: AppColors.bgColor,
+        backgroundColor: AppColors.bgColorAuth,
         body: SafeArea(
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 34.w, vertical: 40.h),

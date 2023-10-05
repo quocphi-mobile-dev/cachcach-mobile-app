@@ -99,7 +99,9 @@ class ProfileScreen extends StatelessWidget {
             ),
           ],
         ),
-        onTap: () {});
+        onTap: () {
+
+        });
   }
 
   Widget _buildChangePassword() {
