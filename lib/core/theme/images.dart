@@ -34,4 +34,5 @@ class AppImages {
   static const imgCharacterFemale = "assets/images/img_character_female.png";
   static const imgQuestionTruth = "assets/images/img_question_truth.png";
   static const imgQuestionDare = "assets/images/img_question_dare.png";
+  static const imgFlipCard = "assets/images/img_flip_card.png";
 }

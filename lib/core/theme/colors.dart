@@ -193,4 +193,10 @@ class AppColors {
 
   /// #FB7A7A
   static const salmon = Color(0xffFB7A7A);
+
+  /// #FF9367
+  static const atomicTangerine = Color(0xffFF9367);
+
+  /// #E73A40
+  static const alizarin = Color(0xffE73A40);
 }
