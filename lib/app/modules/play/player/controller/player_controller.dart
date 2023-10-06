@@ -15,4 +15,10 @@ class PlayerController extends GetxController {
     list.sort((p1, p2) => p2.totalPoint.compareTo(p1.totalPoint));
     return list;
   }
+
+  void reset() {
+    for (var element in listPlayer) {
+      element.reset();
+    }
+  }
 }
