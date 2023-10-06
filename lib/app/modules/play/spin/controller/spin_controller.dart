@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:cachcach/app/modules/play/controller/play_controller.dart';
 import 'package:cachcach/app/modules/play/player/controller/player_controller.dart';
 import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
+import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/routes/routes.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +48,17 @@ class SpinController extends GetxController {
     PlayerController playerController = Get.find();
     for (PlayerInfo playerInfo in playerController.listPlayer) {
       if (playerInfo.truthPoint > 0 || playerInfo.darePoint > 0) {
-        Get.toNamed(RouteName.scoreBoard);
+        Get.dialog(
+          popupEndGame(
+            onBack: () {
+              Get.back();
+            },
+            onConfirm: () {
+              Get.back();
+              Get.toNamed(RouteName.scoreBoard);
+            },
+          ),
+        );
         return;
       }
     }

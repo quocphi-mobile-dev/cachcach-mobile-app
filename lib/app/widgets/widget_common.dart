@@ -1,6 +1,7 @@
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
+import 'package:cachcach/core/utils/my_size_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -89,18 +90,17 @@ Widget gradientButton({
     width: width ?? double.infinity,
     height: height ?? 50.h,
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(borderRadius ?? 14.r),
-      gradient: gradient ??
-          const LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            colors: [
-              AppColors.sunshade,
-              AppColors.coral,
-            ],
-          ),
-      border: border
-    ),
+        borderRadius: BorderRadius.circular(borderRadius ?? 14.r),
+        gradient: gradient ??
+            const LinearGradient(
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft,
+              colors: [
+                AppColors.sunshade,
+                AppColors.coral,
+              ],
+            ),
+        border: border),
     child: Material(
       color: AppColors.transparent,
       borderRadius: BorderRadius.circular(14.r),
@@ -163,6 +163,111 @@ Widget outlineButton({
         borderRadius: BorderRadius.circular(14.r),
         onTap: onTap,
         child: child,
+      ),
+    ),
+  );
+}
+
+Widget popupEndGame({Function? onBack, Function? onConfirm}) {
+  return GestureDetector(
+    onTap: () {
+      Get.back();
+    },
+    child: Material(
+      color: AppColors.transparent,
+      child: Center(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 40.h),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  width: 44.ic,
+                  height: 44.ic,
+                  margin: EdgeInsets.only(top: 12.h, right: 12.w),
+                  child: Material(
+                    color: AppColors.gainsboro,
+                    shape: const CircleBorder(),
+                    clipBehavior: Clip.hardEdge,
+                    child: IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        size: 28.ic,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              space(h: 10.h),
+              Text(
+                "End game?",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.black,
+                ),
+              ),
+              space(h: 20.h),
+              Text(
+                "Bạn có muốn kết thúc trò chơi ? \nDữ liệu lần chơi sẽ được lưu lại.",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              ),
+              space(h: 20),
+              Row(
+                children: [
+                  space(w: 20.w),
+                  TextButton(
+                    onPressed: () {
+                      onBack?.call();
+                    },
+                    child: Text(
+                      "Quay lại",
+                      style: AppTextStyle.textStyleCommon.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.crusta,
+                          decoration: TextDecoration.underline),
+                    ),
+                  ),
+                  const Spacer(),
+                  gradientButton(
+                    width: 120.w,
+                    height: 40.h,
+                    borderRadius: 18.r,
+                    onTap: () {
+                      onConfirm?.call();
+                    },
+                    child: Center(
+                      child: Text(
+                        "Xác nhận",
+                        style: AppTextStyle.textStyleCommon.copyWith(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  space(w: 20.w),
+                ],
+              ),
+              space(h: 20.h),
+            ],
+          ),
+        ),
       ),
     ),
   );
