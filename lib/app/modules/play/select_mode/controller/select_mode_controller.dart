@@ -66,4 +66,9 @@ class SelectModeController extends GetxController {
     listDare.remove(item);
     return item;
   }
+
+  void reset() {
+    listTruth.assignAll(mode.getListTruth());
+    listDare.assignAll(mode.getListDare());
+  }
 }

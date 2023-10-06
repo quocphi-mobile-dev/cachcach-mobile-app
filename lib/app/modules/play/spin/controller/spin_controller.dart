@@ -1,7 +1,7 @@
-import 'dart:math';
-
+import 'package:cachcach/app/modules/play/controller/play_controller.dart';
 import 'package:cachcach/app/modules/play/player/controller/player_controller.dart';
 import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
+import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/routes/routes.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +14,14 @@ class SpinController extends GetxController {
   PlayerInfo playerSelected = PlayerInfo();
   CarouselController carouselController = CarouselController();
   int selectedIndex = 0;
+  List<PlayerInfo> listPlayerUseRandom = [];
+  int totalPlay = 0;
+  int specialTimeSpin = 10;
+  late PlayMode playMode;
 
   @override
   void onReady() {
+    playMode = Get.find<PlayController>().playMode;
     super.onReady();
   }
 
@@ -43,7 +48,17 @@ class SpinController extends GetxController {
     PlayerController playerController = Get.find();
     for (PlayerInfo playerInfo in playerController.listPlayer) {
       if (playerInfo.truthPoint > 0 || playerInfo.darePoint > 0) {
-        Get.toNamed(RouteName.scoreBoard);
+        Get.dialog(
+          popupEndGame(
+            onBack: () {
+              Get.back();
+            },
+            onConfirm: () {
+              Get.back();
+              Get.toNamed(RouteName.scoreBoard);
+            },
+          ),
+        );
         return;
       }
     }
@@ -55,12 +70,41 @@ class SpinController extends GetxController {
     if (isSpinning) {
       return;
     }
+
+    totalPlay++;
     isSpinning = true;
 
+    PlayerController playerController = Get.find();
+
+    if (listPlayerUseRandom.isEmpty) {
+      listPlayerUseRandom.assignAll(playerController.listPlayer);
+    }
+
     Duration timeRandom = const Duration(seconds: 3);
+
     startAnimation();
     carouselController.jumpToPage(0);
-    int pageSelected = 1000 + Random().nextInt(100);
+
+    int pageSelected = 0;
+    int times = 150 ~/ playerController.listPlayer.length;
+
+    if (playMode == PlayMode.couple) {
+      PlayerInfo playerRandom = listPlayerUseRandom.first;
+      int indexRandom = playerController.listPlayer.indexOf(playerRandom);
+      if (specialTimeSpin > 2 && totalPlay % specialTimeSpin == 0) {
+        indexRandom = playerController.listPlayer.indexOf(playerSelected);
+      } else {
+        listPlayerUseRandom.remove(playerRandom);
+      }
+      pageSelected = (playerController.listPlayer.length * times) + indexRandom;
+    } else {
+      listPlayerUseRandom.shuffle();
+      PlayerInfo playerRandom = listPlayerUseRandom.first;
+      int indexRandom = playerController.listPlayer.indexOf(playerRandom);
+      listPlayerUseRandom.remove(playerRandom);
+      pageSelected = (playerController.listPlayer.length * times) + indexRandom;
+    }
+
     carouselController.animateToPage(
       pageSelected,
       duration: timeRandom,
@@ -71,7 +115,6 @@ class SpinController extends GetxController {
     stopAnimation();
     await Future.delayed(const Duration(milliseconds: 1000));
     isSpinning = false;
-    PlayerController playerController = Get.find();
     playerSelected = playerController.listPlayer[selectedIndex];
     Get.toNamed(RouteName.question);
   }

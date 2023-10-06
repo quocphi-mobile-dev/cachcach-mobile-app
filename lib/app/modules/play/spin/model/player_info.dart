@@ -28,4 +28,12 @@ class PlayerInfo {
       textEditingController.text = name;
     }
   }
+
+  void reset() {
+    truthPoint = 0;
+    darePoint = 0;
+    truthGiveUpPoint = 0;
+    dareGiveUpPoint = 0;
+    heroWidgetId = 0;
+  }
 }

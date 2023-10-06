@@ -324,86 +324,94 @@ class _PlayerScreenState extends State<PlayerScreen> {
   }
 
   Widget _buildGuidePlay() {
-    return Center(
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 40.h),
-        constraints: BoxConstraints(minHeight: 400.h),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    space(h: 32.h),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: Icon(
-                        Icons.info,
-                        size: 56.ic,
-                        color: AppColors.blue,
-                      ),
-                    ),
-                    space(h: 20.h),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20.w),
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Luật chơi Thật hay Thách",
-                        style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.black,
-                        ),
-                      ),
-                    ),
-                    space(h: 16.h),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20.w),
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "- Bộ bài sẽ có tổng cộng N lá bài, mỗi lá có 1 Truth và 1 Dare. \n- Luật chơi là mọi người sẽ ngồi vòng tròn, sau đó bạn cần phải quay vòng quay may rủi trên APP để biết tên người thực hiện thử thách. \n- Người thực hiện  chọn “Truth” bạn sẽ phải trả lời đúng sự thật với câu hỏi được ghi trên lá bài. Còn nếu chọn “Dare”, bạn phải thực hiện theo những gì lá bài ghi.",
-                        style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.black,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+    return GestureDetector(
+      onTap: () {
+        Get.back();
+      },
+      child: Material(
+        color: AppColors.transparent,
+        child: Center(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 40.h),
+            constraints: BoxConstraints(minHeight: 400.h),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(12.r),
             ),
-            Positioned(
-              top: 1,
-              right: 1,
-              child: Container(
-                width: 44.ic,
-                height: 44.ic,
-                margin: EdgeInsets.only(top: 12.h, right: 12.w),
-                child: Material(
-                  color: AppColors.gainsboro,
-                  shape: const CircleBorder(),
-                  clipBehavior: Clip.hardEdge,
-                  child: IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(
-                      Icons.close,
-                      size: 28.ic,
+            child: Stack(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        space(h: 32.h),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          child: Icon(
+                            Icons.info,
+                            size: 56.ic,
+                            color: AppColors.blue,
+                          ),
+                        ),
+                        space(h: 20.h),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Luật chơi Thật hay Thách",
+                            style: AppTextStyle.textStyleCommon.copyWith(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        space(h: 16.h),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "- Bộ bài sẽ có tổng cộng N lá bài, mỗi lá có 1 Truth và 1 Dare. \n- Luật chơi là mọi người sẽ ngồi vòng tròn, sau đó bạn cần phải quay vòng quay may rủi trên APP để biết tên người thực hiện thử thách. \n- Người thực hiện  chọn “Truth” bạn sẽ phải trả lời đúng sự thật với câu hỏi được ghi trên lá bài. Còn nếu chọn “Dare”, bạn phải thực hiện theo những gì lá bài ghi.",
+                            style: AppTextStyle.textStyleCommon.copyWith(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
-              ),
+                Positioned(
+                  top: 1,
+                  right: 1,
+                  child: Container(
+                    width: 44.ic,
+                    height: 44.ic,
+                    margin: EdgeInsets.only(top: 12.h, right: 12.w),
+                    child: Material(
+                      color: AppColors.gainsboro,
+                      shape: const CircleBorder(),
+                      clipBehavior: Clip.hardEdge,
+                      child: IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.close,
+                          size: 28.ic,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
