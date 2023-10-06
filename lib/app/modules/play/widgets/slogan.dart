@@ -61,8 +61,8 @@ class _SloganState extends State<Slogan> {
                     child: Text(
                       "Uống rượu chẳng để cho ai - Uống rượu là để kéo dài niềm vui",
                       style: AppTextStyle.textStyleCommon.copyWith(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
                         color: AppColors.white,
                       ),
                     ),
@@ -72,7 +72,7 @@ class _SloganState extends State<Slogan> {
             );
           }),
           options: CarouselOptions(
-              aspectRatio: 343.w / 132.h,
+              aspectRatio: 300.w / 132.h,
               enlargeCenterPage: true,
               scrollPhysics: const NeverScrollableScrollPhysics(),
               autoPlay: true,

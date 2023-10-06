@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-          backgroundColor: AppColors.bgColor,
+          backgroundColor: AppColors.bgColorAuth,
           body: SafeArea(
             child: Column(
               children: [
