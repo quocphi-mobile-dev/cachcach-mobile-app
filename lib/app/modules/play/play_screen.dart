@@ -102,13 +102,15 @@ class _PlayScreenState extends State<PlayScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildItem(
-                  image: AppImages.imgFriends,
-                  label: "Truth or Dare",
-                  onTap: () {}),
+                image: AppImages.imgFriends,
+                label: "Truth or Dare",
+                onTap: () {
+                  controller.playMode = PlayMode.friends;
+                  Get.toNamed(RouteName.selectMode);
+                },
+              ),
               _buildItem(
-                  image: AppImages.imgChewing,
-                  label: "Chewing",
-                  onTap: () {}),
+                  image: AppImages.imgChewing, label: "Chewing", onTap: () {}),
             ],
           )
         ],
