@@ -35,4 +35,10 @@ class AppImages {
   static const imgQuestionTruth = "assets/images/img_question_truth.png";
   static const imgQuestionDare = "assets/images/img_question_dare.png";
   static const imgFlipCard = "assets/images/img_flip_card.png";
+  static const bgTopBar = "assets/images/bg_top_bar.png";
+  static const bgBottom = "assets/images/bg_bottom.png";
+  static const imgLogo2 = "assets/images/img_logo_2.png";
+  static const imgHomeTopBar = "assets/images/img_home_top_bar.png";
+  static const imgLogo4 = "assets/images/img_logo_4.png";
+  static const imgHuman = "assets/images/img_human.png";
 }

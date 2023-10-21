@@ -36,63 +36,74 @@ class _SloganState extends State<Slogan> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        CarouselSlider(
-          carouselController: carouselController,
-          items: List.generate(5, (index) {
-            return Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.r),
-                gradient: const LinearGradient(
-                  colors: [AppColors.sunshade, AppColors.coral],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+        Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            CarouselSlider(
+              carouselController: carouselController,
+              items: List.generate(5, (index) {
+                return Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24.r),
+                      color: AppColors.white),
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 20.h),
+                        child: Text(
+                          "Uống rượu chẳng để cho ai - Uống rượu là để kéo dài niềm vui",
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.crusta,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 10.h),
+                          child: Image.asset(
+                            AppImages.imgLogo4,
+                            width: 50.ic,
+                            height: 50.ic,
+                            fit: BoxFit.none,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+              options: CarouselOptions(
+                  aspectRatio: 333.w / 96.h,
+                  enlargeCenterPage: true,
+                  scrollPhysics: const NeverScrollableScrollPhysics(),
+                  autoPlay: true,
+                  onPageChanged: (index, _) {
+                    setState(() {
+                      pageSelected = index;
+                    });
+                  }),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.h),
+              child: AnimatedSmoothIndicator(
+                activeIndex: pageSelected,
+                count: 5,
+                effect: ExpandingDotsEffect(
+                  activeDotColor: AppColors.grey.withOpacity(0.5),
+                  dotWidth: 10.ic,
+                  dotHeight: 10.ic,
+                  expansionFactor: 2,
+                  dotColor: AppColors.crusta,
                 ),
               ),
-              child: Row(
-                children: [
-                  Image.asset(
-                    AppImages.imgSlogan,
-                    width: 80.w,
-                    height: 56.h,
-                  ),
-                  space(w: 10.w),
-                  Expanded(
-                    child: Text(
-                      "Uống rượu chẳng để cho ai - Uống rượu là để kéo dài niềm vui",
-                      style: AppTextStyle.textStyleCommon.copyWith(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }),
-          options: CarouselOptions(
-              aspectRatio: 300.w / 132.h,
-              enlargeCenterPage: true,
-              scrollPhysics: const NeverScrollableScrollPhysics(),
-              autoPlay: true,
-              onPageChanged: (index, _) {
-                setState(() {
-                  pageSelected = index;
-                });
-              }),
-        ),
-        space(h: 12.h),
-        AnimatedSmoothIndicator(
-          activeIndex: pageSelected,
-          count: 5,
-          effect: ExpandingDotsEffect(
-            activeDotColor: AppColors.white,
-            dotWidth: 10.ic,
-            dotHeight: 10.ic,
-            expansionFactor: 2,
-            dotColor: AppColors.crusta,
-          ),
+            ),
+          ],
         ),
       ],
     );

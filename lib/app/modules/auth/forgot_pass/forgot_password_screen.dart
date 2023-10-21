@@ -22,15 +22,25 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        backgroundColor: AppColors.bgColorAuth,
-        body: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 34.w, vertical: 40.h),
+        backgroundColor: AppColors.bgColor,
+        body: contentWithBackgroundPattern(
+          child: Column(
             children: [
-              _buildAppIcon(),
-              space(h: 12.h),
-              _formSendMail(),
-              space(h: 12.h),
+              buildTopBar(title: "Quên mật khẩu"),
+              Expanded(
+                child: ListView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 22.w,
+                  ).copyWith(bottom: 50.h),
+                  children: [
+                    space(h: 12.h),
+                    _buildAppIcon(),
+                    space(h: 12.h),
+                    _formSendMail(),
+                    space(h: 12.h),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -40,8 +50,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   Widget _buildAppIcon() {
     return SizedBox(
-      height: 140.h,
-      width: 140.w,
+      height: 116.h,
+      width: 120.w,
       child: Image.asset(
         AppImages.imgLogo,
       ),
@@ -101,22 +111,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   Widget _buildLoginButton() {
-    return SizedBox(
-      width: double.infinity,
-      height: 50.h,
-      child: ElevatedButton(
-        onPressed: () {
-          Get.toNamed(RouteName.home);
-        },
-        style: ElevatedButton.styleFrom(
-          // primary: AppColors.primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-        ),
-        child: const Text(
+    return gradientButton(
+      onTap: () {},
+      child: Center(
+        child: Text(
           "Gửi",
-          // style: AppTextStyles.buttonTextStyle,
+          style: AppTextStyle.textStyleCommon.copyWith(
+            fontSize: 17.sp,
+            fontWeight: FontWeight.w600,
+            color: AppColors.white,
+          ),
         ),
       ),
     );

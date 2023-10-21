@@ -1,5 +1,6 @@
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/icons.dart';
+import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
 import 'package:flutter/material.dart';
@@ -38,42 +39,71 @@ Widget divider({
 }
 
 Widget buildTopBar({VoidCallback? onBack, String? title}) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    child: Row(
-      children: [
-        IconButton(
-          icon: SvgPicture.asset(
-            AppIcons.icArrowLeft,
-            width: 32.w,
-            height: 32.h,
-            color: AppColors.white,
-          ),
-          onPressed: onBack ??
-              () {
-                Get.back();
-              },
-        ),
-        space(w: 10.w),
-        title != null
-            ? Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.white,
-                    ),
-                  ),
+  return Stack(
+    children: [
+      Image.asset(
+        AppImages.bgTopBar,
+        fit: BoxFit.fill,
+        width: Get.width,
+        height: 95.h,
+      ),
+      SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: [
+              IconButton(
+                icon: SvgPicture.asset(
+                  AppIcons.icArrowLeft,
+                  width: 32.w,
+                  height: 32.h,
+                  color: AppColors.white,
                 ),
-              )
-            : Container(),
-        space(w: 42.w),
-      ],
-    ),
+                onPressed: onBack ??
+                    () {
+                      Get.back();
+                    },
+              ),
+              space(w: 10.w),
+              title != null
+                  ? Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          title,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                    )
+                  : Container(),
+              space(w: 42.w),
+            ],
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget contentWithBackgroundPattern({required Widget child}) {
+  return Stack(
+    children: [
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: Image.asset(
+          AppImages.bgBottom,
+          width: Get.width,
+          height: 80.h,
+          fit: BoxFit.fill,
+        ),
+      ),
+      child,
+    ],
   );
 }
 

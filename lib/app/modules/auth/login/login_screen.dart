@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        backgroundColor: AppColors.bgColorAuth,
+        backgroundColor: AppColors.bgColor,
         body: SafeArea(
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 34.w, vertical: 40.h),
@@ -99,8 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildAppIcon() {
     return SizedBox(
-      height: 140.h,
-      width: 140.w,
+      height: 185.h,
+      width: 180.w,
       child: Image.asset(
         AppImages.imgLogo,
       ),
