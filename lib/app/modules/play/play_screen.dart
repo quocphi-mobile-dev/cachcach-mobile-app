@@ -23,7 +23,7 @@ class _PlayScreenState extends State<PlayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgColor.withOpacity(1),
+      backgroundColor: AppColors.alabaster,
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.only(bottom: 20.h),

@@ -199,4 +199,10 @@ class AppColors {
 
   /// #E73A40
   static const alizarin = Color(0xffE73A40);
+
+  /// #FFA800
+  static const orange = Color(0xffFFA800);
+
+  /// #f2f0e4
+  static const alabaster = Color(0xfff2f0e4);
 }
