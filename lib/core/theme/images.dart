@@ -35,4 +35,6 @@ class AppImages {
   static const imgQuestionTruth = "assets/images/img_question_truth.png";
   static const imgQuestionDare = "assets/images/img_question_dare.png";
   static const imgFlipCard = "assets/images/img_flip_card.png";
+  static const bgTopBar = "assets/images/bg_top_bar.png";
+  static const bgBottom = "assets/images/bg_bottom.png";
 }

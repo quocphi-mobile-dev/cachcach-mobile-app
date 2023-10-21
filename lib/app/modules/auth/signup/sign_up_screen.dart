@@ -33,17 +33,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-          backgroundColor: AppColors.bgColorAuth,
-          body: SafeArea(
+          backgroundColor: AppColors.bgColor,
+          body: contentWithBackgroundPattern(
             child: Column(
               children: [
-                buildTopBar(),
+                buildTopBar(title: "Đăng ký"),
                 Expanded(
                   child: ListView(
                     padding: EdgeInsets.symmetric(
                       horizontal: 22.w,
                     ).copyWith(bottom: 50.h),
                     children: [
+                      space(h: 12.h),
                       _buildAppIcon(),
                       space(h: 12.h),
                       _formSignUp(),
@@ -58,8 +59,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildAppIcon() {
     return SizedBox(
-      height: 140.h,
-      width: 140.w,
+      height: 116.h,
+      width: 120.w,
       child: Image.asset(
         AppImages.imgLogo,
       ),
