@@ -1,3 +1,4 @@
+import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -14,24 +15,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 10)).then((_) => _handleNavigation());
+    _handleNavigation();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.amber,
-        child: const Center(
-          child: Text("splash 12"),
-        ),
-      ),
+    return const Scaffold(
+      backgroundColor: AppColors.bgColor,
     );
   }
 
   Future<void> _handleNavigation() async {
-    // Get.offAllNamed(RouteName.authMain);
-    Get.offAllNamed(RouteName.login);
-    FlutterNativeSplash.remove();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Get.offAllNamed(RouteName.login);
+      FlutterNativeSplash.remove();
+    });
   }
 }
