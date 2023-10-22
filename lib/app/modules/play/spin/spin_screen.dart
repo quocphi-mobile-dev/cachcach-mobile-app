@@ -40,18 +40,14 @@ class _SpinScreenState extends State<SpinScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      body: SafeArea(
-        bottom: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildTopBar(onBack: () {
-              controller.checkResult();
-            }),
-            _buildTitle(),
-            Expanded(child: _buildWheel()),
-          ],
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildTopBar(onBack: () {
+            controller.checkResult();
+          }, title: "Vòng quay"),
+          Expanded(child: _buildWheel()),
+        ],
       ),
     );
   }
@@ -115,7 +111,7 @@ class _SpinScreenState extends State<SpinScreen>
             width: 140.ic,
             height: 140.ic,
             decoration: const BoxDecoration(
-              color: AppColors.crusta,
+              color: AppColors.orange,
               shape: BoxShape.circle,
             ),
             child: Image.asset(
