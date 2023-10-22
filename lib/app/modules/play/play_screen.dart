@@ -39,36 +39,36 @@ class _PlayScreenState extends State<PlayScreen> {
                 children: [
                   space(h: 20.h),
                   _buildNewItem(
-                    title: "Thật hay Thách ?",
-                    description: "Dành cho những cặp đôi",
-                    totalPlayer: "2",
-                    showRules: true,
-                    onTap: () {
-                      controller.playMode = PlayMode.couple;
-                      Get.toNamed(RouteName.selectMode);
-                    }
-                  ),
+                      title: "Thật hay Thách ?",
+                      description: "Dành cho những cặp đôi",
+                      totalPlayer: "2",
+                      showRules: false,
+                      onTap: () {
+                        controller.playMode = PlayMode.couple;
+                        Get.toNamed(RouteName.selectMode);
+                      }),
                   space(h: 16.h),
                   _buildNewItem(
-                    title: "Thật hay Thách ?",
-                    description: "Cho nhóm bạn",
-                    totalPlayer: ">2",
-                    showRules: true,
-                    onTap: () {
-                      controller.playMode = PlayMode.friends;
-                      Get.toNamed(RouteName.selectMode);
-                    }
-                  ),
+                      title: "Thật hay Thách ?",
+                      description: "Cho nhóm bạn",
+                      totalPlayer: ">2",
+                      showRules: false,
+                      onTap: () {
+                        controller.playMode = PlayMode.friends;
+                        Get.toNamed(RouteName.selectMode);
+                      }),
                   space(h: 16.h),
                   _buildNewItem(
-                    title: "Lật thẻ bài",
-                    description: "Dành cho tất cả",
-                    totalPlayer: ">2",
-                    showRules: true,
-                    onTap: () {
-                      Get.toNamed(RouteName.flipTheCard);
-                    }
-                  ),
+                      title: "Lật thẻ bài",
+                      description: "Dành cho tất cả",
+                      totalPlayer: ">2",
+                      showRules: true,
+                      onTap: () {
+                        Get.toNamed(RouteName.flipTheCard);
+                      },
+                      onRulesTap: () {
+                        showPopupRules();
+                      }),
                 ],
               ),
             ),
@@ -78,13 +78,13 @@ class _PlayScreenState extends State<PlayScreen> {
     );
   }
 
-  Widget _buildNewItem({
-    required String title,
-    required String description,
-    required String totalPlayer,
-    bool showRules = false,
-    Function? onTap,
-  }) {
+  Widget _buildNewItem(
+      {required String title,
+      required String description,
+      required String totalPlayer,
+      bool showRules = false,
+      Function? onTap,
+      Function? onRulesTap}) {
     return GestureDetector(
       onTap: () {
         onTap?.call();
@@ -133,29 +133,33 @@ class _PlayScreenState extends State<PlayScreen> {
                   ),
                 ),
                 space(w: 10.w),
-                Material(
-                  child: InkWell(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Text(
-                          "Luật chơi",
-                          style: AppTextStyle.textStyleCommon.copyWith(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.black,
+                showRules
+                    ? Material(
+                        child: InkWell(
+                          onTap: () {
+                            onRulesTap?.call();
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "Luật chơi",
+                                style: AppTextStyle.textStyleCommon.copyWith(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              space(w: 6.w),
+                              Icon(
+                                Icons.info,
+                                size: 18.ic,
+                                color: AppColors.blue,
+                              )
+                            ],
                           ),
                         ),
-                        space(w: 6.w),
-                        Icon(
-                          Icons.info,
-                          size: 18.ic,
-                          color: AppColors.blue,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                      )
+                    : Container(),
               ],
             ),
             space(h: 4.h),
@@ -247,132 +251,103 @@ class _PlayScreenState extends State<PlayScreen> {
     );
   }
 
-  Widget _widgetGroupCouple() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Cặp đôi",
-            style: AppTextStyle.textStyleCommon.copyWith(
-              fontSize: 34.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.white,
-            ),
-          ),
-          space(h: 20.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  void showPopupRules() {
+    Get.dialog(
+      popupWidget(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              _buildItem(
-                  image: AppImages.imgTruthOrDare,
-                  label: "Truth or Dare",
-                  onTap: () {
-                    controller.playMode = PlayMode.couple;
-                    Get.toNamed(RouteName.selectMode);
-                  }),
-              _buildItem(
-                  image: AppImages.imgBeerFlipCard,
-                  label: "Lật thẻ bài",
-                  onTap: () {
-                    controller.playMode = PlayMode.couple;
-                    Get.toNamed(RouteName.flipTheCard);
-                  }),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _widgetGroupFriends() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Nhóm bạn",
-            style: AppTextStyle.textStyleCommon.copyWith(
-              fontSize: 34.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.white,
-            ),
-          ),
-          space(h: 20.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildItem(
-                image: AppImages.imgFriends,
-                label: "Truth or Dare",
-                onTap: () {
-                  controller.playMode = PlayMode.friends;
-                  Get.toNamed(RouteName.selectMode);
-                },
-              ),
-              _buildItem(
-                  image: AppImages.imgChewing, label: "Chewing", onTap: () {}),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildItem({
-    required String image,
-    required String label,
-    VoidCallback? onTap,
-  }) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 157.w,
-          height: 117.h,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(24),
-          ),
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  image,
-                  width: 120.w,
-                ),
-              ),
-              Material(
-                color: AppColors.transparent,
-                borderRadius: BorderRadius.circular(24),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(24),
-                  onTap: onTap,
-                  child: const SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
+              space(h: 12.h),
+              Center(
+                child: Text(
+                  "Lật thẻ bài",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
                   ),
                 ),
-              )
+              ),
+              space(h: 12.h),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "-",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  space(w: 4),
+                  Expanded(
+                    child: Text(
+                      "Bộ bài sẽ có tổng cộng N lá bài, mỗi lá có 1 Truth và 1 Dare.",
+                      style: AppTextStyle.textStyleCommon.copyWith(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "-",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  space(w: 4),
+                  Expanded(
+                    child: Text(
+                      "Luật chơi là mọi người sẽ ngồi vòng tròn, sau đó bạn cần phải quay vòng quay may rủi trên APP để biết tên người thực hiện thử thách.",
+                      style: AppTextStyle.textStyleCommon.copyWith(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "-",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  space(w: 4),
+                  Expanded(
+                    child: Text(
+                      "Người thực hiện  chọn “Truth” bạn sẽ phải trả lời đúng sự thật với câu hỏi được ghi trên lá bài. Còn nếu chọn “Dare”, bạn phải thực hiện theo những gì lá bài ghi.",
+                      style: AppTextStyle.textStyleCommon.copyWith(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              space(h: 40),
             ],
           ),
         ),
-        space(h: 6.h),
-        Text(
-          label,
-          style: AppTextStyle.textStyleCommon.copyWith(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            color: AppColors.white,
-          ),
-        )
-      ],
+      ),
     );
   }
 }

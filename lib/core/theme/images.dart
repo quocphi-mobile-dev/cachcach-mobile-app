@@ -41,4 +41,5 @@ class AppImages {
   static const imgHomeTopBar = "assets/images/img_home_top_bar.png";
   static const imgLogo4 = "assets/images/img_logo_4.png";
   static const imgHuman = "assets/images/img_human.png";
+  static const imgTopBarPopup = "assets/images/img_top_bar_popup.png";
 }

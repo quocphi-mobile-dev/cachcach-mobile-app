@@ -302,3 +302,66 @@ Widget popupEndGame({Function? onBack, Function? onConfirm}) {
     ),
   );
 }
+
+Widget popupWidget({required Widget child}) {
+  return Center(
+    child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Material(
+        color: AppColors.transparent,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Stack(
+                children: [
+                  Image.asset(
+                    AppImages.imgTopBarPopup,
+                    width: Get.width,
+                    height: 138.h,
+                    fit: BoxFit.fill,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      AppImages.imgLogo4,
+                      width: 120.ic,
+                      height: 120.ic,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+                      child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: SizedBox(
+                          width: 28.ic,
+                          height: 28.ic,
+                          child: Icon(
+                            Icons.close,
+                            size: 24.ic,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              child
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
