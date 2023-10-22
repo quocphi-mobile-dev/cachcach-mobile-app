@@ -10,7 +10,8 @@ class AppColors {
   static Color? grey350 = Colors.grey[350];
   static Color? grey600 = Colors.grey[600];
   static Color? grey400 = Colors.grey[400];
-  static const grey = Colors.grey;
+  /// #7A7A7A
+  static const grey = Color(0xff7A7A7A);
   static const red = Colors.red;
   static const blue = Colors.blue;
   /// #FFF6E8
@@ -205,4 +206,16 @@ class AppColors {
 
   /// #f2f0e4
   static const alabaster = Color(0xfff2f0e4);
+
+  /// #FC9486
+  static const monaLisa = Color(0xffFC9486);
+
+  /// #F8A7FA
+  static const lavenderRose = Color(0xffF8A7FA);
+
+  /// #FAE8C8
+  static const ginFizz = Color(0xffFAE8C8);
+
+  /// #5A3ECD
+  static const purpleHeart = Color(0xff5A3ECD);
 }

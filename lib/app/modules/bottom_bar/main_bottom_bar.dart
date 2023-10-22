@@ -79,6 +79,12 @@ class _MainBottomBarState extends State<MainBottomBar> {
               width: 20.ic,
               height: 20.ic,
             ),
+            selectedIcon: SvgPicture.asset(
+              AppIcons.icMyDares,
+              width: 20.ic,
+              height: 20.ic,
+              color: AppColors.orange,
+            ),
             label: 'My dares',
           ),
           NavigationDestination(
@@ -86,6 +92,12 @@ class _MainBottomBarState extends State<MainBottomBar> {
               AppIcons.icProfile,
               width: 20.ic,
               height: 20.ic,
+            ),
+            selectedIcon: SvgPicture.asset(
+              AppIcons.icProfile,
+              width: 20.ic,
+              height: 20.ic,
+              color: AppColors.orange,
             ),
             label: 'Cá nhân',
           ),

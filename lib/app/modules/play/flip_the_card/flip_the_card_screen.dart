@@ -62,31 +62,62 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      body: SafeArea(
-        bottom: false,
-        child: Column(
-          children: [
-            buildTopBar(title: "Lật thẻ bài"),
-            Expanded(
-              child: Stack(
-                children: [
-                  _buildStackCard(
-                    degree: 15,
-                    compareCardLength: 3,
-                  ),
-                  _buildStackCard(
-                    degree: 8,
-                    compareCardLength: 2,
-                  ),
-                  _buildStackCard(
-                    degree: 0,
-                    compareCardLength: 1,
-                  ),
-                  _buildFlipCard(),
-                ],
+      body: Column(
+        children: [
+          buildTopBar(title: "Lật thẻ bài"),
+          Expanded(
+            child: Stack(
+              children: [
+                _buildRowRules(),
+                _buildStackCard(
+                  degree: 15,
+                  compareCardLength: 3,
+                ),
+                _buildStackCard(
+                  degree: 8,
+                  compareCardLength: 2,
+                ),
+                _buildStackCard(
+                  degree: 0,
+                  compareCardLength: 1,
+                ),
+                _buildFlipCard(),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRowRules() {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: InkWell(
+          onTap: () {
+            showRulesFlipCard();
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Luật chơi",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
               ),
-            )
-          ],
+              space(w: 6.w),
+              Icon(
+                Icons.info,
+                size: 18.ic,
+                color: AppColors.blue,
+              )
+            ],
+          ),
         ),
       ),
     );

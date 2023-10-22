@@ -20,6 +20,7 @@ class SelectModeCard extends StatefulWidget {
     this.onPlay,
     this.onUnlock,
     required this.price,
+    this.cardBackground,
   });
 
   final String title;
@@ -31,6 +32,7 @@ class SelectModeCard extends StatefulWidget {
   final VoidCallback? onPlay;
   final VoidCallback? onUnlock;
   final int price;
+  final Color? cardBackground;
 
   @override
   State<SelectModeCard> createState() => _SelectModeCardState();
@@ -54,10 +56,13 @@ class _SelectModeCardState extends State<SelectModeCard> {
   }
 
   Widget _buildImage() {
-    return Image.asset(
-      widget.image,
-      width: 140.ic,
-      height: 140.ic,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Image.asset(
+        widget.image,
+        width: 140.ic,
+        height: 140.ic,
+      ),
     );
   }
 
@@ -66,7 +71,7 @@ class _SelectModeCardState extends State<SelectModeCard> {
       margin: EdgeInsets.only(top: 90.h, bottom: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       decoration: BoxDecoration(
-        color: AppColors.lightSlateBlue,
+        color: widget.cardBackground ?? AppColors.ginFizz,
         borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           BoxShadow(
@@ -95,7 +100,7 @@ class _SelectModeCardState extends State<SelectModeCard> {
                           style: AppTextStyle.textStyleCommon.copyWith(
                             fontSize: 28.sp,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.white,
+                            color: AppColors.black,
                           ),
                         ),
                       ),
@@ -104,6 +109,7 @@ class _SelectModeCardState extends State<SelectModeCard> {
                     ],
                   ),
                 ),
+                divider(color: AppColors.crusta, indent: 10.w, endIndent: 10.w),
                 space(h: 12.h),
                 Container(
                   alignment: Alignment.center,
@@ -114,7 +120,7 @@ class _SelectModeCardState extends State<SelectModeCard> {
                     style: AppTextStyle.textStyleCommon.copyWith(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.white,
+                      color: AppColors.black.withOpacity(0.65),
                     ),
                   ),
                 ),
@@ -157,11 +163,11 @@ class _SelectModeCardState extends State<SelectModeCard> {
           space(w: 24.w),
           Expanded(
             child: Text(
-              "Add with my dares",
+              "Thêm thẻ của bạn",
               style: AppTextStyle.textStyleCommon.copyWith(
-                fontSize: 14.sp,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.bgColor,
+                color: AppColors.grey,
               ),
             ),
           ),
@@ -272,7 +278,7 @@ class _SelectModeCardState extends State<SelectModeCard> {
       style: AppTextStyle.textStyleCommon.copyWith(
         fontSize: 12.sp,
         fontWeight: FontWeight.w600,
-        color: AppColors.white,
+        color: AppColors.black,
       ),
     );
   }

@@ -199,104 +199,221 @@ Widget outlineButton({
 }
 
 Widget popupEndGame({Function? onBack, Function? onConfirm}) {
-  return GestureDetector(
-    onTap: () {
-      Get.back();
-    },
-    child: Material(
-      color: AppColors.transparent,
-      child: Center(
+  return popupWidget(
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          space(h: 20.h),
+          Text(
+            "Bạn có muốn thoát?",
+            style: AppTextStyle.textStyleCommon.copyWith(
+              fontSize: 19.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          space(h: 20.h),
+          normalButton(
+            onTap: () {
+              Get.back();
+              onBack?.call();
+            },
+            height: 42.h,
+            backgroundColor: AppColors.orange,
+            child: Center(
+              child: Text(
+                "Thoát mà không lưu",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+          ),
+          space(h: 12.h),
+          gradientButton(
+            onTap: () {
+              onConfirm?.call();
+            },
+            height: 42.h,
+            child: Center(
+              child: Text(
+                "Lưu lịch sử",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+          ),
+          space(h: 30.h),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget popupWidget({required Widget child}) {
+  return Center(
+    child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Material(
+        color: AppColors.transparent,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 40.h),
           decoration: BoxDecoration(
             color: AppColors.white,
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(20.r),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  width: 44.ic,
-                  height: 44.ic,
-                  margin: EdgeInsets.only(top: 12.h, right: 12.w),
-                  child: Material(
-                    color: AppColors.gainsboro,
-                    shape: const CircleBorder(),
-                    clipBehavior: Clip.hardEdge,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: Icon(
-                        Icons.close,
-                        size: 28.ic,
-                      ),
+              Stack(
+                children: [
+                  Image.asset(
+                    AppImages.imgTopBarPopup,
+                    width: Get.width,
+                    height: 138.h,
+                    fit: BoxFit.fill,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      AppImages.imgLogo4,
+                      width: 120.ic,
+                      height: 120.ic,
+                      fit: BoxFit.fill,
                     ),
                   ),
-                ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.w, vertical: 10.w),
+                      child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: SizedBox(
+                          width: 28.ic,
+                          height: 28.ic,
+                          child: Icon(
+                            Icons.close,
+                            size: 24.ic,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-              space(h: 10.h),
-              Text(
-                "End game?",
+              child
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+void showRulesFlipCard() {
+  Get.dialog(
+    popupWidget(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            space(h: 12.h),
+            Center(
+              child: Text(
+                "Lật thẻ bài",
                 style: AppTextStyle.textStyleCommon.copyWith(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                   color: AppColors.black,
                 ),
               ),
-              space(h: 20.h),
-              Text(
-                "Bạn có muốn kết thúc trò chơi ? \nDữ liệu lần chơi sẽ được lưu lại.",
-                style: AppTextStyle.textStyleCommon.copyWith(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+            ),
+            space(h: 12.h),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "-",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              space(h: 20),
-              Row(
-                children: [
-                  space(w: 20.w),
-                  TextButton(
-                    onPressed: () {
-                      onBack?.call();
-                    },
-                    child: Text(
-                      "Quay lại",
-                      style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.crusta,
-                          decoration: TextDecoration.underline),
+                space(w: 4),
+                Expanded(
+                  child: Text(
+                    "Bộ bài sẽ có tổng cộng N lá bài, mỗi lá có 1 Truth và 1 Dare.",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
                     ),
                   ),
-                  const Spacer(),
-                  gradientButton(
-                    width: 120.w,
-                    height: 40.h,
-                    borderRadius: 18.r,
-                    onTap: () {
-                      onConfirm?.call();
-                    },
-                    child: Center(
-                      child: Text(
-                        "Xác nhận",
-                        style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.white,
-                        ),
-                      ),
+                ),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "-",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                space(w: 4),
+                Expanded(
+                  child: Text(
+                    "Luật chơi là mọi người sẽ ngồi vòng tròn, sau đó bạn cần phải quay vòng quay may rủi trên APP để biết tên người thực hiện thử thách.",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
                     ),
                   ),
-                  space(w: 20.w),
-                ],
-              ),
-              space(h: 20.h),
-            ],
-          ),
+                ),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "-",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                space(w: 4),
+                Expanded(
+                  child: Text(
+                    "Người thực hiện  chọn “Truth” bạn sẽ phải trả lời đúng sự thật với câu hỏi được ghi trên lá bài. Còn nếu chọn “Dare”, bạn phải thực hiện theo những gì lá bài ghi.",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            space(h: 40),
+          ],
         ),
       ),
     ),

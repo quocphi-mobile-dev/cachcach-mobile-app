@@ -1,3 +1,4 @@
+import 'package:cachcach/app/modules/play/controller/play_controller.dart';
 import 'package:cachcach/app/modules/play/select_mode/card/select_mode_card.dart';
 import 'package:cachcach/app/modules/play/select_mode/model/mode.dart';
 import 'package:cachcach/app/modules/play/select_mode/model/select_mode_model.dart';
@@ -22,7 +23,6 @@ class SelectModeController extends GetxController {
           final mode = Mode.values[index];
           return SelectModeModel(
             isLock: mode.isLock(),
-            backgroundColor: mode.getBackgroundColor(),
             card: SelectModeCard(
               title: mode.getTitle(),
               totalCards: mode.getTotalCard(),
@@ -31,11 +31,17 @@ class SelectModeController extends GetxController {
               guideText: mode.getGuideText(),
               isLock: mode.isLock(),
               price: mode.getPrice(),
+              cardBackground: mode.getBackgroundColor(),
               onPlay: () {
                 this.mode = mode;
                 listTruth.assignAll(mode.getListTruth());
                 listDare.assignAll(mode.getListDare());
-                Get.toNamed(RouteName.player);
+                if (Get.find<PlayController>().playMode ==
+                    PlayMode.flipTheCard) {
+                  Get.toNamed(RouteName.flipTheCard);
+                } else {
+                  Get.toNamed(RouteName.player);
+                }
               },
               onUnlock: () {},
             ),
