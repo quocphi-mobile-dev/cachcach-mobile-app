@@ -67,7 +67,7 @@ class _PlayScreenState extends State<PlayScreen> {
                         Get.toNamed(RouteName.flipTheCard);
                       },
                       onRulesTap: () {
-                        showPopupRules();
+                        showRulesFlipCard();
                       }),
                 ],
               ),
@@ -248,106 +248,6 @@ class _PlayScreenState extends State<PlayScreen> {
           ),
         ),
       ],
-    );
-  }
-
-  void showPopupRules() {
-    Get.dialog(
-      popupWidget(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              space(h: 12.h),
-              Center(
-                child: Text(
-                  "Lật thẻ bài",
-                  style: AppTextStyle.textStyleCommon.copyWith(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.black,
-                  ),
-                ),
-              ),
-              space(h: 12.h),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "-",
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 13.sp,
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  space(w: 4),
-                  Expanded(
-                    child: Text(
-                      "Bộ bài sẽ có tổng cộng N lá bài, mỗi lá có 1 Truth và 1 Dare.",
-                      style: AppTextStyle.textStyleCommon.copyWith(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "-",
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 13.sp,
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  space(w: 4),
-                  Expanded(
-                    child: Text(
-                      "Luật chơi là mọi người sẽ ngồi vòng tròn, sau đó bạn cần phải quay vòng quay may rủi trên APP để biết tên người thực hiện thử thách.",
-                      style: AppTextStyle.textStyleCommon.copyWith(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "-",
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 13.sp,
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  space(w: 4),
-                  Expanded(
-                    child: Text(
-                      "Người thực hiện  chọn “Truth” bạn sẽ phải trả lời đúng sự thật với câu hỏi được ghi trên lá bài. Còn nếu chọn “Dare”, bạn phải thực hiện theo những gì lá bài ghi.",
-                      style: AppTextStyle.textStyleCommon.copyWith(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              space(h: 40),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
