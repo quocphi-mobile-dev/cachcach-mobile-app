@@ -30,13 +30,13 @@ extension ModeExtension on Mode {
       case Mode.spicy:
         return false;
       case Mode.crazy:
-        return true;
+        return false;
       case Mode.nightmare:
-        return true;
+        return false;
       case Mode.xxx:
-        return true;
+        return false;
       case Mode.bozzy:
-        return true;
+        return false;
     }
   }
 
@@ -94,9 +94,9 @@ extension ModeExtension on Mode {
   Color? getBackgroundColor() {
     switch (this) {
       case Mode.nightmare:
-        return AppColors.darkCoral;
+        return AppColors.monaLisa;
       case Mode.xxx:
-        return AppColors.pinkFlamingo;
+        return AppColors.lavenderRose;
       default:
         return null;
     }

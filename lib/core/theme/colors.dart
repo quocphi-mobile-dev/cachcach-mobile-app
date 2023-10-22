@@ -205,4 +205,13 @@ class AppColors {
 
   /// #f2f0e4
   static const alabaster = Color(0xfff2f0e4);
+
+  /// #FC9486
+  static const monaLisa = Color(0xffFC9486);
+
+  /// #F8A7FA
+  static const lavenderRose = Color(0xffF8A7FA);
+
+  /// #FAE8C8
+  static const ginFizz = Color(0xffFAE8C8);
 }

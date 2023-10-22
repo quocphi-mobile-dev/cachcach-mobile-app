@@ -28,11 +28,9 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
         if (controller.listCard.isEmpty) {
           return Container();
         }
-        SelectModeModel cardSelected =
-            controller.listCard[controller.pageSelected.value];
         return Scaffold(
-          backgroundColor: cardSelected.backgroundColor ?? AppColors.bgColor,
-          body: SafeArea(
+          backgroundColor: AppColors.bgColor,
+          body: contentWithBackgroundPattern(
             child: Column(
               children: [
                 buildTopBar(title: "Lựa chọn cấp độ"),
@@ -41,7 +39,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
                   child: _buildPageCard(),
                 ),
                 _buildIndicator(),
-                _buildButtonUnlockAll(),
+                space(h: 50.h),
               ],
             ),
           ),
@@ -147,9 +145,9 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
             (index) {
               SelectModeModel model = controller.listCard[index];
               bool isSelected = controller.pageSelected.value == index;
-              double size = 11.ic;
+              double size = 14.ic;
               if (controller.pageSelected.value == index) {
-                size = 13.ic;
+                size = 14.ic;
               }
 
               if (model.isLock) {
@@ -169,7 +167,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
                 child: Icon(
                   Icons.circle,
                   size: size,
-                  color: isSelected ? AppColors.white : AppColors.fog,
+                  color: isSelected ? AppColors.crusta : AppColors.grey,
                 ),
               );
             },

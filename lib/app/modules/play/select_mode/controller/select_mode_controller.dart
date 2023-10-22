@@ -22,7 +22,6 @@ class SelectModeController extends GetxController {
           final mode = Mode.values[index];
           return SelectModeModel(
             isLock: mode.isLock(),
-            backgroundColor: mode.getBackgroundColor(),
             card: SelectModeCard(
               title: mode.getTitle(),
               totalCards: mode.getTotalCard(),
@@ -31,6 +30,7 @@ class SelectModeController extends GetxController {
               guideText: mode.getGuideText(),
               isLock: mode.isLock(),
               price: mode.getPrice(),
+              cardBackground: mode.getBackgroundColor(),
               onPlay: () {
                 this.mode = mode;
                 listTruth.assignAll(mode.getListTruth());
