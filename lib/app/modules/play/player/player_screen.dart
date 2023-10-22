@@ -33,37 +33,54 @@ class _PlayerScreenState extends State<PlayerScreen> {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       body: SafeArea(
+        top: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildTopBar(title: "${selectModeController.mode.getLabel()} Game"),
+            buildTopBar(title: "Thật hay thách"),
             Expanded(
-              child: Obx(
-                () => ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w)
-                      .copyWith(bottom: 50.h),
-                  children: [
-                    _buildTitle(),
-                    space(h: 10.h),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        PlayerInfo playerInfo = controller.listPlayer[index];
-
-                        return _buildItemPlayer(playerInfo);
-                      },
-                      separatorBuilder: (context, index) {
-                        return space(h: 10.h);
-                      },
-                      itemCount: controller.listPlayer.length,
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 20.h),
+                      child: Image.asset(
+                        AppImages.imgBottomPlayer,
+                        width: 325.w,
+                        height: 190.h,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                    space(h: 38.h),
-                    playController.playMode == PlayMode.couple
-                        ? Container()
-                        : _buildAddPlayer()
-                  ],
-                ),
+                  ),
+                  Obx(
+                    () => ListView(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w)
+                          .copyWith(bottom: 50.h),
+                      children: [
+                        space(h: 10.h),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            PlayerInfo playerInfo =
+                                controller.listPlayer[index];
+
+                            return _buildItemPlayer(playerInfo);
+                          },
+                          separatorBuilder: (context, index) {
+                            return space(h: 10.h);
+                          },
+                          itemCount: controller.listPlayer.length,
+                        ),
+                        space(h: 38.h),
+                        playController.playMode == PlayMode.couple
+                            ? Container()
+                            : _buildAddPlayer()
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
             _buildButtonStartGame(),
@@ -76,36 +93,27 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   Widget _buildButtonStartGame() {
     return Container(
-      width: double.infinity,
-      height: 58.h,
       margin: EdgeInsets.symmetric(horizontal: 16.w),
-      decoration: BoxDecoration(
-        color: AppColors.crusta,
-        borderRadius: BorderRadius.circular(14.r),
-      ),
-      child: Material(
-        color: AppColors.transparent,
-        borderRadius: BorderRadius.circular(14.r),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(14.r),
-          onTap: () {
-            FocusScope.of(context).unfocus();
-            Get.toNamed(RouteName.spin);
-          },
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            alignment: Alignment.center,
-            child: Text(
-              "Bắt đầu chơi",
-              style: AppTextStyle.textStyleCommon.copyWith(
-                fontSize: 17.sp,
-                fontWeight: FontWeight.w600,
-                color: AppColors.white,
-              ),
+      child: gradientButton(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+          Get.toNamed(RouteName.spin);
+        },
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          alignment: Alignment.center,
+          child: Text(
+            "Bắt đầu chơi",
+            style: AppTextStyle.textStyleCommon.copyWith(
+              fontSize: 17.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.white,
             ),
           ),
         ),
+        height: 58.h,
+        width: double.infinity,
       ),
     );
   }
@@ -125,7 +133,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   child: Container(
                     height: 68.h,
                     decoration: BoxDecoration(
-                      color: AppColors.salmon,
+                      color: AppColors.crusta,
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     alignment: Alignment.center,
@@ -168,7 +176,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 width: 52.ic,
                 height: 52.ic,
                 decoration: const BoxDecoration(
-                  color: AppColors.gainsboro,
+                  color: AppColors.white,
                   shape: BoxShape.circle,
                 ),
                 child: Image.asset(
@@ -281,9 +289,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   child: Text(
                     "Thêm người chơi",
                     style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 18.sp,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.bgColor,
+                      color: AppColors.grey,
                     ),
                   ),
                 )

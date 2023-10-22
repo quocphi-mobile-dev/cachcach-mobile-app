@@ -42,4 +42,5 @@ class AppImages {
   static const imgLogo4 = "assets/images/img_logo_4.png";
   static const imgHuman = "assets/images/img_human.png";
   static const imgTopBarPopup = "assets/images/img_top_bar_popup.png";
+  static const imgBottomPlayer = "assets/images/img_bottom_player.png";
 }

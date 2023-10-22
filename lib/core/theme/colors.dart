@@ -10,7 +10,8 @@ class AppColors {
   static Color? grey350 = Colors.grey[350];
   static Color? grey600 = Colors.grey[600];
   static Color? grey400 = Colors.grey[400];
-  static const grey = Colors.grey;
+  /// #7A7A7A
+  static const grey = Color(0xff7A7A7A);
   static const red = Colors.red;
   static const blue = Colors.blue;
   /// #FFF6E8
