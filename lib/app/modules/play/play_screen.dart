@@ -64,7 +64,8 @@ class _PlayScreenState extends State<PlayScreen> {
                       totalPlayer: ">2",
                       showRules: true,
                       onTap: () {
-                        Get.toNamed(RouteName.flipTheCard);
+                        controller.playMode = PlayMode.flipTheCard;
+                        Get.toNamed(RouteName.selectMode);
                       },
                       onRulesTap: () {
                         showRulesFlipCard();

@@ -1,3 +1,4 @@
+import 'package:cachcach/app/modules/play/controller/play_controller.dart';
 import 'package:cachcach/app/modules/play/select_mode/card/select_mode_card.dart';
 import 'package:cachcach/app/modules/play/select_mode/model/mode.dart';
 import 'package:cachcach/app/modules/play/select_mode/model/select_mode_model.dart';
@@ -35,7 +36,12 @@ class SelectModeController extends GetxController {
                 this.mode = mode;
                 listTruth.assignAll(mode.getListTruth());
                 listDare.assignAll(mode.getListDare());
-                Get.toNamed(RouteName.player);
+                if (Get.find<PlayController>().playMode ==
+                    PlayMode.flipTheCard) {
+                  Get.toNamed(RouteName.flipTheCard);
+                } else {
+                  Get.toNamed(RouteName.player);
+                }
               },
               onUnlock: () {},
             ),
