@@ -236,7 +236,6 @@ Widget popupEndGame({Function? onBack, Function? onConfirm}) {
           space(h: 12.h),
           gradientButton(
             onTap: () {
-              Get.back();
               onConfirm?.call();
             },
             height: 42.h,

@@ -28,6 +28,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       body: SafeArea(
+        top: false,
         child: Column(
           children: [
             buildTopBar(
@@ -91,7 +92,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
       margin: EdgeInsets.only(top: 90.h, bottom: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       decoration: BoxDecoration(
-        color: AppColors.lightSlateBlue,
+        color: AppColors.ginFizz,
         borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           BoxShadow(
@@ -104,53 +105,58 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
       child: Column(
         children: [
           space(h: 40.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    selectModeController.mode.getLabel(),
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.white,
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  selectModeController.mode.getLabel(),
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 28.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.grey,
+                  ),
+                ),
+              ),
+              space(w: 10.w),
+              Text(
+                "${selectModeController.mode.getTotalCard()} Cards",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.grey,
+                ),
+              ),
+            ],
+          ),
+          divider(color: AppColors.crusta),
+          space(h: 10.h),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildScoreBoardHeader(),
+                  space(h: 4.h),
+                  divider(color: AppColors.grey),
+                  space(h: 4.h),
+                  Expanded(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.only(bottom: 50.h),
+                      itemBuilder: (BuildContext context, int index) {
+                        PlayerInfo playerInfo =
+                        playerController.getListPlayerSortByPoint()[index];
+                        return _buildPlayerScore(playerInfo);
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return space(h: 6.h);
+                      },
+                      itemCount: playerController.getListPlayerSortByPoint().length,
                     ),
                   ),
-                ),
-                space(w: 10.w),
-                Text(
-                  "${selectModeController.mode.getTotalCard()} Cards",
-                  style: AppTextStyle.textStyleCommon.copyWith(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          space(h: 10.h),
-          _buildScoreBoardHeader(),
-          space(h: 4.h),
-          divider(color: AppColors.white, indent: 10.w, endIndent: 10.w),
-          space(h: 4.h),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              padding: EdgeInsets.only(left: 10.w, right: 10.w, bottom: 50.h),
-              itemBuilder: (BuildContext context, int index) {
-                PlayerInfo playerInfo =
-                    playerController.getListPlayerSortByPoint()[index];
-                return _buildPlayerScore(playerInfo);
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 10.h),
-                  child: divider(color: AppColors.white),
-                );
-              },
-              itemCount: playerController.getListPlayerSortByPoint().length,
+                ],
+              ),
             ),
           ),
         ],
@@ -159,10 +165,13 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
   }
 
   Widget _buildImage() {
-    return Image.asset(
-      selectModeController.mode.getImage(),
-      width: 140.ic,
-      height: 140.ic,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Image.asset(
+        selectModeController.mode.getImage(),
+        width: 140.ic,
+        height: 140.ic,
+      ),
     );
   }
 
@@ -176,7 +185,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
             style: AppTextStyle.textStyleCommon.copyWith(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.white,
+              color: AppColors.crusta,
             ),
           ),
         ),
@@ -189,7 +198,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
               style: AppTextStyle.textStyleCommon.copyWith(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.white,
+                color: AppColors.crusta,
               ),
             ),
           ),
@@ -203,7 +212,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
               style: AppTextStyle.textStyleCommon.copyWith(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.white,
+                color: AppColors.crusta,
               ),
             ),
           ),
@@ -217,7 +226,16 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
       children: [
         Expanded(
           flex: 3,
-          child: Container(),
+          child: Container(
+            child: Text(
+              "Player",
+              style: AppTextStyle.textStyleCommon.copyWith(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.grey,
+              ),
+            ),
+          ),
         ),
         Expanded(
           flex: 4,
@@ -237,7 +255,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
                   style: AppTextStyle.textStyleCommon.copyWith(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.white,
+                    color: AppColors.grey,
                   ),
                 ),
               ],
@@ -262,7 +280,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
                   style: AppTextStyle.textStyleCommon.copyWith(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.white,
+                    color: AppColors.grey,
                   ),
                 ),
               ],

@@ -54,7 +54,6 @@ class SpinController extends GetxController {
               Get.back();
             },
             onConfirm: () {
-              Get.back();
               Get.toNamed(RouteName.scoreBoard);
             },
           ),
