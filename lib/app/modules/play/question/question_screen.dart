@@ -27,19 +27,17 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      body: SafeArea(
+      body: contentWithBackgroundPattern(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            buildTopBar(),
-            _buildLabel(),
-            space(h: 30.h),
+            buildTopBar(title: "Người được chọn"),
             _buildPlayer(),
             space(h: 30.h),
             Expanded(child: _buildTruthOrDare()),
             space(h: 16.h),
             _buildActions(),
-            space(h: 16.h),
+            space(h: 50.h),
           ],
         ),
       ),
@@ -60,6 +58,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
           width: 172.w,
           height: 58.h,
           borderRadius: 14.r,
+          backgroundColor: AppColors.black,
           onTap: () {
             if (questionType == QuestionType.truth) {
               spinController.playerSelected.truthGiveUpPoint += 1;
@@ -116,7 +115,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
       width: 172.w,
       height: 300.h,
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.crusta,
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Material(
@@ -148,7 +147,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   style: AppTextStyle.textStyleCommon.copyWith(
                     fontSize: 44.sp,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.black,
+                    color: AppColors.white,
                   ),
                 ),
               ],
@@ -244,7 +243,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
       width: 355.w,
       height: 300.h,
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.whiteSmoke,
         borderRadius: BorderRadius.circular(16.r),
       ),
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
@@ -277,13 +276,34 @@ class _QuestionScreenState extends State<QuestionScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    selectModeController.getRandomTruth(),
-                    textAlign: TextAlign.justify,
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.black,
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: spinController.playerSelected.name,
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.purpleHeart,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ", ",
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.black,
+                          ),
+                        ),
+                        TextSpan(
+                          text: selectModeController.getRandomTruth(),
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.black,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -333,13 +353,34 @@ class _QuestionScreenState extends State<QuestionScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    selectModeController.getRandomDare(),
-                    textAlign: TextAlign.justify,
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.white,
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: spinController.playerSelected.name,
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.purpleHeart,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ", ",
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: selectModeController.getRandomDare(),
+                          style: AppTextStyle.textStyleCommon.copyWith(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -372,7 +413,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
         width: 160.w,
         height: 180.h,
         decoration: BoxDecoration(
-            color: AppColors.crusta, borderRadius: BorderRadius.circular(20.r)),
+            color: AppColors.orange, borderRadius: BorderRadius.circular(20.r)),
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         child: Column(

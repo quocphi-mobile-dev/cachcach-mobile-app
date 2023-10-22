@@ -215,4 +215,7 @@ class AppColors {
 
   /// #FAE8C8
   static const ginFizz = Color(0xffFAE8C8);
+
+  /// #5A3ECD
+  static const purpleHeart = Color(0xff5A3ECD);
 }
