@@ -199,105 +199,60 @@ Widget outlineButton({
 }
 
 Widget popupEndGame({Function? onBack, Function? onConfirm}) {
-  return GestureDetector(
-    onTap: () {
-      Get.back();
-    },
-    child: Material(
-      color: AppColors.transparent,
-      child: Center(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 40.h),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(12.r),
+  return popupWidget(
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          space(h: 20.h),
+          Text(
+            "Bạn có muốn thoát?",
+            style: AppTextStyle.textStyleCommon.copyWith(
+              fontSize: 19.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  width: 44.ic,
-                  height: 44.ic,
-                  margin: EdgeInsets.only(top: 12.h, right: 12.w),
-                  child: Material(
-                    color: AppColors.gainsboro,
-                    shape: const CircleBorder(),
-                    clipBehavior: Clip.hardEdge,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: Icon(
-                        Icons.close,
-                        size: 28.ic,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              space(h: 10.h),
-              Text(
-                "End game?",
-                style: AppTextStyle.textStyleCommon.copyWith(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.black,
-                ),
-              ),
-              space(h: 20.h),
-              Text(
-                "Bạn có muốn kết thúc trò chơi ? \nDữ liệu lần chơi sẽ được lưu lại.",
+          space(h: 20.h),
+          normalButton(
+            onTap: () {
+              Get.back();
+              onBack?.call();
+            },
+            height: 42.h,
+            backgroundColor: AppColors.orange,
+            child: Center(
+              child: Text(
+                "Thoát mà không lưu",
                 style: AppTextStyle.textStyleCommon.copyWith(
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
                 ),
               ),
-              space(h: 20),
-              Row(
-                children: [
-                  space(w: 20.w),
-                  TextButton(
-                    onPressed: () {
-                      onBack?.call();
-                    },
-                    child: Text(
-                      "Quay lại",
-                      style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.crusta,
-                          decoration: TextDecoration.underline),
-                    ),
-                  ),
-                  const Spacer(),
-                  gradientButton(
-                    width: 120.w,
-                    height: 40.h,
-                    borderRadius: 18.r,
-                    onTap: () {
-                      onConfirm?.call();
-                    },
-                    child: Center(
-                      child: Text(
-                        "Xác nhận",
-                        style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  space(w: 20.w),
-                ],
-              ),
-              space(h: 20.h),
-            ],
+            ),
           ),
-        ),
+          space(h: 12.h),
+          gradientButton(
+            onTap: () {
+              Get.back();
+              onConfirm?.call();
+            },
+            height: 42.h,
+            child: Center(
+              child: Text(
+                "Lưu lịch sử",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+          ),
+          space(h: 30.h),
+        ],
       ),
     ),
   );
@@ -337,8 +292,8 @@ Widget popupWidget({required Widget child}) {
                   Align(
                     alignment: Alignment.topRight,
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.w, vertical: 10.w),
                       child: InkWell(
                         onTap: () {
                           Get.back();
