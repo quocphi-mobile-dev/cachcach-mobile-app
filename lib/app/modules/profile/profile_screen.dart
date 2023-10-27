@@ -1,3 +1,4 @@
+import 'package:cachcach/app/modules/profile/controller/profile_controller.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/icons.dart';
@@ -10,8 +11,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +141,7 @@ class ProfileScreen extends StatelessWidget {
               space(h: 90.h),
               normalButton(
                 onTap: () {
-                  Get.back();
+                  controller.logout();
                 },
                 backgroundColor: AppColors.orange,
                 child: Center(

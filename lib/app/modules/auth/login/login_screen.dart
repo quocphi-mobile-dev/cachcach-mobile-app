@@ -1,3 +1,4 @@
+import 'package:cachcach/app/modules/auth/login/controller/login_controller.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/icons.dart';
@@ -19,7 +20,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final textFieldFocusNode = FocusNode();
-  bool _obscured = false;
+  bool _obscured = true;
 
   void _toggleObscuredPass() {
     setState(() {
@@ -28,6 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
       textFieldFocusNode.canRequestFocus = false;
     });
   }
+
+  final controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildEmailTextField() {
     return TextField(
+      controller: controller.emailController,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         fillColor: AppColors.whiteSmoke,
@@ -142,6 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildPasswordTextField() {
     return TextField(
+      controller: controller.passwordController,
       obscureText: _obscured,
       focusNode: textFieldFocusNode,
       decoration: InputDecoration(
@@ -174,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildLoginButton() {
     return gradientButton(
       onTap: () {
-        Get.toNamed(RouteName.home);
+        controller.login();
       },
       child: Center(
         child: Text(
@@ -281,24 +286,6 @@ class FormLoginSocial extends StatelessWidget {
           height: 40.ic,
           fit: BoxFit.cover,
           color: AppColors.white,
-        ),
-      ),
-    );
-    return SizedBox(
-      width: 50.w,
-      height: 50.h,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          // primary: AppColors.primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-        ),
-        child: Image.asset(
-          AppImages.imgLogo,
-          height: 24.h,
-          width: 24.w,
         ),
       ),
     );
