@@ -13,7 +13,7 @@ class _Product extends EnvironmentBase {
 
 class _Dev extends EnvironmentBase {
   @override
-  String get host => "";
+  String get host => "http://api.cachcach.org";
 }
 
 class Environment {
