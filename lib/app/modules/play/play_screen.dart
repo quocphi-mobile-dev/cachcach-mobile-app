@@ -7,6 +7,7 @@ import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
 import 'package:cachcach/routes/routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,48 +35,47 @@ class _PlayScreenState extends State<PlayScreen> {
             _buildTopBar(),
             space(h: 10.h),
             Expanded(
-              child: ListView(
-                padding: EdgeInsets.only(bottom: 20.h),
-                children: [
-                  space(h: 20.h),
-                  _buildNewItem(
-                      title: "Thật hay Thách ?",
-                      description: "Dành cho những cặp đôi",
-                      totalPlayer: "2",
-                      showRules: false,
-                      onTap: () {
-                        controller.playMode = PlayMode.couple;
-                        Get.toNamed(RouteName.selectMode);
-                      }),
-                  space(h: 16.h),
-                  _buildNewItem(
-                      title: "Thật hay Thách ?",
-                      description: "Cho nhóm bạn",
-                      totalPlayer: ">2",
-                      showRules: false,
-                      onTap: () {
-                        controller.playMode = PlayMode.friends;
-                        Get.toNamed(RouteName.selectMode);
-                      }),
-                  space(h: 16.h),
-                  _buildNewItem(
-                      title: "Lật thẻ bài",
-                      description: "Dành cho tất cả",
-                      totalPlayer: ">2",
-                      showRules: true,
-                      onTap: () {
-                        controller.playMode = PlayMode.flipTheCard;
-                        Get.toNamed(RouteName.selectMode);
-                      },
-                      onRulesTap: () {
-                        showRulesFlipCard();
-                      }),
-                ],
-              ),
+              child: _buildListItem(),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildListItem() {
+    return Obx(
+      () {
+        if (controller.isLoading.value) {
+          return const Center(
+            child: CupertinoActivityIndicator(),
+          );
+        }
+
+        return ListView.separated(
+          padding: EdgeInsets.only(bottom: 20.h),
+          itemBuilder: (BuildContext context, int index) {
+            var gameMode = controller.listGameMode[index];
+            return _buildNewItem(
+                title: gameMode.name ?? "",
+                description: gameMode.description ?? "",
+                totalPlayer: gameMode.getTotalPlayer(),
+                showRules: false,
+                onTap: () {
+                  if (gameMode.isCouple()) {
+                    controller.playMode = PlayMode.couple;
+                  } else {
+                    controller.playMode = PlayMode.friends;
+                  }
+                  Get.toNamed(RouteName.selectMode);
+                });
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return space(h: 16.h);
+          },
+          itemCount: controller.listGameMode.length,
+        );
+      },
     );
   }
 
