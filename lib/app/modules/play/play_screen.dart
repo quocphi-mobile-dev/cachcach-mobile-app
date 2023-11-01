@@ -62,12 +62,9 @@ class _PlayScreenState extends State<PlayScreen> {
                 totalPlayer: gameMode.getTotalPlayer(),
                 showRules: false,
                 onTap: () {
-                  if (gameMode.isCouple()) {
-                    controller.playMode = PlayMode.couple;
-                  } else {
-                    controller.playMode = PlayMode.friends;
-                  }
-                  Get.toNamed(RouteName.selectMode);
+                  controller.playMode = gameMode.getPlayMode();
+                  Get.toNamed(RouteName.selectMode,
+                      arguments: {"id": gameMode.id});
                 });
           },
           separatorBuilder: (BuildContext context, int index) {
@@ -116,6 +113,7 @@ class _PlayScreenState extends State<PlayScreen> {
             ),
             space(h: 4.h),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
                   AppImages.imgHuman,
@@ -165,6 +163,7 @@ class _PlayScreenState extends State<PlayScreen> {
             ),
             space(h: 4.h),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(
                   Icons.access_time_outlined,

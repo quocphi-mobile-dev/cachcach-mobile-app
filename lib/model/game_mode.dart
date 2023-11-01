@@ -1,3 +1,4 @@
+import 'package:cachcach/app/modules/play/controller/play_controller.dart';
 import 'package:cachcach/model/play_type.dart';
 
 class GameMode {
@@ -54,5 +55,17 @@ class GameMode {
 
   bool isCouple() {
     return playType == PlayType.COUPLE.getId();
+  }
+
+  PlayMode getPlayMode() {
+    if (playType == PlayType.COUPLE.getId()) {
+      return PlayMode.couple;
+    }
+
+    if (playType == PlayType.GROUP) {
+      return PlayMode.friends;
+    }
+
+    return PlayMode.flipTheCard;
   }
 }

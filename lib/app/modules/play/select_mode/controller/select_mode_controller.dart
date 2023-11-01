@@ -1,54 +1,42 @@
-import 'package:cachcach/app/modules/play/controller/play_controller.dart';
-import 'package:cachcach/app/modules/play/select_mode/card/select_mode_card.dart';
-import 'package:cachcach/app/modules/play/select_mode/model/mode.dart';
-import 'package:cachcach/app/modules/play/select_mode/model/select_mode_model.dart';
-import 'package:cachcach/routes/routes.dart';
+import 'package:cachcach/core/utils/constant.dart';
+import 'package:cachcach/core/utils/top_level_function.dart';
+import 'package:cachcach/model/game_mode_category.dart';
+import 'package:cachcach/services/repositories/home_repository.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class SelectModeController extends GetxController {
   RxInt pageSelected = 0.obs;
-  RxList<SelectModeModel> listCard = RxList([]);
-  Mode mode = Mode.classic;
+  GameModeCategory? categorySelected;
 
   List<String> listTruth = [];
   List<String> listDare = [];
 
+  RxBool isLoading = false.obs;
+  RxList<GameModeCategory> listCategory = RxList([]);
+  CancelToken cancelToken = CancelToken();
+
+  @override
+  void onClose() {
+    cancelToken.cancel();
+    super.onClose();
+  }
+
   @override
   void onReady() {
     super.onReady();
-    listCard.assignAll(
-      List.generate(
-        Mode.values.length,
-        (index) {
-          final mode = Mode.values[index];
-          return SelectModeModel(
-            isLock: mode.isLock(),
-            card: SelectModeCard(
-              title: mode.getTitle(),
-              totalCards: mode.getTotalCard(),
-              image: mode.getImage(),
-              label: mode.getLabel(),
-              guideText: mode.getGuideText(),
-              isLock: mode.isLock(),
-              price: mode.getPrice(),
-              cardBackground: mode.getBackgroundColor(),
-              onPlay: () {
-                this.mode = mode;
-                listTruth.assignAll(mode.getListTruth());
-                listDare.assignAll(mode.getListDare());
-                if (Get.find<PlayController>().playMode ==
-                    PlayMode.flipTheCard) {
-                  Get.toNamed(RouteName.flipTheCard);
-                } else {
-                  Get.toNamed(RouteName.player);
-                }
-              },
-              onUnlock: () {},
-            ),
-          );
-        },
-      ),
-    );
+  }
+
+  Future getListCategory(int? id) async {
+    try {
+      isLoading.value = true;
+      listCategory.value = await HomeRepository.getGameModeCategories(
+          id: id, cancelToken: cancelToken);
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      handleException(e);
+    }
   }
 
   String getRandomTruth() {
@@ -74,7 +62,7 @@ class SelectModeController extends GetxController {
   }
 
   void reset() {
-    listTruth.assignAll(mode.getListTruth());
-    listDare.assignAll(mode.getListDare());
+    listTruth.assignAll(content);
+    listDare.assignAll(content);
   }
 }
