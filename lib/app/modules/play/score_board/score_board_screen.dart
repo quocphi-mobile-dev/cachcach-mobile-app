@@ -1,6 +1,5 @@
 import 'package:cachcach/app/modules/play/player/controller/player_controller.dart';
 import 'package:cachcach/app/modules/play/select_mode/controller/select_mode_controller.dart';
-import 'package:cachcach/app/modules/play/select_mode/model/mode.dart';
 import 'package:cachcach/app/modules/play/spin/model/player_info.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
@@ -109,7 +108,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
             children: [
               Expanded(
                 child: Text(
-                  selectModeController.mode.getLabel(),
+                  selectModeController.categorySelected?.name ?? "",
                   style: AppTextStyle.textStyleCommon.copyWith(
                     fontSize: 28.sp,
                     fontWeight: FontWeight.w600,
@@ -119,7 +118,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
               ),
               space(w: 10.w),
               Text(
-                "${selectModeController.mode.getTotalCard()} Cards",
+                "10 Cards",
                 style: AppTextStyle.textStyleCommon.copyWith(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
@@ -146,13 +145,14 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
                       padding: EdgeInsets.only(bottom: 50.h),
                       itemBuilder: (BuildContext context, int index) {
                         PlayerInfo playerInfo =
-                        playerController.getListPlayerSortByPoint()[index];
+                            playerController.getListPlayerSortByPoint()[index];
                         return _buildPlayerScore(playerInfo);
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return space(h: 6.h);
                       },
-                      itemCount: playerController.getListPlayerSortByPoint().length,
+                      itemCount:
+                          playerController.getListPlayerSortByPoint().length,
                     ),
                   ),
                 ],
@@ -168,7 +168,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
     return Align(
       alignment: Alignment.topCenter,
       child: Image.asset(
-        selectModeController.mode.getImage(),
+        AppImages.imgClassic,
         width: 140.ic,
         height: 140.ic,
       ),
