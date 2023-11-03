@@ -218,4 +218,7 @@ class AppColors {
 
   /// #5A3ECD
   static const purpleHeart = Color(0xff5A3ECD);
+
+  /// #FF483D
+  static const sunsetOrange = Color(0xffFF483D);
 }

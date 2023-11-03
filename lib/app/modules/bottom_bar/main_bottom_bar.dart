@@ -73,20 +73,20 @@ class _MainBottomBarState extends State<MainBottomBar> {
             ),
             label: 'Khám phá',
           ),
-          NavigationDestination(
-            icon: SvgPicture.asset(
-              AppIcons.icMyDares,
-              width: 20.ic,
-              height: 20.ic,
-            ),
-            selectedIcon: SvgPicture.asset(
-              AppIcons.icMyDares,
-              width: 20.ic,
-              height: 20.ic,
-              color: AppColors.orange,
-            ),
-            label: 'My dares',
-          ),
+          // NavigationDestination(
+          //   icon: SvgPicture.asset(
+          //     AppIcons.icMyDares,
+          //     width: 20.ic,
+          //     height: 20.ic,
+          //   ),
+          //   selectedIcon: SvgPicture.asset(
+          //     AppIcons.icMyDares,
+          //     width: 20.ic,
+          //     height: 20.ic,
+          //     color: AppColors.orange,
+          //   ),
+          //   label: 'My dares',
+          // ),
           NavigationDestination(
             icon: SvgPicture.asset(
               AppIcons.icProfile,

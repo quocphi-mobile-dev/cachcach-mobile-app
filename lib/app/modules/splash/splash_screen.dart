@@ -28,11 +28,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _handleNavigation() async {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      if ((await StorageService().token)?.isNotEmpty == true) {
-        Get.offAllNamed(RouteName.home);
-      } else {
-        Get.offAllNamed(RouteName.login);
-      }
+      // if ((await StorageService().token)?.isNotEmpty == true) {
+      //   Get.offAllNamed(RouteName.home);
+      // } else {
+      //   Get.offAllNamed(RouteName.login);
+      // }
+      Get.offAllNamed(RouteName.home);
       FlutterNativeSplash.remove();
     });
   }

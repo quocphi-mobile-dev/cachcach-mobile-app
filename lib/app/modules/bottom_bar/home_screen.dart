@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: <Widget>[
         PlayScreen(),
-        MyDareScreen(),
+        // MyDareScreen(),
         const ProfileScreen(),
       ][currentPageIndex],
     );

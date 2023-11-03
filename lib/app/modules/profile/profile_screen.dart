@@ -5,11 +5,13 @@ import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -57,14 +59,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 shrinkWrap: true,
                 children: [
                   _buildNotification(),
+                  space(h: 24.h),
                   _buildLanguage(),
-                  _buildSwitchTheme(),
+                  space(h: 24.h),
+                  // _buildSwitchTheme(),
                   _buildContactSupport(),
-                  space(h: 12.h),
-                  _buildChangePassword(),
-                  _buildDeleteAccount(),
-                  space(h: 12.h),
-                  _buildLogout(),
+                  // space(h: 12.h),
+                  // _buildChangePassword(),
+                  // _buildDeleteAccount(),
+                  // space(h: 12.h),
+                  // _buildLogout(),
                 ],
               ),
             ),
@@ -74,9 +78,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildCommon({required Widget child, VoidCallback? onTap}) {
+  Widget _buildCommon(
+      {required Widget child, double? height, VoidCallback? onTap}) {
     return Container(
-      height: 40.h,
+      height: height ?? 40.h,
       decoration: const BoxDecoration(
         color: AppColors.white,
       ),
@@ -271,6 +276,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildContactSupport() {
     return _buildCommon(
+        height: 60.h,
         child: Row(
           children: [
             space(w: 40.w),
@@ -292,11 +298,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
             space(w: 10.w),
           ],
         ),
-        onTap: () {});
+        onTap: () {
+          final Uri emailLaunchUri = Uri(
+            scheme: 'mailto',
+            path: 'Quocphibk1997@gmail.com',
+            query: encodeQueryParameters(<String, String>{
+              'subject': 'Support Cach Cach',
+            }),
+          );
+          launchUrl(emailLaunchUri);
+        });
+  }
+
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
   }
 
   Widget _buildLanguage() {
     return _buildCommon(
+        height: 60.h,
         child: Row(
           children: [
             SizedBox(
@@ -324,14 +347,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             space(w: 10.w),
           ],
         ),
-        onTap: () {});
+        onTap: () {
+          Get.toNamed(RouteName.language);
+        });
   }
 
   Widget _buildNotification() {
     return _buildCommon(
+      height: 60.h,
       child: Row(
         children: [
-          space(w: 40.w),
+          SizedBox(
+            width: 40.w,
+            child: Icon(
+              Icons.notifications_outlined,
+              size: 32.ic,
+              color: AppColors.orange,
+            ),
+          ),
           Expanded(
             child: Text(
               "Bật thông báo",
@@ -342,8 +375,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           space(w: 10.w),
-          CupertinoSwitch(
-              value: true, thumbColor: AppColors.crusta, onChanged: (value) {}),
+          Obx(
+            () => CupertinoSwitch(
+              value: controller.enableNotification.value,
+              thumbColor: AppColors.white,
+              activeColor: AppColors.orange,
+              onChanged: (value) {
+                controller.enableNotification.value = value;
+              },
+            ),
+          ),
         ],
       ),
     );

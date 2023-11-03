@@ -10,6 +10,7 @@ import 'package:cachcach/app/modules/play/score_board/score_board_screen.dart';
 import 'package:cachcach/app/modules/play/select_mode/select_mode_screen.dart';
 import 'package:cachcach/app/modules/play/setting/setting_screen.dart';
 import 'package:cachcach/app/modules/play/spin/spin_screen.dart';
+import 'package:cachcach/app/modules/profile/language/language_screen.dart';
 import 'package:cachcach/app/modules/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,6 +30,7 @@ class RouteName {
   static const String question = "/question";
   static const String scoreBoard = "/score-board";
   static const String flipTheCard = "/flip-the-card";
+  static const String language = "/language";
 
   static const String privacyPolicy = "/privacy-policy";
   static const String welcome = '/welcome';
@@ -50,6 +52,7 @@ class AppRoutes {
     RouteName.question: () => const QuestionScreen(),
     RouteName.scoreBoard: () => const ScoreBoardScreen(),
     RouteName.flipTheCard: () => const FlipTheCardScreen(),
+    RouteName.language: () => const LanguageScreen(),
   };
 
   static final bindings = <String, List<Bindings> Function()>{};
