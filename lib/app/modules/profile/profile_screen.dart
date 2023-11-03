@@ -5,6 +5,7 @@ import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -312,7 +313,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? encodeQueryParameters(Map<String, String> params) {
     return params.entries
         .map((MapEntry<String, String> e) =>
-    '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
         .join('&');
   }
 
@@ -346,7 +347,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             space(w: 10.w),
           ],
         ),
-        onTap: () {});
+        onTap: () {
+          Get.toNamed(RouteName.language);
+        });
   }
 
   Widget _buildNotification() {
