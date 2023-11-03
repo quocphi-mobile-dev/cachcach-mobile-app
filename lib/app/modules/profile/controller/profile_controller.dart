@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   CancelToken cancelToken = CancelToken();
+  RxBool enableNotification = false.obs;
 
   @override
   void onClose() {
