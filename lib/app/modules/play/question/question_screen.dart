@@ -7,6 +7,7 @@ import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -65,7 +66,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
             } else {
               spinController.playerSelected.dareGiveUpPoint += 1;
             }
-            Get.back();
+            if (selectModeController.listQuestionCollectionsRandom.isEmpty) {
+              Get.offNamed(RouteName.scoreBoard);
+            } else {
+              Get.back();
+            }
           },
           child: Center(
             child: Text(
@@ -89,7 +94,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
             } else {
               spinController.playerSelected.darePoint += 1;
             }
-            Get.back();
+            if (selectModeController.listQuestionCollectionsRandom.isEmpty) {
+              Get.offNamed(RouteName.scoreBoard);
+            } else {
+              Get.back();
+            }
           },
           child: Center(
             child: Text(
@@ -107,7 +116,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 
   Widget _buildCardTruth() {
-    if (selectModeController.listTruth.isEmpty) {
+    if (selectModeController.listQuestionCollectionsRandom.isEmpty) {
       return Container();
     }
 
@@ -159,7 +168,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 
   Widget _buildCardDare() {
-    if (selectModeController.listDare.isEmpty) {
+    if (selectModeController.listQuestionCollectionsRandom.isEmpty) {
       return Container();
     }
 
