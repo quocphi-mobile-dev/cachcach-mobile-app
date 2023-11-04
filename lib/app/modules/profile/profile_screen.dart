@@ -1,7 +1,6 @@
 import 'package:cachcach/app/modules/profile/controller/profile_controller.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
-import 'package:cachcach/core/theme/icons.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
@@ -9,7 +8,6 @@ import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -301,7 +299,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         onTap: () {
           final Uri emailLaunchUri = Uri(
             scheme: 'mailto',
-            path: 'Quocphibk1997@gmail.com',
+            path: 'info.cachcach@gmail.com',
             query: encodeQueryParameters(<String, String>{
               'subject': 'Support Cach Cach',
             }),

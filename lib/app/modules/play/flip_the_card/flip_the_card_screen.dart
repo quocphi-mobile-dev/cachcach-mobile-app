@@ -8,6 +8,7 @@ import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -56,6 +57,11 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
         control.reset();
       }
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      String? categoryId = Get.arguments['category_id'];
+      controller.getListQuestionCollections(categoryId);
+    });
   }
 
   @override
@@ -66,23 +72,29 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
         children: [
           buildTopBar(title: "Lật thẻ bài"),
           Expanded(
-            child: Stack(
-              children: [
-                _buildRowRules(),
-                _buildStackCard(
-                  degree: 15,
-                  compareCardLength: 3,
-                ),
-                _buildStackCard(
-                  degree: 8,
-                  compareCardLength: 2,
-                ),
-                _buildStackCard(
-                  degree: 0,
-                  compareCardLength: 1,
-                ),
-                _buildFlipCard(),
-              ],
+            child: Obx(
+              () => controller.isLoading.value
+                  ? const Center(
+                      child: CupertinoActivityIndicator(),
+                    )
+                  : Stack(
+                      children: [
+                        _buildRowRules(),
+                        _buildStackCard(
+                          degree: 15,
+                          compareCardLength: 3,
+                        ),
+                        _buildStackCard(
+                          degree: 8,
+                          compareCardLength: 2,
+                        ),
+                        _buildStackCard(
+                          degree: 0,
+                          compareCardLength: 1,
+                        ),
+                        _buildFlipCard(),
+                      ],
+                    ),
             ),
           )
         ],
@@ -127,7 +139,8 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
       {required double degree, required int compareCardLength}) {
     return Obx(
       () {
-        if (controller.listCardRemaining.length < compareCardLength) {
+        if (controller.listQuestionCollectionsRemaining.length <
+            compareCardLength) {
           return Container();
         }
 
@@ -174,7 +187,7 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
                         flipCardController.toggleCard();
                       }
                     } else {
-                      if (controller.listCardRemaining.isEmpty) {
+                      if (controller.listQuestionCollectionsRemaining.isEmpty) {
                         return;
                       }
 

@@ -4,7 +4,6 @@ import 'package:cachcach/app/modules/play/select_mode/controller/select_mode_con
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
-import 'package:cachcach/core/utils/constant.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
 import 'package:cachcach/model/game_mode_category.dart';
 import 'package:cachcach/routes/routes.dart';
@@ -26,7 +25,9 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
   @override
   void initState() {
     super.initState();
-    controller.getListCategory(Get.arguments['id']);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      controller.getListCategory(Get.arguments['id']);
+    });
   }
 
   @override
@@ -71,14 +72,14 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
               isLock: false,
               price: 0,
               onPlay: () {
-                controller.listTruth.assignAll(content);
-                controller.listDare.assignAll(content);
                 controller.categorySelected = category;
                 if (Get.find<PlayController>().playMode ==
                     PlayMode.flipTheCard) {
-                  Get.toNamed(RouteName.flipTheCard);
+                  Get.toNamed(RouteName.flipTheCard,
+                      arguments: {"category_id": category.id});
                 } else {
-                  Get.toNamed(RouteName.player);
+                  Get.toNamed(RouteName.player,
+                      arguments: {"category_id": category.id});
                 }
               },
             ),

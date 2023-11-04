@@ -28,6 +28,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
   final PlayController playController = Get.find();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      String? categoryId = Get.arguments['category_id'];
+      selectModeController.getListQuestionCollections(categoryId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
@@ -95,6 +104,14 @@ class _PlayerScreenState extends State<PlayerScreen> {
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       child: gradientButton(
         onTap: () {
+          for (var player in controller.listPlayer) {
+            if (player.name.isEmpty) {
+              return;
+            }
+          }
+          if (selectModeController.listQuestionCollectionsRandom.isEmpty) {
+            return;
+          }
           FocusScope.of(context).unfocus();
           Get.toNamed(RouteName.spin);
         },
