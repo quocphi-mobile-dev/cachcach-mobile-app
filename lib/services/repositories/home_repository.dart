@@ -1,5 +1,6 @@
 import 'package:cachcach/model/game_mode.dart';
 import 'package:cachcach/model/game_mode_category.dart';
+import 'package:cachcach/model/question_collections.dart';
 import 'package:cachcach/services/api/api_path.dart';
 import 'package:cachcach/services/api/api_service.dart';
 import 'package:dio/dio.dart';
@@ -26,5 +27,19 @@ class HomeRepository {
     response.data['data'].forEach((v) => listCategory
         .add(GameModeCategory.fromJson(Map<String, dynamic>.from(v))));
     return listCategory;
+  }
+
+  static Future<List<QuestionCollections>> getQuestionCollections(
+      {required String? categoryId, CancelToken? cancelToken}) async {
+    var data = {
+      "category_ids": [categoryId]
+    };
+    Response response = await ApiService().post(ApiPath.questionCollections,
+        data: data, cancelToken: cancelToken);
+
+    List<QuestionCollections> listData = [];
+    response.data['data'].forEach((v) => listData
+        .add(QuestionCollections.fromJson(Map<String, dynamic>.from(v))));
+    return listData;
   }
 }

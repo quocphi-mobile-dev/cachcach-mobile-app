@@ -1,6 +1,7 @@
 import 'package:cachcach/core/utils/constant.dart';
 import 'package:cachcach/core/utils/top_level_function.dart';
 import 'package:cachcach/model/game_mode_category.dart';
+import 'package:cachcach/model/question_collections.dart';
 import 'package:cachcach/services/repositories/home_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
@@ -9,8 +10,8 @@ class SelectModeController extends GetxController {
   RxInt pageSelected = 0.obs;
   GameModeCategory? categorySelected;
 
-  List<String> listTruth = [];
-  List<String> listDare = [];
+  RxList<QuestionCollections> listQuestionCollections = RxList([]);
+  List<QuestionCollections> listQuestionCollectionsRandom = [];
 
   RxBool isLoading = false.obs;
   RxList<GameModeCategory> listCategory = RxList([]);
@@ -40,29 +41,48 @@ class SelectModeController extends GetxController {
   }
 
   String getRandomTruth() {
-    if (listTruth.isEmpty) {
+    if (listQuestionCollectionsRandom.isEmpty) {
       return "";
     }
 
-    listTruth.shuffle();
-    String item = listTruth.first;
-    listTruth.remove(item);
+    listQuestionCollectionsRandom.shuffle();
+    QuestionCollections questionCollections =
+        listQuestionCollectionsRandom.first;
+    String item = questionCollections.getQuestionTruth()?.content ?? "";
+    listQuestionCollectionsRandom.remove(questionCollections);
     return item;
   }
 
   String getRandomDare() {
-    if (listDare.isEmpty) {
+    if (listQuestionCollectionsRandom.isEmpty) {
       return "";
     }
 
-    listDare.shuffle();
-    String item = listDare.first;
-    listDare.remove(item);
+    listQuestionCollectionsRandom.shuffle();
+    QuestionCollections questionCollections =
+        listQuestionCollectionsRandom.first;
+    String item = questionCollections.getQuestionDare()?.content ?? "";
+    listQuestionCollectionsRandom.remove(questionCollections);
     return item;
   }
 
   void reset() {
-    listTruth.assignAll(content);
-    listDare.assignAll(content);
+    listQuestionCollectionsRandom
+        .assignAll(listQuestionCollections.map((element) => element).toList());
+  }
+
+  Future getListQuestionCollections(String? categoryId) async {
+    try {
+      isLoading.value = true;
+      listQuestionCollections.assignAll(
+          await HomeRepository.getQuestionCollections(
+              categoryId: categoryId, cancelToken: cancelToken));
+      listQuestionCollectionsRandom.assignAll(
+          listQuestionCollections.map((element) => element).toList());
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      handleException(e);
+    }
   }
 }
