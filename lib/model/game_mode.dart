@@ -62,7 +62,7 @@ class GameMode {
       return PlayMode.couple;
     }
 
-    if (playType == PlayType.GROUP) {
+    if (playType == PlayType.GROUP.getId()) {
       return PlayMode.friends;
     }
 
