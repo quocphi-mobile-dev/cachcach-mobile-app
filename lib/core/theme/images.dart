@@ -45,4 +45,5 @@ class AppImages {
   static const imgBottomPlayer = "assets/images/img_bottom_player.png";
   static const imgLanguage = "assets/images/img_language.png";
   static const flagVn = "assets/images/flag_vn.png";
+  static const img1 = "assets/images/img_1.png";
 }

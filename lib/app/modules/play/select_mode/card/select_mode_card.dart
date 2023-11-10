@@ -105,7 +105,7 @@ class _SelectModeCardState extends State<SelectModeCard> {
                         ),
                       ),
                       space(w: 10.w),
-                      _buildTotalCard(),
+                      // _buildTotalCard(),
                     ],
                   ),
                 ),

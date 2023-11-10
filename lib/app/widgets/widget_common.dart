@@ -282,7 +282,7 @@ Widget popupWidget({required Widget child}) {
                   Align(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      AppImages.imgLogo4,
+                      AppImages.imgLogo2,
                       width: 120.ic,
                       height: 120.ic,
                       fit: BoxFit.fill,

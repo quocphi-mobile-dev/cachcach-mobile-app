@@ -8,7 +8,7 @@ abstract class EnvironmentBase {
 
 class _Product extends EnvironmentBase {
   @override
-  String get host => "";
+  String get host => "https://api.cachcach.org";
 }
 
 class _Dev extends EnvironmentBase {
