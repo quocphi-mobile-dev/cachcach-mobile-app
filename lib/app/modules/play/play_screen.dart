@@ -107,8 +107,11 @@ class _PlayScreenState extends State<PlayScreen> {
               width: 345.w,
               height: 186.h,
               decoration: BoxDecoration(
-                color: AppColors.red,
                 borderRadius: BorderRadius.circular(10.r),
+              ),
+              child: Image.asset(
+                AppImages.img1,
+                fit: BoxFit.fill,
               ),
             ),
             space(h: 4.h),
@@ -222,30 +225,20 @@ class _PlayScreenState extends State<PlayScreen> {
             fit: BoxFit.fill,
           ),
         ),
-        SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Column(
-                children: [
-                  Image.asset(AppImages.imgLogo2),
-                  Text(
-                    "Không vui không trả tiền !!!",
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.white,
-                    ),
-                  )
-                ],
-              ),
-              space(h: 10.h),
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child: Slogan(),
-              )
-            ],
-          ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Column(
+              children: [
+                Image.asset(AppImages.imgLogo2),
+              ],
+            ),
+            space(h: 10.h),
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: Slogan(),
+            )
+          ],
         ),
       ],
     );
