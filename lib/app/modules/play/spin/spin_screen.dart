@@ -43,9 +43,11 @@ class _SpinScreenState extends State<SpinScreen>
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildTopBar(onBack: () {
-            controller.checkResult();
-          }, title: "Vòng quay"),
+          buildTopBar(
+              onBack: () {
+                controller.checkResult();
+              },
+              title: "Vòng quay"),
           Expanded(child: _buildWheel()),
         ],
       ),
@@ -64,7 +66,7 @@ class _SpinScreenState extends State<SpinScreen>
                 CustomPaint(
                   painter: CustomArc(
                     context: context,
-                    color: AppColors.blueGem,
+                    color: AppColors.capeHoney,
                   ),
                   size: Size(double.infinity, 500.h),
                 ),
@@ -114,19 +116,20 @@ class _SpinScreenState extends State<SpinScreen>
               color: AppColors.orange,
               shape: BoxShape.circle,
             ),
-            child: Image.asset(
-              playerInfo.gender.value == Gender.male
-                  ? AppImages.imgPlayerMale1
-                  : AppImages.imgPlayerFemale1,
-            ),
+            child: Padding(
+              padding: const EdgeInsets.all(22),
+              child: Image.asset(
+                playerInfo.imgAvatar.value,
+              ),
+            )
           ),
         ),
         space(h: 10.h),
         Text(
           playerInfo.name,
           style: AppTextStyle.textStyleCommon.copyWith(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w600,
+            fontSize: 26.sp,
+            fontWeight: FontWeight.w700,
             color: AppColors.white,
           ),
         ),

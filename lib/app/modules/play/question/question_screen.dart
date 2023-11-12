@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cachcach/app/modules/play/question/model/question_type.dart';
 import 'package:cachcach/app/modules/play/select_mode/controller/select_mode_controller.dart';
 import 'package:cachcach/app/modules/play/spin/controller/spin_controller.dart';
@@ -252,7 +254,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
       width: 355.w,
       height: 300.h,
       decoration: BoxDecoration(
-        color: AppColors.whiteSmoke,
+        color: AppColors.capeHoney,
         borderRadius: BorderRadius.circular(16.r),
       ),
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
@@ -430,9 +432,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
           children: [
             Expanded(
               child: Image.asset(
-                spinController.playerSelected.gender.value == Gender.male
-                    ? AppImages.imgPlayerMale1
-                    : AppImages.imgPlayerFemale1,
+                spinController.playerSelected.imgAvatar.value,
                 width: 120.ic,
                 height: 120.ic,
                 fit: BoxFit.fitWidth,
@@ -444,8 +444,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: AppTextStyle.textStyleCommon.copyWith(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
+                fontSize: 26.sp,
+                fontWeight: FontWeight.w700,
                 color: AppColors.white,
               ),
             ),

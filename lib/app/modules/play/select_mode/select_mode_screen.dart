@@ -38,7 +38,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
         child: Column(
           children: [
             buildTopBar(title: "Lựa chọn cấp độ"),
-            space(h: 12.h),
+            // space(h: 12.h),
             Expanded(
               child: _buildPageCard(),
             ),
@@ -51,6 +51,13 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
   }
 
   Widget _buildPageCard() {
+    List<String> listImages = [
+      'assets/images/img_classic.png',
+      'assets/images/img_fun.png',
+      'assets/images/img_hot.png',
+      'assets/images/img_extremme.png',
+    ];
+
     return Obx(() {
       if (controller.isLoading.value) {
         return const Center(
@@ -61,12 +68,14 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
       return PageView.builder(
         itemBuilder: (context, index) {
           GameModeCategory category = controller.listCategory[index];
+          print("index  : $index");
+
           return Container(
             margin: EdgeInsets.symmetric(horizontal: 16.w),
             child: SelectModeCard(
               title: "",
               totalCards: 10,
-              image: AppImages.imgClassic,
+              image: listImages[index],
               label: category.name ?? "",
               guideText: category.description ?? "",
               isLock: false,

@@ -5,6 +5,7 @@ enum Gender { male, female }
 
 class PlayerInfo {
   Rx<Gender> gender = Rx(Gender.female);
+  Rx<String> imgAvatar = Rx("assets/images/img_player_female_1.png");
   TextEditingController textEditingController = TextEditingController();
 
   String get name => textEditingController.text.toString();
@@ -19,13 +20,16 @@ class PlayerInfo {
 
   int heroWidgetId = 0;
 
-  PlayerInfo({Gender? gender, String? name}) {
+  PlayerInfo({Gender? gender, String? name, String? imgAvatar}) {
     if (gender != null) {
       this.gender.value = gender;
     }
 
     if (name != null) {
       textEditingController.text = name;
+    }
+    if (imgAvatar != null) {
+      this.imgAvatar.value = imgAvatar;
     }
   }
 

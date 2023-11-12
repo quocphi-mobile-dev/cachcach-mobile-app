@@ -127,7 +127,7 @@ class _SelectModeCardState extends State<SelectModeCard> {
               ],
             ),
           ),
-          _buildButtonAddWithMyDare(),
+          // _buildButtonAddWithMyDare(),
           space(h: 18.h),
           _buildButtonPlay(),
         ],

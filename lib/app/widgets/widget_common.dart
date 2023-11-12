@@ -320,7 +320,7 @@ Widget popupWidget({required Widget child}) {
   );
 }
 
-void showRulesFlipCard() {
+void showRulesTruthOrDare() {
   Get.dialog(
     popupWidget(
       child: Container(
@@ -331,7 +331,7 @@ void showRulesFlipCard() {
             space(h: 12.h),
             Center(
               child: Text(
-                "Lật thẻ bài",
+                "Truth or Dare",
                 style: AppTextStyle.textStyleCommon.copyWith(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
@@ -403,6 +403,177 @@ void showRulesFlipCard() {
                 Expanded(
                   child: Text(
                     "Người thực hiện  chọn “Truth” bạn sẽ phải trả lời đúng sự thật với câu hỏi được ghi trên lá bài. Còn nếu chọn “Dare”, bạn phải thực hiện theo những gì lá bài ghi.",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "-",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                space(w: 4),
+                Expanded(
+                  child: Text(
+                    "Chúc các bạn chơi game vui vẻ.",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            space(h: 40),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+void showRulesFlipCard() {
+  Get.dialog(
+    popupWidget(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            space(h: 12.h),
+            Center(
+              child: Text(
+                "Lật thẻ bài",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.black,
+                ),
+              ),
+            ),
+            space(h: 12.h),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "-",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                space(w: 4),
+                Expanded(
+                  child: Text(
+                    "Mỗi một bộ bài có số lượng lá nhất định.",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "-",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                space(w: 4),
+                Expanded(
+                  child: Text(
+                    "Mỗi lá bài sẽ có một sự kiện, nội dung hay các nhiệm vụ có thể liên quan đến mối quan hệ, tình cảm hoặc những trải nghiệm thú vị.",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "-",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                space(w: 4),
+                Expanded(
+                  child: Text(
+                    "Bạn sẽ lật một lá bài và thực hiện nhiệm theo nội dung lá bài.",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "-",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                space(w: 4),
+                Expanded(
+                  child: Text(
+                    "Trò chơi này thường mang đến niềm vui, sự hứng khởi và cơ hội để bạn và bạn bè hiểu rõ hơn về nhau. Chúc các bạn chơi game vui vẻ.",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "-",
+                  style: AppTextStyle.textStyleCommon.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                space(w: 4),
+                Expanded(
+                  child: Text(
+                    "Chúc các bạn chơi game vui vẻ.",
                     style: AppTextStyle.textStyleCommon.copyWith(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w500,

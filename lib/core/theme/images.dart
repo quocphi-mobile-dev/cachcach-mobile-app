@@ -16,7 +16,11 @@ class AppImages {
   static const imgPolicy = "assets/images/img_policy.png";
   static const imgTermsOfUse = "assets/images/img_terms_of_use.png";
   static const imgPlayerMale1 = "assets/images/img_player_male_1.png";
+  static const imgPlayerMale2 = "assets/images/img_player_male_2.png";
+  static const imgPlayerMale3 = "assets/images/img_player_male_3.png";
   static const imgPlayerFemale1 = "assets/images/img_player_female_1.png";
+  static const imgPlayerFemale2 = "assets/images/img_player_female_2.png";
+  static const imgPlayerFemale3 = "assets/images/img_player_female_3.png";
   static const imgSpinArrow = "assets/images/img_spin_arrow.png";
   static const imgSpin = "assets/images/img_spin.png";
   static const imgCursor = "assets/images/img_cursor.png";
@@ -25,13 +29,12 @@ class AppImages {
   static const imgCup = "assets/images/img_cup.png";
   static const imgGoogle = "assets/images/img_google.png";
   static const imgPlayBottomBar = "assets/images/img_play_bottom_bar.png";
-  static const imgMyDaresBottomBar = "assets/images/img_my_dares_bottom_bar.png";
+  static const imgMyDaresBottomBar =
+      "assets/images/img_my_dares_bottom_bar.png";
   static const imgSlogan = "assets/images/img_slogan.png";
   static const imgBeerFlipCard = "assets/images/img_beer_flip_card.png";
   static const imgFriends = "assets/images/img_friends.png";
   static const imgChewing = "assets/images/img_chewing.png";
-  static const imgCharacterMale = "assets/images/img_character_male.png";
-  static const imgCharacterFemale = "assets/images/img_character_female.png";
   static const imgQuestionTruth = "assets/images/img_question_truth.png";
   static const imgQuestionDare = "assets/images/img_question_dare.png";
   static const imgFlipCard = "assets/images/img_flip_card.png";
@@ -46,4 +49,9 @@ class AppImages {
   static const imgLanguage = "assets/images/img_language.png";
   static const flagVn = "assets/images/flag_vn.png";
   static const img1 = "assets/images/img_1.png";
+  static const imgPlayCard = "assets/images/img_play_card.png";
+  static const imgTruthOrDareGroup =
+      "assets/images/img_truth_or_dare_group.png";
+  static const imgTruthOrDareSingle =
+      "assets/images/img_truth_or_dare_single.png";
 }

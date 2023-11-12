@@ -34,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Image.asset(
                   AppImages.imgTopBarPopup,
                   width: Get.width,
-                  height: 139.h,
+                  // height: 139.h,
                   fit: BoxFit.fill,
                 ),
                 SafeArea(
@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Image.asset(
                       AppImages.imgLogo2,
                       width: 190.w,
-                      height: 69.h,
+                      height: 190.h,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -62,6 +62,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   space(h: 24.h),
                   // _buildSwitchTheme(),
                   _buildContactSupport(),
+                  space(h: 24.h),
+                  _buildPolicy(),
+                  space(h: 12.h),
+                  _buildTermOfUse(),
                   // space(h: 12.h),
                   // _buildChangePassword(),
                   // _buildDeleteAccount(),
@@ -277,10 +281,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
         height: 60.h,
         child: Row(
           children: [
-            space(w: 40.w),
+            SizedBox(
+              width: 44.w,
+              child: Icon(
+                Icons.contact_mail,
+                size: 28.ic,
+                color: AppColors.orange,
+              ),
+            ),
+            space(w: 10.w),
             Expanded(
               child: Text(
-                "Contact support",
+                "Liên hệ hỗ trợ",
                 style: AppTextStyle.textStyleCommon.copyWith(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
@@ -308,6 +320,88 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
   }
 
+  Widget _buildPolicy() {
+    return _buildCommon(
+        height: 60.h,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 44.w,
+              child: Icon(
+                Icons.policy,
+                size: 28.ic,
+                color: AppColors.orange,
+              ),
+            ),
+            space(w: 10.w),
+            Expanded(
+              child: Text(
+                "Chính sách hoạt động",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: AppColors.crusta,
+              size: 20.ic,
+            ),
+            space(w: 10.w),
+          ],
+        ),
+        onTap: () async {
+          final Uri url = Uri.parse(
+              'https://cachcach-5yuibabli-dinouniverse.vercel.app/en/policy');
+          if (!await launchUrl(url)) {
+            throw Exception('Could not launch $url');
+          }
+        });
+  }
+
+  Widget _buildTermOfUse() {
+    return _buildCommon(
+        height: 60.h,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 44.w,
+              child: Icon(
+                Icons.policy,
+                size: 28.ic,
+                color: AppColors.orange,
+              ),
+            ),
+            space(w: 10.w),
+            Expanded(
+              child: Text(
+                "Điều khoản sử dụng",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: AppColors.crusta,
+              size: 20.ic,
+            ),
+            space(w: 10.w),
+          ],
+        ),
+        onTap: () async {
+          final Uri url = Uri.parse(
+              'https://cachcach-5yuibabli-dinouniverse.vercel.app/en/privacy');
+          if (!await launchUrl(url)) {
+            throw Exception('Could not launch $url');
+          }
+        });
+  }
+
   String? encodeQueryParameters(Map<String, String> params) {
     return params.entries
         .map((MapEntry<String, String> e) =>
@@ -322,12 +416,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             SizedBox(
               width: 40.w,
-              child: Image.asset(
-                AppImages.imgLanguage,
-                width: 32.ic,
-                height: 32.ic,
+              child: Icon(
+                Icons.language,
+                size: 32.ic,
+                color: AppColors.orange,
               ),
             ),
+            space(w: 10.w),
+            // SizedBox(
+            //   width: 40.w,
+            //   child: Image.asset(
+            //     AppImages.imgLanguage,
+            //     width: 32.ic,
+            //     height: 32.ic,
+            //   ),
+            // ),
             Expanded(
               child: Text(
                 "Ngôn ngữ",
@@ -363,6 +466,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: AppColors.orange,
             ),
           ),
+          space(w: 10.w),
           Expanded(
             child: Text(
               "Bật thông báo",

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cachcach/app/modules/play/controller/play_controller.dart';
 import 'package:cachcach/app/modules/play/player/controller/player_controller.dart';
 import 'package:cachcach/app/modules/play/select_mode/controller/select_mode_controller.dart';
@@ -135,6 +137,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
   }
 
   Widget _buildItemPlayer(PlayerInfo playerInfo) {
+    List<String> listPlayerMale = [
+      "assets/images/img_player_male_1.png",
+      "assets/images/img_player_male_2.png",
+      "assets/images/img_player_male_3.png",
+    ];
+    List<String> listPlayerFemale = [
+      "assets/images/img_player_female_1.png",
+      "assets/images/img_player_female_2.png",
+      "assets/images/img_player_female_3.png",
+    ];
+
     return Slidable(
       key: ValueKey(playerInfo.hashCode),
       endActionPane: playController.playMode == PlayMode.couple
@@ -189,20 +202,20 @@ class _PlayerScreenState extends State<PlayerScreen> {
           children: [
             Obx(
               () => Container(
-                width: 52.ic,
-                height: 52.ic,
-                decoration: const BoxDecoration(
-                  color: AppColors.white,
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(
-                  playerInfo.gender.value == Gender.male
-                      ? AppImages.imgCharacterMale
-                      : AppImages.imgCharacterFemale,
-                  width: 26.ic,
-                  height: 26.ic,
-                ),
-              ),
+                  width: 52.ic,
+                  height: 52.ic,
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6),
+                    child: Image.asset(
+                      playerInfo.imgAvatar.value,
+                      width: 26.ic,
+                      height: 26.ic,
+                    ),
+                  )),
             ),
             space(w: 8.w),
             Expanded(
@@ -233,8 +246,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 onTap: () {
                   if (playerInfo.gender.value == Gender.female) {
                     playerInfo.gender.value = Gender.male;
+                    playerInfo.imgAvatar.value =
+                        listPlayerMale[Random().nextInt(listPlayerMale.length)];
                   } else {
                     playerInfo.gender.value = Gender.female;
+                    playerInfo.imgAvatar.value = listPlayerFemale[
+                        Random().nextInt(listPlayerFemale.length)];
                   }
                 },
                 child: Container(

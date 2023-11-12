@@ -168,7 +168,7 @@ class _ScoreBoardScreenState extends State<ScoreBoardScreen> {
     return Align(
       alignment: Alignment.topCenter,
       child: Image.asset(
-        AppImages.imgClassic,
+        AppImages.imgBottomPlayer,
         width: 140.ic,
         height: 140.ic,
       ),

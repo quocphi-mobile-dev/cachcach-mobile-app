@@ -227,25 +227,27 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
       ),
       child: Column(
         children: [
+          space(h: 6.h),
           Row(
             children: [
-              Image.asset(
-                AppImages.imgLogoMini,
-                width: 80.ic,
-                height: 80.ic,
-              ),
-              Text(
-                "CẠCH CẠCH",
-                style: AppTextStyle.textStyleCommon.copyWith(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.alizarin,
+              space(w: 6.w),
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: const BoxDecoration(
+                  color: AppColors.atomicTangerine,
+                  borderRadius: BorderRadius.all(Radius.circular(60)),
                 ),
-              ),
+                child: Image.asset(
+                  AppImages.imgLogo2,
+                  width: 50.ic,
+                  height: 50.ic,
+                ),
+              )
             ],
           ),
+          space(h: 6.h),
           divider(
-            color: AppColors.alizarin,
+            color: AppColors.atomicTangerine,
             indent: 12.w,
             endIndent: 12.w,
           ),
@@ -260,7 +262,7 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
                       child: Text(
                         controller.cardContent.value,
                         style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 18.sp,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black,
                         ),

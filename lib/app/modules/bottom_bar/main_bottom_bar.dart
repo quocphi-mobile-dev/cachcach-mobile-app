@@ -55,6 +55,7 @@ class _MainBottomBarState extends State<MainBottomBar> {
             widget.callback(index);
           });
         },
+        height: 66,
         indicatorColor: AppColors.atomicTangerine.withOpacity(0.16),
         selectedIndex: currentPageIndex,
         backgroundColor: AppColors.white,

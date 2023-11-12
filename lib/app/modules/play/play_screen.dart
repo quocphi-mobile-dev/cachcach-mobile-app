@@ -57,6 +57,7 @@ class _PlayScreenState extends State<PlayScreen> {
           itemBuilder: (BuildContext context, int index) {
             var gameMode = controller.listGameMode[index];
             return _buildNewItem(
+                playType: gameMode.playType ?? 1,
                 title: gameMode.name ?? "",
                 description: gameMode.description ?? "",
                 totalPlayer: gameMode.getTotalPlayer(),
@@ -76,13 +77,24 @@ class _PlayScreenState extends State<PlayScreen> {
     );
   }
 
-  Widget _buildNewItem(
-      {required String title,
-      required String description,
-      required String totalPlayer,
-      bool showRules = false,
-      Function? onTap,
-      Function? onRulesTap}) {
+  Widget _buildNewItem({
+    required String title,
+    required String description,
+    required String totalPlayer,
+    required int playType,
+    bool showRules = true,
+    Function? onTap,
+  }) {
+    String getImgPreview() {
+      if (playType == 1) {
+        return AppImages.imgPlayCard;
+      } else if (playType == 2) {
+        return AppImages.imgTruthOrDareSingle;
+      } else {
+        return AppImages.imgTruthOrDareGroup;
+      }
+    }
+
     return GestureDetector(
       onTap: () {
         onTap?.call();
@@ -110,13 +122,13 @@ class _PlayScreenState extends State<PlayScreen> {
                 borderRadius: BorderRadius.circular(10.r),
               ),
               child: Image.asset(
-                AppImages.img1,
+                getImgPreview(),
                 fit: BoxFit.fill,
               ),
             ),
-            space(h: 4.h),
+            space(h: 8.h),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
                   AppImages.imgHuman,
@@ -135,38 +147,15 @@ class _PlayScreenState extends State<PlayScreen> {
                   ),
                 ),
                 space(w: 10.w),
-                showRules
-                    ? Material(
-                        child: InkWell(
-                          onTap: () {
-                            onRulesTap?.call();
-                          },
-                          child: Row(
-                            children: [
-                              Text(
-                                "Luật chơi",
-                                style: AppTextStyle.textStyleCommon.copyWith(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.black,
-                                ),
-                              ),
-                              space(w: 6.w),
-                              Icon(
-                                Icons.info,
-                                size: 18.ic,
-                                color: AppColors.blue,
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    : Container(),
+                Container(
+                  padding: EdgeInsets.only(left: 12, bottom: 4.h, top: 4.h),
+                  child: _buildRowRules(playType: playType),
+                )
               ],
             ),
-            space(h: 4.h),
+            space(h: 8.h),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
                   Icons.access_time_outlined,
@@ -174,16 +163,7 @@ class _PlayScreenState extends State<PlayScreen> {
                   size: 24.ic,
                 ),
                 space(w: 10.w),
-                Expanded(
-                  child: Text(
-                    description,
-                    style: AppTextStyle.textStyleCommon.copyWith(
-                      color: AppColors.dimGray,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                _buildTitle(playType: playType),
                 space(w: 10.w),
                 Row(
                   children: [
@@ -216,12 +196,9 @@ class _PlayScreenState extends State<PlayScreen> {
     return Stack(
       children: [
         SizedBox(
-          height: 180.h,
-          width: Get.width,
           child: Image.asset(
             AppImages.imgHomeTopBar,
             width: Get.width,
-            height: 180.h,
             fit: BoxFit.fill,
           ),
         ),
@@ -230,10 +207,14 @@ class _PlayScreenState extends State<PlayScreen> {
           children: [
             Column(
               children: [
-                Image.asset(AppImages.imgLogo2),
+                space(h: 44.h),
+                SizedBox(
+                  child: Image.asset(
+                    AppImages.imgLogo2,
+                  ),
+                ),
               ],
             ),
-            space(h: 10.h),
             const Align(
               alignment: Alignment.bottomCenter,
               child: Slogan(),
@@ -241,6 +222,65 @@ class _PlayScreenState extends State<PlayScreen> {
           ],
         ),
       ],
+    );
+  }
+
+  Widget _buildRowRules({required int playType}) {
+    return InkWell(
+      onTap: () {
+        if (playType == 1) {
+          showRulesFlipCard();
+        } else {
+          showRulesTruthOrDare();
+        }
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Luật chơi",
+            style: AppTextStyle.textStyleCommon.copyWith(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+              color: AppColors.black,
+            ),
+          ),
+          space(w: 6.w),
+          Icon(
+            Icons.info,
+            size: 18.ic,
+            color: AppColors.blue,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTitle({required int playType}) {
+    List<String> descriptions = [
+      'Dành cho tất cả',
+      'Dành cho những cặp đôi',
+      'Cho nhóm bạn',
+    ];
+    String getDescriptions() {
+      if (playType == 1) {
+        return descriptions[0];
+      } else if (playType == 2) {
+        return descriptions[1];
+      } else {
+        return descriptions[2];
+      }
+    }
+
+    return Expanded(
+      child: Text(
+        getDescriptions(),
+        style: AppTextStyle.textStyleCommon.copyWith(
+          color: AppColors.dimGray,
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
     );
   }
 }
