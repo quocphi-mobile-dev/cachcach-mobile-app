@@ -354,7 +354,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         onTap: () async {
           final Uri url = Uri.parse(
-              'https://cachcach-5yuibabli-dinouniverse.vercel.app/en/policy');
+              'https://cachcach.org/policy');
           if (!await launchUrl(url)) {
             throw Exception('Could not launch $url');
           }
@@ -395,7 +395,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         onTap: () async {
           final Uri url = Uri.parse(
-              'https://cachcach-5yuibabli-dinouniverse.vercel.app/en/privacy');
+              'https://cachcach.org/privacy');
           if (!await launchUrl(url)) {
             throw Exception('Could not launch $url');
           }
