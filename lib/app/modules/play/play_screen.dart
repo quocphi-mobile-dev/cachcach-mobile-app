@@ -27,13 +27,32 @@ class _PlayScreenState extends State<PlayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.alabaster,
+      backgroundColor: AppColors.black900,
       body: SafeArea(
         top: false,
         child: Column(
           children: [
             _buildTopBar(),
-            space(h: 10.h),
+            space(h: 30.h),
+            Center(
+              child: Text(
+                "CHỌN CHẾ ĐỘ CHƠI",
+                style: AppTextStyle.textStyleCommon.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.yellowOrange,
+                ),
+              ),
+            ),
+            space(h: 2.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 120.h),
+              child: divider(
+                color: AppColors.yellowOrange,
+                height: 2.h,
+              ),
+            ),
+            space(h: 12.h),
             Expanded(
               child: _buildListItem(),
             ),
@@ -51,7 +70,6 @@ class _PlayScreenState extends State<PlayScreen> {
             child: CupertinoActivityIndicator(),
           );
         }
-
         return ListView.separated(
           padding: EdgeInsets.only(bottom: 20.h),
           itemBuilder: (BuildContext context, int index) {
@@ -64,8 +82,16 @@ class _PlayScreenState extends State<PlayScreen> {
                 showRules: false,
                 onTap: () {
                   controller.playMode = gameMode.getPlayMode();
-                  Get.toNamed(RouteName.selectMode,
-                      arguments: {"id": gameMode.id});
+                  //TODO Type card 1
+                  if (gameMode.type == 1) {
+                    Get.toNamed(RouteName.cardSelectMode,
+                        arguments: {"id": gameMode.id});
+                  }
+                  //TODO Type Truth or dare 2
+                  if (gameMode.type == 2) {
+                    Get.toNamed(RouteName.selectMode,
+                        arguments: {"id": gameMode.id});
+                  }
                 });
           },
           separatorBuilder: (BuildContext context, int index) {
@@ -208,11 +234,6 @@ class _PlayScreenState extends State<PlayScreen> {
             Column(
               children: [
                 space(h: 44.h),
-                SizedBox(
-                  child: Image.asset(
-                    AppImages.imgLogo2,
-                  ),
-                ),
               ],
             ),
             const Align(

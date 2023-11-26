@@ -40,6 +40,8 @@ class FlipTheCardController extends GetxController {
 
   Future getListQuestionCollections(String? categoryId) async {
     try {
+      print("categoryId: $categoryId");
+      print("getListQuestionCollections");
       isLoading.value = true;
       listQuestionCollections.assignAll(
           await HomeRepository.getQuestionCollections(

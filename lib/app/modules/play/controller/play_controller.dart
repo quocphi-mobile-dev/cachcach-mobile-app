@@ -29,6 +29,7 @@ class PlayController extends GetxController {
       isLoading.value = true;
       listGameMode.value =
           await HomeRepository.getGameModes(cancelToken: cancelToken);
+      pragma('listGameMode.value: ${listGameMode.value.toString()}');
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
