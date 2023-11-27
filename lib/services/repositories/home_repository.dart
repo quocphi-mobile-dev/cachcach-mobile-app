@@ -41,7 +41,6 @@ class HomeRepository {
     response.data['data'].forEach((v) => listData
         .add(QuestionCollections.fromJson(Map<String, dynamic>.from(v))));
     print("listData: ${listData.length}");
-    listData.removeRange(1, listData.length-2);
     return listData;
   }
 }

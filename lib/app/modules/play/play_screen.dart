@@ -89,7 +89,7 @@ class _PlayScreenState extends State<PlayScreen> {
                   }
                   //TODO Type Truth or dare 2
                   if (gameMode.type == 2) {
-                    Get.toNamed(RouteName.selectMode,
+                    Get.toNamed(RouteName.selectTopic,
                         arguments: {"id": gameMode.id});
                   }
                 });

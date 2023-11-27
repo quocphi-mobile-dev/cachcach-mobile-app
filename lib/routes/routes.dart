@@ -3,6 +3,7 @@ import 'package:cachcach/app/modules/auth/login/login_screen.dart';
 import 'package:cachcach/app/modules/auth/signup/sign_up_screen.dart';
 import 'package:cachcach/app/modules/bottom_bar/home_screen.dart';
 import 'package:cachcach/app/modules/play/flip_the_card/flip_the_card_screen.dart';
+import 'package:cachcach/app/modules/play/new_ui/select_topic/select_topic_screen.dart';
 import 'package:cachcach/app/modules/play/play_screen.dart';
 import 'package:cachcach/app/modules/play/player/player_screen.dart';
 import 'package:cachcach/app/modules/play/question/question_screen.dart';
@@ -40,6 +41,9 @@ class RouteName {
   static const String privacyPolicy = "/privacy-policy";
   static const String welcome = '/welcome';
   static const String termOfUse = '/term-of-use';
+
+  /// new ui
+  static const String selectTopic = '/select-topic';
 }
 
 class AppRoutes {
@@ -60,6 +64,7 @@ class AppRoutes {
     RouteName.flipTheCard: () => const FlipTheCardScreen(),
     RouteName.language: () => const LanguageScreen(),
     RouteName.endGame: () => const EndGameScreen(),
+    RouteName.selectTopic: () => const SelectTopicScreen(),
   };
 
   static final bindings = <String, List<Bindings> Function()>{};
