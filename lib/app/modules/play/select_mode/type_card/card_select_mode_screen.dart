@@ -99,20 +99,17 @@ class _CardSelectModeScreenState extends State<CardSelectModeScreen> {
               ),
             ),
             onTap: () {
-              print(
-                  "controller.pageSelected.value : ${controller.pageSelected.value}");
-
               if (controller.pageSelected.value == 0) {
                 Get.toNamed(RouteName.flipTheCard,
-                    arguments: {"category_id": 1});
+                    arguments: {"category_id": '1'});
               }
               if (controller.pageSelected.value == 1) {
                 Get.toNamed(RouteName.flipTheCard,
-                    arguments: {"category_id": 5});
+                    arguments: {"category_id": '5'});
               }
               if (controller.pageSelected.value == 2) {
                 Get.toNamed(RouteName.flipTheCard,
-                    arguments: {"category_id": 4});
+                    arguments: {"category_id": '4'});
               }
             },
           );

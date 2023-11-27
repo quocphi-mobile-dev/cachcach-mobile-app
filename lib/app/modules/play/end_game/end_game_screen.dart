@@ -31,7 +31,8 @@ class EndGameScreen extends StatelessWidget {
                 borderRadius: 8,
                 width: 140.w,
                 onTap: () {
-                  Get.offAllNamed(RouteName.home);
+                  // Get.offAllNamed(RouteName.home);
+                  Get.offNamedUntil(RouteName.home, (route) => false);
                 },
                 height: 42.h,
                 gradient: const LinearGradient(
@@ -60,7 +61,10 @@ class EndGameScreen extends StatelessWidget {
                 borderRadius: 8,
                 width: 140.w,
                 onTap: () {
+                  Get.back();
                   Get.offAllNamed(RouteName.home);
+                  // Get.offNamedUntil(RouteName.home, (route) => false);
+                  // Get.offAllNamed(RouteName.home);
                 },
                 height: 42.h,
                 child: Center(

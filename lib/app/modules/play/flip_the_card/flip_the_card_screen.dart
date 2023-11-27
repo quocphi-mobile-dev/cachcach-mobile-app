@@ -37,6 +37,9 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
   void initState() {
     super.initState();
 
+    String? categoryId = Get.arguments['category_id'];
+    controller.getListQuestionCollections(categoryId);
+
     control = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
@@ -58,12 +61,6 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
         flipCardController.toggleCardWithoutAnimation();
         control.reset();
       }
-    });
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      print("initState :  $initState");
-      String? categoryId = Get.arguments['category_id'];
-      controller.getListQuestionCollections(categoryId);
     });
   }
 
@@ -199,7 +196,6 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
                   splashColor: AppColors.transparent,
                   highlightColor: AppColors.transparent,
                   onTap: () {
-                    print("_buildCardBack.state?.isFront");
                     if (flipCardController.state?.isFront == true) {
                       if (controller.canDraw) {
                         controller.canDraw = false;

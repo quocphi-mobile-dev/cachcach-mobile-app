@@ -35,11 +35,8 @@ class CardSelectModeController extends GetxController {
     }
   }
 
-
-
   void reset() {
     listQuestionCollectionsRandom
         .assignAll(listQuestionCollections.map((element) => element).toList());
   }
-
 }
