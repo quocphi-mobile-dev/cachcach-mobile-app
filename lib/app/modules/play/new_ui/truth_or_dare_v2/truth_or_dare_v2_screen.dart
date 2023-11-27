@@ -123,7 +123,7 @@ class _TruthOrDareV2ScreenState extends State<TruthOrDareV2Screen> {
                       () => Text(
                         controller.contentTruth.value,
                         style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 14.sp,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w400,
                           color: AppColors.black,
                         ),
@@ -178,7 +178,7 @@ class _TruthOrDareV2ScreenState extends State<TruthOrDareV2Screen> {
                       () => Text(
                         controller.contentDare.value,
                         style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 14.sp,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w400,
                           color: AppColors.black,
                         ),
