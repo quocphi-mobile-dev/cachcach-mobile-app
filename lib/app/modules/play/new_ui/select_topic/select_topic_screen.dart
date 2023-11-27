@@ -3,11 +3,26 @@ import 'package:cachcach/core/theme/colors.dart';
 import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/theme/text_styles.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
+import 'package:cachcach/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class SelectTopicScreen extends StatelessWidget {
+class SelectTopicScreen extends StatefulWidget {
   const SelectTopicScreen({super.key});
+
+  @override
+  State<SelectTopicScreen> createState() => _SelectTopicScreenState();
+}
+
+class _SelectTopicScreenState extends State<SelectTopicScreen> {
+  late int gameModeId;
+
+  @override
+  void initState() {
+    gameModeId = Get.arguments['id'];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +30,7 @@ class SelectTopicScreen extends StatelessWidget {
       backgroundColor: AppColors.black900,
       body: Column(
         children: [
-          buildTopBar(title: "Lật thẻ bài"),
+          buildTopBar(title: "Thật hay thách"),
           space(h: 12.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.w),
@@ -63,7 +78,10 @@ class SelectTopicScreen extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 20.w),
       child: gradientButton(
         height: 58.h,
-        onTap: () {},
+        onTap: () {
+          Get.toNamed(RouteName.truthOrDareV2,
+              arguments: {'game_mode_id': gameModeId, 'category_id': "2"});
+        },
         child: Center(
           child: Text(
             "Khởi động",
@@ -83,7 +101,10 @@ class SelectTopicScreen extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 20.w),
       child: gradientButton(
         height: 58.h,
-        onTap: () {},
+        onTap: () {
+          Get.toNamed(RouteName.truthOrDareV2,
+              arguments: {'game_mode_id': gameModeId, 'category_id': "3"});
+        },
         child: Center(
           child: Text(
             "Mười tám cộng",

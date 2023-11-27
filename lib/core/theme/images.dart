@@ -62,4 +62,7 @@ class AppImages {
   static const img18 = "assets/images/img_18.png";
   static const bgCardGameMode = "assets/images/bg_card_game_mode.png";
   static const imgTruthOrDareV2 = "assets/images/img_truth_or_dare_v2.png";
+  static const imgTruthV2 = "assets/images/img_truth_v2.png";
+  static const imgDareV2 = "assets/images/img_dare_v2.png";
+  static const imgBgContent = "assets/images/img_bg_content.png";
 }

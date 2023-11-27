@@ -4,6 +4,7 @@ import 'package:cachcach/app/modules/auth/signup/sign_up_screen.dart';
 import 'package:cachcach/app/modules/bottom_bar/home_screen.dart';
 import 'package:cachcach/app/modules/play/flip_the_card/flip_the_card_screen.dart';
 import 'package:cachcach/app/modules/play/new_ui/select_topic/select_topic_screen.dart';
+import 'package:cachcach/app/modules/play/new_ui/truth_or_dare_v2/truth_or_dare_v2_screen.dart';
 import 'package:cachcach/app/modules/play/play_screen.dart';
 import 'package:cachcach/app/modules/play/player/player_screen.dart';
 import 'package:cachcach/app/modules/play/question/question_screen.dart';
@@ -44,6 +45,7 @@ class RouteName {
 
   /// new ui
   static const String selectTopic = '/select-topic';
+  static const String truthOrDareV2 = '/truth-or-dare-v2';
 }
 
 class AppRoutes {
@@ -65,6 +67,7 @@ class AppRoutes {
     RouteName.language: () => const LanguageScreen(),
     RouteName.endGame: () => const EndGameScreen(),
     RouteName.selectTopic: () => const SelectTopicScreen(),
+    RouteName.truthOrDareV2: () => const TruthOrDareV2Screen(),
   };
 
   static final bindings = <String, List<Bindings> Function()>{};
