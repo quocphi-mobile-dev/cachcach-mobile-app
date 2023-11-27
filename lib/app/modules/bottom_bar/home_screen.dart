@@ -21,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             currentPageIndex = index;
           });
-          print("callback _HomeScreenState: index $index");
         },
       ),
       body: <Widget>[

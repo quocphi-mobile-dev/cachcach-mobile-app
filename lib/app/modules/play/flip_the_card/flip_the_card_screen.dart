@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../routes/routes.dart';
+
 class FlipTheCardScreen extends StatefulWidget {
   const FlipTheCardScreen({super.key});
 
@@ -34,6 +36,9 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
   @override
   void initState() {
     super.initState();
+
+    String? categoryId = Get.arguments['category_id'];
+    controller.getListQuestionCollections(categoryId);
 
     control = AnimationController(
       duration: const Duration(seconds: 1),
@@ -57,46 +62,59 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
         control.reset();
       }
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      String? categoryId = Get.arguments['category_id'];
-      controller.getListQuestionCollections(categoryId);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgColor,
-      body: Column(
+      backgroundColor: AppColors.black900,
+      body: Stack(
         children: [
-          buildTopBar(title: "Lật thẻ bài"),
-          Expanded(
-            child: Obx(
-              () => controller.isLoading.value
-                  ? const Center(
-                      child: CupertinoActivityIndicator(),
-                    )
-                  : Stack(
-                      children: [
-                        _buildRowRules(),
-                        _buildStackCard(
-                          degree: 15,
-                          compareCardLength: 3,
-                        ),
-                        _buildStackCard(
-                          degree: 8,
-                          compareCardLength: 2,
-                        ),
-                        _buildStackCard(
-                          degree: 0,
-                          compareCardLength: 1,
-                        ),
-                        _buildFlipCard(),
-                      ],
-                    ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Image.asset(
+              AppImages.bgBottom2,
+              width: Get.width,
+              height: 120.h,
+              fit: BoxFit.fill,
             ),
-          )
+          ),
+          Column(
+            children: [
+              buildTopBar(title: "Lật thẻ bài"),
+              Expanded(
+                child: Obx(
+                  () => controller.isLoading.value
+                      ? const Center(
+                          child: CupertinoActivityIndicator(),
+                        )
+                      : Stack(
+                          children: [
+                            _buildRowRules(),
+                            _buildStackCard(
+                              degree: 15,
+                              compareCardLength: 3,
+                            ),
+                            _buildStackCard(
+                              degree: 15,
+                              compareCardLength: 3,
+                            ),
+                            _buildStackCard(
+                              degree: 8,
+                              compareCardLength: 2,
+                            ),
+                            _buildStackCard(
+                              degree: 0,
+                              compareCardLength: 1,
+                            ),
+                            _buildFlipCard(),
+                          ],
+                        ),
+                ),
+              ),
+              space(h: 80),
+            ],
+          ),
         ],
       ),
     );
@@ -119,7 +137,7 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
                 style: AppTextStyle.textStyleCommon.copyWith(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: AppColors.white,
                 ),
               ),
               space(w: 6.w),
@@ -143,19 +161,17 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
             compareCardLength) {
           return Container();
         }
-
         return Align(
           alignment: Alignment.center,
           child: Transform.rotate(
             alignment: Alignment.center,
             angle: degree * pi / 180,
             child: SizedBox(
-              width: 239.w,
-              height: 367.h,
+              width: 280.w,
+              height: 400.h,
               child: Image.asset(
                 AppImages.imgFlipCard,
-                width: 239.w,
-                height: 367.h,
+                fit: BoxFit.fill,
               ),
             ),
           ),
@@ -188,9 +204,9 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
                       }
                     } else {
                       if (controller.listQuestionCollectionsRemaining.isEmpty) {
+                        Get.toNamed(RouteName.endGame);
                         return;
                       }
-
                       control.forward();
                     }
                   },
@@ -215,43 +231,19 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
 
   Widget _buildCardBack() {
     return Container(
-      width: 239.w,
-      height: 367.h,
+      width: 300.w,
+      height: 480.h,
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(18.r),
-        border: Border.all(
-          color: AppColors.atomicTangerine,
-          width: 2.ic,
+        image: const DecorationImage(
+          image: AssetImage(AppImages.imgCardBackground),
+          fit: BoxFit.cover,
         ),
+        borderRadius: BorderRadius.circular(18.r),
       ),
       child: Column(
         children: [
-          space(h: 6.h),
-          Row(
-            children: [
-              space(w: 6.w),
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: const BoxDecoration(
-                  color: AppColors.atomicTangerine,
-                  borderRadius: BorderRadius.all(Radius.circular(60)),
-                ),
-                child: Image.asset(
-                  AppImages.imgLogo2,
-                  width: 50.ic,
-                  height: 50.ic,
-                ),
-              )
-            ],
-          ),
-          space(h: 6.h),
-          divider(
-            color: AppColors.atomicTangerine,
-            indent: 12.w,
-            endIndent: 12.w,
-          ),
-          space(h: 6.h),
+          space(h: 200.h),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -262,8 +254,8 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
                       child: Text(
                         controller.cardContent.value,
                         style: AppTextStyle.textStyleCommon.copyWith(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w700,
                           color: AppColors.black,
                         ),
                       ),
@@ -273,21 +265,31 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
               ),
             ),
           ),
-          space(h: 6.h),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.w),
-            alignment: Alignment.centerRight,
-            child: Obx(
-              () => Text(
-                "${controller.getCardNumber()}/${controller.getTotal()}",
-                style: AppTextStyle.textStyleCommon.copyWith(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.darkGray,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                AppImages.imgLogo2,
+                width: 78.ic,
+                height: 78.ic,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.w),
+                alignment: Alignment.centerRight,
+                child: Obx(
+                  () => Text(
+                    "${controller.getCardNumber()}/${controller.getTotal()}",
+                    style: AppTextStyle.textStyleCommon.copyWith(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.black,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          )
+            ],
+          ),
+          space(h: 14.h),
         ],
       ),
     );
@@ -295,12 +297,11 @@ class _FlipTheCardScreenState extends State<FlipTheCardScreen>
 
   Widget _buildCardFront() {
     return SizedBox(
-      width: 239.w,
-      height: 367.h,
+      width: 280.w,
+      height: 400.h,
       child: Image.asset(
         AppImages.imgFlipCard,
-        width: 239.w,
-        height: 367.h,
+        fit: BoxFit.fill,
       ),
     );
   }

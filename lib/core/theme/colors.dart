@@ -10,10 +10,12 @@ class AppColors {
   static Color? grey350 = Colors.grey[350];
   static Color? grey600 = Colors.grey[600];
   static Color? grey400 = Colors.grey[400];
+
   /// #7A7A7A
   static const grey = Color(0xff7A7A7A);
   static const red = Colors.red;
   static const blue = Colors.blue;
+
   /// #FFF6E8
   static const bgColor = Color(0xffFFF6E8);
   static const bgColorAuth = Color(0xffFFFFFF);
@@ -221,4 +223,13 @@ class AppColors {
 
   /// #FF483D
   static const sunsetOrange = Color(0xffFF483D);
+
+  // #1E1E1E
+  static const black900 = Color(0xff1E1E1E);
+
+  /// #232323
+  static const black950 = Color(0xff232323);
+
+  /// #F2AB00
+  static const yellowOrange = Color(0xffF2AB00);
 }

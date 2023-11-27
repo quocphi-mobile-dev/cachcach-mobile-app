@@ -1,9 +1,8 @@
 import 'package:cachcach/app/modules/play/controller/play_controller.dart';
-import 'package:cachcach/app/modules/play/select_mode/card/select_mode_card.dart';
+import 'package:cachcach/app/modules/play/select_mode/widget/select_mode_card.dart';
 import 'package:cachcach/app/modules/play/select_mode/controller/select_mode_controller.dart';
 import 'package:cachcach/app/widgets/widget_common.dart';
 import 'package:cachcach/core/theme/colors.dart';
-import 'package:cachcach/core/theme/images.dart';
 import 'package:cachcach/core/utils/my_size_extensions.dart';
 import 'package:cachcach/model/game_mode_category.dart';
 import 'package:cachcach/routes/routes.dart';
@@ -68,8 +67,6 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
       return PageView.builder(
         itemBuilder: (context, index) {
           GameModeCategory category = controller.listCategory[index];
-          print("index  : $index");
-
           return Container(
             margin: EdgeInsets.symmetric(horizontal: 16.w),
             child: SelectModeCard(

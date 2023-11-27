@@ -40,6 +40,7 @@ class AppImages {
   static const imgFlipCard = "assets/images/img_flip_card.png";
   static const bgTopBar = "assets/images/bg_top_bar.png";
   static const bgBottom = "assets/images/bg_bottom.png";
+  static const bgBottom2 = "assets/images/bg_bottom2.png";
   static const imgLogo2 = "assets/images/img_logo_2.png";
   static const imgHomeTopBar = "assets/images/img_home_top_bar.png";
   static const imgLogo4 = "assets/images/img_logo_4.png";
@@ -54,4 +55,10 @@ class AppImages {
       "assets/images/img_truth_or_dare_group.png";
   static const imgTruthOrDareSingle =
       "assets/images/img_truth_or_dare_single.png";
+  static const imgCardBackground = "assets/images/card_background.png";
+  static const imgEndGame = "assets/images/end_game_background.png";
+  static const imgKhoiDong = "assets/images/img_khoi_dong.png";
+  static const imgThuocPhim = "assets/images/img_thuoc_phim.png";
+  static const img18 = "assets/images/img_18.png";
+  static const bgCardGameMode = "assets/images/bg_card_game_mode.png";
 }

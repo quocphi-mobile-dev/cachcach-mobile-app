@@ -15,6 +15,9 @@ import 'package:cachcach/app/modules/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../app/modules/play/end_game/end_game_screen.dart';
+import '../app/modules/play/select_mode/type_card/card_select_mode_screen.dart';
+
 class RouteName {
   static const String splash = "/splash";
   static const String login = "/login";
@@ -31,6 +34,8 @@ class RouteName {
   static const String scoreBoard = "/score-board";
   static const String flipTheCard = "/flip-the-card";
   static const String language = "/language";
+  static const String endGame = "/end-game";
+  static const String cardSelectMode = "/card-select-mode";
 
   static const String privacyPolicy = "/privacy-policy";
   static const String welcome = '/welcome';
@@ -46,6 +51,7 @@ class AppRoutes {
     RouteName.home: () => const HomeScreen(),
     RouteName.play: () => const PlayScreen(),
     RouteName.selectMode: () => const SelectModeScreen(),
+    RouteName.cardSelectMode: () => const CardSelectModeScreen(),
     RouteName.player: () => const PlayerScreen(),
     RouteName.setting: () => const SettingScreen(),
     RouteName.spin: () => const SpinScreen(),
@@ -53,6 +59,7 @@ class AppRoutes {
     RouteName.scoreBoard: () => const ScoreBoardScreen(),
     RouteName.flipTheCard: () => const FlipTheCardScreen(),
     RouteName.language: () => const LanguageScreen(),
+    RouteName.endGame: () => const EndGameScreen(),
   };
 
   static final bindings = <String, List<Bindings> Function()>{};
