@@ -90,7 +90,14 @@ class _TruthOrDareV2ScreenState extends State<TruthOrDareV2Screen> {
       splashColor: AppColors.transparent,
       highlightColor: AppColors.transparent,
       onTap: () {
+        if (controller.listQuestionCollections.isEmpty) {
+          return;
+        }
+
         if (flipTruthController.state?.isFront == true) {
+          if (controller.questionSelected.value != null) {
+            return;
+          }
           controller.randomQuestion();
           flipTruthController.toggleCard();
         }
@@ -145,7 +152,15 @@ class _TruthOrDareV2ScreenState extends State<TruthOrDareV2Screen> {
       splashColor: AppColors.transparent,
       highlightColor: AppColors.transparent,
       onTap: () {
+        if (controller.listQuestionCollections.isEmpty) {
+          return;
+        }
+
         if (flipDareController.state?.isFront == true) {
+          if (controller.questionSelected.value != null) {
+            return;
+          }
+
           controller.randomQuestion();
           flipDareController.toggleCard();
         }
