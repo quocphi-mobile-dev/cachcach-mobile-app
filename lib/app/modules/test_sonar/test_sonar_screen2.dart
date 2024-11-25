@@ -501,7 +501,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               style: AppTextStyle.textStyleCommon.copyWith(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black
+                  color: AppColors.black)
             ),
           ),
           space(w: 10.w),
