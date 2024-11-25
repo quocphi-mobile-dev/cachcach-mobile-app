@@ -43,8 +43,8 @@ jobs:
           unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
           export PATH=$SONAR_SCANNER_HOME/bin:$PATH
           export SONAR_SCANNER_OPTS="-server"
-          sonar-scanner
-            -Dsonar.organization=QuocPhi
-            -Dsonar.projectKey=ac8a29cfe848f0f0eb4041776d855f4a7a50b4bb
-            -Dsonar.sources=.lib
+          sonar-scanner \
+            -Dsonar.organization=quocphi-mobile-dev \
+            -Dsonar.projectKey=quocphi-mobile-dev_cachcach-mobile-app \
+            -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io
